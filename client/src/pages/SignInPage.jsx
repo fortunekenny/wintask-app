@@ -31,13 +31,13 @@ const SignInPage = () => {
           type="email"
           name="email"
           labelText="email"
-          defaultValue="kent@you.com"
+          // defaultValue="kent@you.com"
         />
         <FormRow
           type="password"
           name="password"
           labelText="password"
-          defaultValue="secret"
+          // defaultValue="secret"
         />
         <button type="submit" className="" disabled={isSubmitting}>
           {isSubmitting ? "submitting..." : "submit"}

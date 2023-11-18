@@ -31,7 +31,8 @@ app.set("trust proxy", 1);
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000,
-    max: 60,
+    max: 10,
+    message: { msg: "IP rate limit exceeded, retry in 10 minutes." },
   })
 );
 
