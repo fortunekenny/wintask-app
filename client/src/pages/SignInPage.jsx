@@ -27,18 +27,8 @@ const SignInPage = () => {
     <Wrapper>
       <Form method="post" className="">
         <h4>Sign-In</h4>
-        <FormRow
-          type="email"
-          name="email"
-          labelText="email"
-          // defaultValue="kent@you.com"
-        />
-        <FormRow
-          type="password"
-          name="password"
-          labelText="password"
-          // defaultValue="secret"
-        />
+        <FormRow type="email" name="email" labelText="email" />
+        <FormRow type="password" name="password" labelText="password" />
         <button type="submit" className="" disabled={isSubmitting}>
           {isSubmitting ? "submitting..." : "submit"}
         </button>

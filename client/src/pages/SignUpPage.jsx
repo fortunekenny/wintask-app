@@ -25,24 +25,9 @@ const SignUpPage = () => {
     <Wrapper>
       <Form method="post" className="">
         <h4>Register</h4>
-        <FormRow
-          type="text"
-          name="name"
-          labelText="name"
-          // defaultValue="kent"
-        />
-        <FormRow
-          type="email"
-          name="email"
-          labelText="email"
-          // defaultValue="kent@you.com"
-        />
-        <FormRow
-          type="password"
-          name="password"
-          labelText="password"
-          // defaultValue="secret"
-        />
+        <FormRow type="text" name="name" labelText="name" />
+        <FormRow type="email" name="email" labelText="email" />
+        <FormRow type="password" name="password" labelText="password" />
         <button type="submit" className="" disabled={isSubmitting}>
           {isSubmitting ? "submitting..." : "submit"}
         </button>

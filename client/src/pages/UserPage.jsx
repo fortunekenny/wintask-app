@@ -22,7 +22,6 @@ const UserContext = createContext();
 
 const UserPage = () => {
   const { user } = useLoaderData();
-  console.log(user);
   const navigate = useNavigate();
 
   const [showAdmin, setShowAdmin] = useState(false);
