@@ -7,6 +7,7 @@ const LandingPage = () => {
 
   useEffect(() => {
     let timer = setInterval(() => setDate(new Date()), 1000);
+    // timer = timer;
     return function cleanup() {
       clearInterval(timer);
     };

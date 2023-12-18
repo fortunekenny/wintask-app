@@ -18,11 +18,42 @@ const TaskSchema = new mongoose.Schema(
       min: 0,
       max: 59,
     },
-    timeCreated: {
+    ampm: {
+      type: String,
+      required: [true, "Please set AM/PM"],
+    },
+    futureTime: {
+      type: Date,
+      default: Date.now,
+    },
+    previouseFutureTime: {
+      // cancel creates a new futuretime, thus we need a data of futuretime at creation or edition of task before canceling, to get acurate repeat time
+      type: Date,
+      default: Date.now,
+    },
+    lastTimeUpdated: {
+      //lastimeupdated is used to know time when task is created or edited to calculate remainingtime when repeating task
+      type: Date,
+      default: Date.now,
+    },
+    lastTimeUpdatedBeforeCanceling: {
+      // lastTimeUpdatedBeforeCanceling is used to get when task is edited,created, or repeated because cancel changes the updatedAt value, thus when cancel or repeat is true we show this data as createdAt in frontend
       type: Date,
       default: Date.now,
     },
     remainingTime: {
+      type: Number,
+      default: 0,
+    },
+    cancelCount: {
+      type: Number,
+      default: 0,
+    },
+    repeatCount: {
+      type: Number,
+      default: 0,
+    },
+    editCount: {
       type: Number,
       default: 0,
     },
@@ -31,23 +62,13 @@ const TaskSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    completed: {
-      type: Boolean,
-      default: false,
-    },
     cancel: {
       type: Boolean,
       default: false,
     },
-    status: {
-      type: String,
-      enum: ["active", "inactive"],
-      default: "inactive",
-    },
     repeat: {
-      type: String,
-      enum: ["hourly", "daily", "none", "once"],
-      default: "none",
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

@@ -1,4 +1,4 @@
-const FormRow = ({ type, name, labelText, defaultValue }) => {
+const FormRow = ({ type, name, labelText, defaultValue, min, max }) => {
   return (
     <div>
       <div className="">
@@ -10,6 +10,8 @@ const FormRow = ({ type, name, labelText, defaultValue }) => {
           id={name}
           name={name}
           defaultValue={defaultValue}
+          min={min}
+          max={max}
           required
         />
       </div>

@@ -10,6 +10,8 @@ const {
   getAllTasks,
   getUserTasks,
   getTask,
+  repeatTask,
+  cancelTask,
   updateTask,
   deleteTask,
 } = require("../controllers/taskController");
@@ -25,6 +27,13 @@ router
     [authenticateUser, authorizePermissions("user", "founder")],
     getUserTasks
   );
+router
+  .route("/repeattask/:id")
+  .patch(authenticateUser, authorizePermissions("user", "founder"), repeatTask);
+
+router
+  .route("/canceltask/:id")
+  .patch(authenticateUser, authorizePermissions("user", "founder"), cancelTask);
 
 router
   .route("/:id")

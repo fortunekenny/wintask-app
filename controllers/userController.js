@@ -1,4 +1,5 @@
 const User = require("../model/user");
+const Tasks = require("../model/tasks");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 
@@ -9,18 +10,31 @@ const {
 } = require("../utils");
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({ role: "user" }).select("-password");
+  const users = await User.find({}).select("-password");
+  // .populate({
+  //   path: "task",
+  //   select: "_id title futureTime remainingTime updatedAt repeat cancel",
+  // });
+  // .populate("tasks");
   res.status(StatusCodes.OK).json({ users });
 };
+
 const getSingleUser = async (req, res) => {
-  const user = await User.findOne({ _id: req.params.id }).select("-password");
+  const user = await User.findOne({ _id: req.params.id })
+    .select("-password")
+    .populate("tasks");
   if (!user) {
     throw new CustomError.NotFoundError(`No user with id : ${req.params.id}`);
   }
+  // const tasks = await Tasks.find({ user: req.params.id });
   checkPermissions(req.user, user._id);
   res.status(StatusCodes.OK).json({ user });
 };
 
+// const showCurrentUser = async (req, res) => {
+//   const user = await User.findOne({ _id: req.user.userId }).select("-password");
+//   res.status(StatusCodes.OK).json({ user });
+// };
 const showCurrentUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: req.user });
 };

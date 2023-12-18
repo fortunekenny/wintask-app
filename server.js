@@ -7,7 +7,7 @@ const app = express();
 
 //rest of packages
 const cookieParser = require("cookie-parser");
-const rateLimiter = require("express-rate-limit");
+// const rateLimiter = require("express-rate-limit");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const cors = require("cors");
@@ -30,15 +30,6 @@ const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
 //IMPORTING ENDS
-
-app.set("trust proxy", 1);
-app.use(
-  rateLimiter({
-    windowMs: 30 * 60 * 1000,
-    max: 10,
-    message: { msg: "IP rate limit exceeded, retry in 30 minutes." },
-  })
-);
 
 app.use(helmet());
 app.use(cors());

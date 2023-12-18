@@ -17,7 +17,8 @@ const Navbar = () => {
       </NavLink>
       <div>
         <h5 className="">
-          <span>Welcome</span> {name}
+          <span>Welcome </span>
+          {name}
         </h5>
         <LogoutComponent />
       </div>
