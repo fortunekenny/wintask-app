@@ -1,11 +1,10 @@
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
-import Task from "./task";
+import Task from "./Task";
 
 const TasksComponent = () => {
   const { data } = useTasksContext();
   let { tasks } = data;
-  // console.log(tasks);
   // Sorting Tasks according to future time
   tasks = tasks.sort(function (x, y) {
     let a = new Date(x.updatedAt).getTime(),
