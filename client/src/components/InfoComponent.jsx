@@ -1,23 +1,26 @@
 import styled from "styled-components";
-import { Form, Link, redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { TimeRemainder, InfoComponent, ButtonsComponent } from "../components";
+import { redirect } from "react-router-dom";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 day.extend(advancedFormat);
 
-const Task = (task) => {
+const InfoComponent = (task) => {
   let {
     cancel,
     remainingTime,
     repeat,
-    title,
-    _id,
     futureTime,
     lastTimeUpdatedBeforeCanceling,
     updatedAt,
-  } = task;
+  } = task.task;
   let [remainderTime, setRemainderTime] = useState(remainingTime);
+
+  let expiresAt = day(futureTime).format("HH:mm:ss");
+  updatedAt =
+    repeat || cancel
+      ? day(lastTimeUpdatedBeforeCanceling).format("HH:mm:ss")
+      : day(updatedAt).format("HH:mm:ss");
   let timeNow = new Date();
   futureTime = new Date(futureTime);
 
@@ -37,26 +40,20 @@ const Task = (task) => {
     return () => clearInterval(remainder);
   }, [futureTime, timeNow]);
 
-  // const navigation = useNavigation();
-  // const isSubmitting = navigation.state === "submitting";
-
   return (
     <Wrapper>
       <div className="">
-        <h4>task page</h4>
-        <div className="">
-          <h5>{title}</h5>
-          <TimeRemainder task={task} />
-        </div>
-        <div className="">
-          <h5>remaining time loader bar</h5>
-        </div>
-        <div className="">
-          <InfoComponent task={task} />
-        </div>
-        <div className="">
-          <ButtonsComponent task={task} />
-        </div>
+        <h4>
+          {repeat ? "Repeated" : "Created"} At: {updatedAt}
+        </h4>
+        <h4>
+          {remainderTime < 1 && !cancel
+            ? "Expired "
+            : remainderTime < 1 && cancel
+            ? "Cancelled "
+            : "Expires "}
+          At: {expiresAt}
+        </h4>
       </div>
     </Wrapper>
   );
@@ -66,4 +63,4 @@ const Wrapper = styled.div`
   background: skyblue;
 `;
 
-export default Task;
+export default InfoComponent;
