@@ -5,6 +5,7 @@ import { createContext, useContext, useState } from "react";
 import customFetch from "../utils/customFetch";
 // import { Toast } from "react-toastify/dist/components";
 import { toast } from "react-toastify";
+import LiveTime from "../components/LiveTime";
 
 export const loader = async ({ request }) => {
   try {
@@ -47,6 +48,7 @@ const UserPage = () => {
         <h2>UserPage</h2>
         <div>
           <Navbar />
+          <LiveTime />
           <div>
             <Outlet context={{ user }} />
             {/* <Outlet /> */}
