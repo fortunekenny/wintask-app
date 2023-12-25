@@ -1,37 +1,7 @@
 import styled from "styled-components";
-import { Link, Form, redirect } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link, Form } from "react-router-dom";
 
-const ButtonsComponent = (task) => {
-  let {
-    // cancel,
-    remainingTime,
-    // repeat,
-    // title,
-    _id,
-    futureTime,
-    // lastTimeUpdatedBeforeCanceling,
-    // updatedAt,
-  } = task.task;
-  let [remainderTime, setRemainderTime] = useState(remainingTime);
-  let timeNow = new Date();
-  futureTime = new Date(futureTime);
-
-  useEffect(() => {
-    let remainder = setInterval(() => {
-      setRemainderTime(() => {
-        let remainingTimeCount = futureTime - timeNow;
-        if (remainingTimeCount < 1) {
-          clearInterval(remainder);
-          let hour = 0;
-          return hour;
-        }
-        redirect("/userpage");
-        return remainingTimeCount;
-      });
-    }, 1000);
-    return () => clearInterval(remainder);
-  }, [futureTime, timeNow]);
+const ButtonsComponent = ({ remainderTime, _id }) => {
   return (
     <Wrapper>
       <Form method="post" action={`./repeattask/${_id}`}>

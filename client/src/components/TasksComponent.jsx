@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
-import Task from "./Task";
+import SingleTask from "./SingleTask";
 
 const TasksComponent = () => {
   const { data } = useTasksContext();
@@ -25,7 +25,7 @@ const TasksComponent = () => {
       <h4>TasksComponent</h4>
       <div className="">
         {tasks.map((task) => {
-          return <Task key={task._id} {...task} />;
+          return <SingleTask key={task._id} {...task} />;
         })}
       </div>
     </Wrapper>

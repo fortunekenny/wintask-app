@@ -1,7 +1,5 @@
 import { styled } from "styled-components";
 import { FormRow } from "../components";
-import { useState } from "react";
-// import { useOutletContext } from "react-router-dom";
 import { Form, useNavigation, redirect, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { RiCheckboxBlankFill } from "react-icons/ri";
@@ -11,7 +9,6 @@ import { CiSquarePlus } from "react-icons/ci";
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  // console.log(data);
   try {
     await customFetch.post("/tasks", data);
     toast.success("Task created");
@@ -23,15 +20,10 @@ export const action = async ({ request }) => {
 };
 
 const CreateTask = () => {
-  // const { user } = useOutletContext();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
-  // const [ampm, setAmpm] = useState(timeNow);
-  // const setTimeNow = () => {
-  //   ampm === "AM" ? setAmpm("PM") : setAmpm("AM");
-  // };
 
   return (
     <Wrapper>
