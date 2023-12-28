@@ -4,7 +4,7 @@ const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
 
 const createTask = async (req, res) => {
-  let { title, alarmHour, alarmMinute, ampm } = req.body;
+  let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
   const currentTime = new Date();
 
@@ -16,7 +16,8 @@ const createTask = async (req, res) => {
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmMinute = Number(alarmMinute);
-  const seconds = timeNow.getSeconds();
+  alarmSeconds = Number(alarmSeconds);
+  // const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
@@ -32,12 +33,12 @@ const createTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
     return new Date(
-      `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+      `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
 
   let futureTime = new Date(
-    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   futureTime =
@@ -58,6 +59,7 @@ const createTask = async (req, res) => {
     title,
     alarmHour,
     alarmMinute,
+    alarmSeconds,
     remainingTime,
     user: req.user.userId,
     futureTime,
@@ -139,15 +141,15 @@ const repeatTask = async (req, res) => {
   let repeatMinute = Math.floor((remainderTime % oneHour) / oneMinute);
   let repeatSecond = Math.floor((remainderTime % oneMinute) / oneSecond);
 
-  let seconds = secondNow + repeatSecond;
+  let alarmSeconds = secondNow + repeatSecond;
   let alarmMinute = minuteNow + repeatMinute;
   let alarmHour = hourNow + repeatHour;
   let day = dayNow + repeatDay;
   let month = monthNow + repeatMonth;
   let year = yearNow + repeatYear;
-  if (seconds > 59) {
-    let s = Math.floor(seconds / 59);
-    seconds = seconds - 59;
+  if (alarmSeconds > 59) {
+    let s = Math.floor(alarmSeconds / 59);
+    alarmSeconds = alarmSeconds - 59;
     alarmMinute = alarmMinute + s;
   }
   if (alarmMinute > 59) {
@@ -173,7 +175,7 @@ const repeatTask = async (req, res) => {
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(
-    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   if (task.ampm === ampmNow && futureTime < currentTime) {
@@ -196,7 +198,7 @@ const repeatTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   const { id: taskId } = req.params;
-  let { title, alarmHour, alarmMinute, ampm } = req.body;
+  let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
   const task = await Task.findOne({ _id: taskId });
   if (!task) {
     throw new CustomError.NotFoundError(`No task with id: ${taskId}`);
@@ -216,7 +218,8 @@ const updateTask = async (req, res) => {
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmMinute = Number(alarmMinute);
-  const seconds = timeNow.getSeconds();
+  alarmSeconds = Number(alarmSeconds);
+  // const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   let daysInMonth = (month, year) => {
@@ -231,12 +234,12 @@ const updateTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
     return new Date(
-      `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+      `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
 
   let futureTime = new Date(
-    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   futureTime =
@@ -252,6 +255,7 @@ const updateTask = async (req, res) => {
   task.title = title;
   task.alarmHour = alarmHour;
   task.alarmMinute = alarmMinute;
+  task.alarmSeconds = alarmSeconds;
   task.ampm = ampm;
   task.futureTime = futureTime;
   task.previouseFutureTime = futureTime;
@@ -285,10 +289,10 @@ const cancelTask = async (req, res) => {
   let day = timeNow.getDate();
   let alarmHour = timeNow.getHours();
   let alarmMinute = timeNow.getMinutes();
-  let seconds = timeNow.getSeconds();
+  let alarmSeconds = timeNow.getSeconds();
 
   futureTime = new Date(
-    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
+    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   const remainingTime = futureTime - currentTime;

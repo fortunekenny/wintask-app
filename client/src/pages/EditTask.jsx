@@ -41,7 +41,7 @@ const EditTask = () => {
   const isSubmitting = navigation.state === "submitting";
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
-
+  let secondsNow = new Date().getSeconds();
   return (
     <Wrapper>
       <h3>EditTask Page</h3>
@@ -75,6 +75,19 @@ const EditTask = () => {
           defaultValue={task.alarmMinute}
         >
           <option value={""}>Minute</option>
+          {[...Array(60)].map((x, i) => (
+            <option value={i} key={i}>
+              {i < 10 ? `0${i}` : i}
+            </option>
+          ))}
+        </select>
+        <select
+          name="alarmSeconds"
+          id="alarmSeconds"
+          defaultValue={task.alarmSeconds}
+        >
+          <option value={""}>Seconds</option>
+          <option value={secondsNow}>Seconds Now</option>
           {[...Array(60)].map((x, i) => (
             <option value={i} key={i}>
               {i < 10 ? `0${i}` : i}

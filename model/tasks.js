@@ -18,6 +18,12 @@ const TaskSchema = new mongoose.Schema(
       min: 0,
       max: 59,
     },
+    alarmSeconds: {
+      type: Number,
+      required: [true, "Please enter the alarm minute(s)"],
+      min: 0,
+      max: 59,
+    },
     ampm: {
       type: String,
       required: [true, "Please set AM/PM"],
