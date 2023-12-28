@@ -1,9 +1,17 @@
 import styled from "styled-components";
-import { redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { TimeRemainder, InfoComponent, ButtonsComponent } from "../components";
+import ProgressBar from "./ProgressBar";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import isTomorrow from "dayjs/plugin/isTomorrow";
+import isYesterday from "dayjs/plugin/isYesterday";
+import isToday from "dayjs/plugin/isToday";
+import duration from "dayjs/plugin/duration";
+day.extend(isYesterday);
+day.extend(isTomorrow);
+day.extend(isToday);
+day.extend(duration);
 day.extend(advancedFormat);
 
 const SingleTask = ({
@@ -12,6 +20,9 @@ const SingleTask = ({
   repeat,
   title,
   _id,
+  futureTimeInNumber,
+  previouseFutureTime,
+  lastTimeUpdated,
   futureTime,
   lastTimeUpdatedBeforeCanceling,
   updatedAt,
@@ -19,27 +30,33 @@ const SingleTask = ({
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
+
   useEffect(() => {
     let remainder = setInterval(() => {
       setRemainderTime(() => {
         let remainingTimeCount = futureTime - timeNow;
-        if (remainingTimeCount < 1) {
+        if (remainingTimeCount < 1000) {
           clearInterval(remainder);
           let hour = 0;
           return hour;
         }
-        redirect("/userpage");
         return remainingTimeCount;
       });
     }, 1000);
     return () => clearInterval(remainder);
   }, [futureTime, timeNow]);
 
-  let expiresAt = day(futureTime).format("HH:mm:ss");
+  let expiresAt = day(futureTime).format("hh:mm:ss A");
   let updatedTime =
     repeat || cancel
-      ? day(lastTimeUpdatedBeforeCanceling).format("HH:mm:ss")
-      : day(updatedAt).format("HH:mm:ss");
+      ? day(lastTimeUpdatedBeforeCanceling).format("hh:mm:ss A")
+      : day(updatedAt).format("hh:mm:ss A");
+
+  let yesterday = day(futureTime).isYesterday();
+  let today = day(futureTime).isToday();
+  let tomorrow = day(futureTime).isTomorrow();
+  let dur = day.duration(day(timeNow).diff(futureTime));
+  // console.log(dur.$d.days);
 
   let data = {
     cancel,
@@ -53,6 +70,11 @@ const SingleTask = ({
     remainderTime,
     expiresAt,
     updatedTime,
+    timeNow,
+    yesterday,
+    today,
+    tomorrow,
+    dur,
   };
 
   // const navigation = useNavigation();
@@ -68,7 +90,7 @@ const SingleTask = ({
           <ButtonsComponent {...data} />
         </div>
         <div className="">
-          <h5>remaining time loader bar</h5>
+          <ProgressBar {...data} />
         </div>
       </div>
     </Wrapper>

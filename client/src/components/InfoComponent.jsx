@@ -9,6 +9,10 @@ const InfoComponent = ({
   updatedTime,
   remainderTime,
   expiresAt,
+  yesterday,
+  today,
+  tomorrow,
+  dur,
 }) => {
   return (
     <Wrapper>
@@ -24,6 +28,15 @@ const InfoComponent = ({
             : "Expires "}
           At: {expiresAt}
         </h4>
+        <span>
+          {tomorrow
+            ? "tomorrow"
+            : yesterday
+            ? "yesterday"
+            : today
+            ? "today"
+            : `${dur.$d.days} days ago`}
+        </span>
       </div>
     </Wrapper>
   );

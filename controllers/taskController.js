@@ -9,24 +9,26 @@ const createTask = async (req, res) => {
   const currentTime = new Date();
 
   const timeNow = new Date();
-  alarmHour = Number(alarmHour);
-  alarmMinute = Number(alarmMinute);
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
+  alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
+  alarmMinute = Number(alarmMinute);
   const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
-
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
+
   const pmamFutureTime2 = () => {
+    alarmHour = alarmHour === 12 ? 0 : alarmHour;
+
     let daysInThisMonth = daysInMonth(month, year);
     day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
-    month = day === 1 ? month + 1 : month;
+    month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
     return new Date(
@@ -42,9 +44,7 @@ const createTask = async (req, res) => {
     ampmNow === "PM" && ampm === "AM" ? pmamFutureTime2() : futureTime;
 
   const remainingTime = futureTime - currentTime;
-
   let previouseFutureTime = futureTime;
-
   let lastTimeUpdated = new Date();
   let lastTimeUpdatedBeforeCanceling = new Date();
 
@@ -146,46 +146,35 @@ const repeatTask = async (req, res) => {
   let month = monthNow + repeatMonth;
   let year = yearNow + repeatYear;
   if (seconds > 59) {
-    seconds = 0;
-    alarmMinute = alarmMinute + 1;
+    let s = Math.floor(seconds / 59);
+    seconds = seconds - 59;
+    alarmMinute = alarmMinute + s;
   }
   if (alarmMinute > 59) {
-    alarmMinute = 0;
-    alarmHour = alarmHour + 1;
+    let m = Math.floor(alarmMinute / 59);
+    alarmMinute = alarmMinute - 59;
+    alarmHour = alarmHour + m;
   }
   if (alarmHour > 23) {
-    alarmHour = 0;
-    day = day + 1;
+    let h = Math.floor(alarmHour / 23);
+    alarmHour = alarmHour - 23;
+    day = day + h;
   }
   if (day > daysInThisMonth) {
-    day = 1;
-    month = month + 1;
+    let d = Math.floor(day / daysInThisMonth);
+    day = day - daysInThisMonth;
+    month = month + d;
   }
   if (month > 12) {
-    month = 1;
-    year = year + 1;
+    let mt = Math.floor(month / 12);
+    month = month - 12;
+    year = year + mt;
   }
-
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
-
-  const pmamFutureTime2 = () => {
-    let daysInThisMonth = daysInMonth(month, year);
-    day = day + 1;
-    day = day >= daysInThisMonth ? 1 : day;
-    month = day === 1 ? month + 1 : month;
-    month = month > 12 ? 1 : month;
-    year = month === 1 ? year + 1 : year;
-    return new Date(
-      `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
-    );
-  };
 
   futureTime = new Date(
     `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${seconds}`
   );
-
-  futureTime =
-    ampmNow === "PM" && task.ampm === "AM" ? pmamFutureTime2() : futureTime;
 
   if (task.ampm === ampmNow && futureTime < currentTime) {
     throw new CustomError.BadRequestError(
@@ -194,7 +183,8 @@ const repeatTask = async (req, res) => {
   }
 
   task.futureTime = futureTime;
-  task.remainingTime = futureTime - currentTime;
+  task.futureTimeInNumber = futureTime.getTime();
+  task.remainingTime = remainderTime;
   task.repeatCount = repeatCount;
   task.cancel = false;
   task.repeat = true;
@@ -219,13 +209,13 @@ const updateTask = async (req, res) => {
   let editCount = task.editCount + 1;
 
   const timeNow = new Date();
-  alarmHour = Number(alarmHour);
-  alarmMinute = Number(alarmMinute);
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
+  alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
+  alarmMinute = Number(alarmMinute);
   const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
@@ -233,6 +223,7 @@ const updateTask = async (req, res) => {
     return new Date(year, month, 0).getDate();
   };
   const pmamFutureTime2 = () => {
+    alarmHour = alarmHour === 12 ? 0 : alarmHour;
     let daysInThisMonth = daysInMonth(month, year);
     day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
