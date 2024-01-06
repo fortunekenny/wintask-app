@@ -36,6 +36,14 @@ const TaskSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    futureTimeMonth: {
+      type: Number,
+      default: 0,
+    },
+    futureTimeYear: {
+      type: Number,
+      default: 0,
+    },
     previouseFutureTime: {
       // cancel creates a new futuretime, thus we need a data of futuretime at creation or edition of task before canceling, to get acurate repeat time
       type: Date,

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import remainingTimeConverter from "../utils/remainingTimeConverter";
-const TimeRemainder = ({ remainderTime }) => {
+const TimeRemainder = ({ remainderTime, futureTimeMonth, futureTimeYear }) => {
   let { remainingHours, remainingMinutes, remainingSeconds } =
-    remainingTimeConverter(remainderTime);
+    remainingTimeConverter(remainderTime, futureTimeMonth, futureTimeYear);
 
   return (
     <Wrapper>

@@ -44,6 +44,9 @@ const createTask = async (req, res) => {
   futureTime =
     ampmNow === "PM" && ampm === "AM" ? pmamFutureTime2() : futureTime;
 
+  let futureTimeMonth = futureTime.getMonth();
+  let futureTimeYear = futureTime.getFullYear();
+
   const remainingTime = futureTime - currentTime;
   let previouseFutureTime = futureTime;
   let lastTimeUpdated = new Date();
@@ -67,6 +70,8 @@ const createTask = async (req, res) => {
     previouseFutureTime,
     lastTimeUpdated,
     lastTimeUpdatedBeforeCanceling,
+    futureTimeMonth,
+    futureTimeYear,
   });
   res.status(StatusCodes.CREATED).json({ task });
 };
@@ -125,7 +130,7 @@ const repeatTask = async (req, res) => {
   };
   let daysInThisMonth = daysInMonth(
     futureTime.getMonth(),
-    futureTime.getYear()
+    futureTime.getFullYear()
   );
   const oneSecond = 1000;
   const oneMinute = oneSecond * 60;
@@ -177,6 +182,8 @@ const repeatTask = async (req, res) => {
   futureTime = new Date(
     `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
+  let futureTimeMonth = futureTime.getMonth();
+  let futureTimeYear = futureTime.getFullYear();
 
   if (task.ampm === ampmNow && futureTime < currentTime) {
     throw new CustomError.BadRequestError(
@@ -191,6 +198,8 @@ const repeatTask = async (req, res) => {
   task.cancel = false;
   task.repeat = true;
   task.lastTimeUpdatedBeforeCanceling = new Date();
+  task.futureTimeMonth = futureTimeMonth;
+  task.futureTimeYear = futureTimeYear;
   await task.save();
 
   res.status(StatusCodes.CREATED).json({ task });
@@ -232,7 +241,7 @@ const updateTask = async (req, res) => {
     day = day >= daysInThisMonth ? 1 : day;
     month = day === 1 ? month + 1 : month;
     month = month > 12 ? 1 : month;
-    year = month === 1 ? year + 1 : year;
+    year = month > 12 ? year + 1 : year;
     return new Date(
       `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
@@ -244,6 +253,9 @@ const updateTask = async (req, res) => {
 
   futureTime =
     ampmNow === "PM" && ampm === "AM" ? pmamFutureTime2() : futureTime;
+
+  let futureTimeMonth = futureTime.getMonth();
+  let futureTimeYear = futureTime.getFullYear();
 
   const remainingTime = futureTime - currentTime;
 
@@ -265,6 +277,9 @@ const updateTask = async (req, res) => {
   task.editCount = editCount;
   task.cancel = false;
   task.repeat = false;
+  task.futureTimeMonth = futureTimeMonth;
+  task.futureTimeYear = futureTimeYear;
+
   await task.save();
 
   res.status(StatusCodes.OK).json({ task });
