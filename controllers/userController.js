@@ -8,14 +8,10 @@ const {
   createTokenUser,
   checkPermissions,
 } = require("../utils");
+const tasks = require("../model/tasks");
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({}).select("-password");
-  // .populate({
-  //   path: "task",
-  //   select: "_id title futureTime remainingTime updatedAt repeat cancel",
-  // });
-  // .populate("tasks");
+  const users = await User.find({}).select("-password"); //.populate("tasks");
   res.status(StatusCodes.OK).json({ users });
 };
 

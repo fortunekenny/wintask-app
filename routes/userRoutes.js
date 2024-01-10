@@ -23,10 +23,6 @@ router.route("/updateUserPassword").patch(authenticateUser, updateUserPassword);
 
 router
   .route("/:id")
-  .get(
-    authenticateUser,
-    authorizePermissions("admin", "founder"),
-    getSingleUser
-  );
+  .get(authenticateUser, authorizePermissions("founder"), getSingleUser);
 
 module.exports = router;

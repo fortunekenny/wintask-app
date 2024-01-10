@@ -13,6 +13,8 @@ import {
   CreateTask,
   UserPage,
   Admin,
+  Profile,
+  AdminSingleUserPage,
 } from "./pages";
 
 import { action as signupAction } from "./pages/SignUpPage";
@@ -27,6 +29,8 @@ import { loader as repeatTaskLoader } from "./pages/RepeatTask";
 import { action as repeatTaskAction } from "./pages/RepeatTask";
 import { loader as cancelTaskLoader } from "./pages/CancelTask";
 import { action as cancelTaskAction } from "./pages/CancelTask";
+import { loader as usersLoader } from "./pages/Admin";
+import { loader as singleUserLoader } from "./pages/AdminSingleUserPage";
 
 const router = createBrowserRouter([
   {
@@ -88,8 +92,18 @@ const router = createBrowserRouter([
             element: <Navigate to=".." />,
           },
           {
+            path: "profile/:id",
+            element: <Profile />,
+          },
+          {
             path: "admin",
+            loader: usersLoader,
             element: <Admin />,
+          },
+          {
+            path: "/userpage/admin/singleuserpage/:id",
+            loader: singleUserLoader,
+            element: <AdminSingleUserPage />,
           },
         ],
       },
