@@ -6,3 +6,4 @@ export { default as TimeRemainder } from "./TimeRemainder";
 export { default as InfoComponent } from "./InfoComponent";
 export { default as ButtonsComponent } from "./ButtonsComponent";
 export { default as UsersComponent } from "./UsersComponent";
+export { default as AdminSingleUserTasks } from "./AdminSingleUserTasks";

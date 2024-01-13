@@ -1,6 +1,6 @@
 import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
-import { UsersComponent } from "../components";
+import UsersComponent from "../components/UsersComponent";
 
 export const loader = async ({ request }) => {
   try {
