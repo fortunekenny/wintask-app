@@ -45,8 +45,8 @@ const UserPage = () => {
       }}
     >
       <Wrapper>
-        <h2>UserPage</h2>
-        <div>
+        {/* <h2>UserPage</h2> */}
+        <div className="user-page">
           <Navbar />
           <LiveTime />
           <div>
@@ -60,7 +60,19 @@ const UserPage = () => {
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  .user-page {
+    /* background: skyblue; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* flex-wrap: wrap; */
+    /* width: 100vw; */
+    /* max-width: 700px; */
+    margin: 0 auto;
+  }
+  /* .user-page > div {
+    display: block;
+  } */
 `;
 
 export default UserPage;

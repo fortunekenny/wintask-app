@@ -87,16 +87,19 @@ const SingleTask = ({
   // const isSubmitting = navigation.state === "submitting";
   return (
     <Wrapper>
-      <div className="">
-        <h4>task page</h4>
-        <h5>{title}</h5>
-        <div className="">
-          <TimeRemainder {...data} />
+      <div className="single-task-center">
+        {/* <h4>task page</h4> */}
+        <h3 className="task-title">{title}</h3>
+        {/* <hr /> */}
+        <div className="feature-center">
+          <div className="">
+            <TimeRemainder {...data} />
+            <ButtonsComponent {...data} />
+          </div>
+          <div className="">
+            <ProgressBar {...data} />
+          </div>
           <InfoComponent {...data} />
-          <ButtonsComponent {...data} />
-        </div>
-        <div className="">
-          <ProgressBar {...data} />
         </div>
       </div>
     </Wrapper>
@@ -104,7 +107,50 @@ const SingleTask = ({
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  /* background: skyblue; */
+  .single-task-center {
+    /* border: 1px solid red; */
+    /* display: inline-block; */
+    background: var(--white);
+    border: 2px solid var(--lightVariation);
+    border-radius: 0.5rem;
+    margin: 1rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    padding-top: 0;
+    box-shadow: var(--shadowMD);
+    /*  */
+  }
+  .single-task-center:hover {
+    box-shadow: var(--shadowXLG);
+  }
+  .task-title {
+    background: var(--white);
+    margin: auto;
+    padding: 0 0.5rem;
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    letter-spacing: 0.2rem;
+  }
+  .feature-center {
+    border: 2px solid var(--lightVariation);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    position: relative;
+  }
+  @media screen and (min-width: 676px) {
+    .single-task-center {
+      width: 70%;
+      max-width: 600px;
+      margin: auto;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadowMD);
+    }
+    .task-title {
+      letter-spacing: 0.5rem;
+      font-size: 1.953rem;
+    }
+  }
 `;
 
 export default SingleTask;

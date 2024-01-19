@@ -22,7 +22,7 @@ const TasksComponent = () => {
 
   return (
     <Wrapper>
-      <h4>TasksComponent</h4>
+      {/* <h4>TasksComponent</h4> */}
       <div className="">
         {tasks.map((task) => {
           return <SingleTask key={task._id} {...task} />;
@@ -33,7 +33,7 @@ const TasksComponent = () => {
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  margin-bottom: 2rem;
 `;
 
 export default TasksComponent;

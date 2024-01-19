@@ -16,34 +16,88 @@ const InfoComponent = ({
 }) => {
   return (
     <Wrapper>
-      <div className="">
-        <h4>
-          {repeat ? "Repeated" : "Created"} At: {updatedTime}
-        </h4>
-        <h4>
-          {remainderTime < 1 && !cancel
-            ? "Expired "
-            : remainderTime < 1 && cancel
-            ? "Cancelled "
-            : "Expires "}
-          At: {expiresAt}
-        </h4>
-        <span>
-          {tomorrow
-            ? "tomorrow"
-            : yesterday
-            ? "yesterday"
-            : today
-            ? "today"
-            : `${dur.$d.days} days ago`}
-        </span>
+      <div className="center-info">
+        <div className="repeat">
+          <h5>
+            <span>{repeat ? "Repeated" : "Created"} At:</span>
+            {updatedTime}
+          </h5>
+        </div>
+        <div className="expire">
+          <h5>
+            <span>
+              {remainderTime < 1 && !cancel
+                ? "Expired "
+                : remainderTime < 1 && cancel
+                ? "Cancelled "
+                : "Expires "}
+              At:
+            </span>
+            {expiresAt}
+          </h5>
+          <span>
+            {tomorrow
+              ? "tomorrow"
+              : yesterday
+              ? "yesterday"
+              : today
+              ? "today"
+              : `${dur.$d.days} days ago`}
+          </span>
+        </div>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  /* background: skyblue; */
+  .center-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0;
+    /* margin-bottom: 0; */
+  }
+  .center-info span {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .expire {
+    display: flex;
+    align-items: end;
+  }
+  .expire span {
+    color: var(--mediumVariation);
+    /* margin-bottom: 0; */
+  }
+  .repeat h5 {
+    margin-bottom: 0;
+    padding-top: 1.1rem;
+    padding-bottom: 0.2rem;
+    position: relative;
+  }
+  .expire h5 {
+    margin-bottom: 0;
+    padding-top: 1.1rem;
+    padding-bottom: 0.2rem;
+    position: relative;
+    margin-right: 0.3rem;
+  }
+  .repeat h5 span {
+    position: absolute;
+    top: 2%;
+    left: 0%;
+    margin-bottom: 0;
+    color: var(--mediumVariation);
+  }
+  .expire h5 span {
+    position: absolute;
+    top: 2%;
+    left: 0%;
+    margin-bottom: 0;
+    color: var(--mediumVariation);
+  }
 `;
 
 export default InfoComponent;

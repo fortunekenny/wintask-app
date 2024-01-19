@@ -22,7 +22,7 @@ const Tasks = () => {
   const { data } = useLoaderData();
   return (
     <>
-      <h2>Tasks</h2>
+      {/* <h2>Tasks</h2> */}
       <Link to="createtask">
         <CiSquarePlus /> createTask
       </Link>
@@ -34,7 +34,7 @@ const Tasks = () => {
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  /* background: skyblue; */
 `;
 
 export default Tasks;

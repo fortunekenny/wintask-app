@@ -30,50 +30,51 @@ const ProgressBar = ({ remainderTime, remainingTime, futureTime, timeNow }) => {
           </defs>
           <line
             x1="0"
-            y1="10"
-            x2="300"
-            y2="10"
+            y1="15"
+            x2="480"
+            y2="15"
             stroke="#ddd"
             // strokeLinecap="round"
             // strokeWidth="17"
           />
           <line
             x1="0"
-            y1="10"
-            x2={percent * 3}
-            y2="10"
-            stroke="url(#e)"
+            y1="15"
+            x2={percent * 4.8}
+            y2="15"
+            stroke="#af3dcc"
+            // stroke="url(#e)"
             // strokeLinecap="round"
             // strokeWidth="15"
           />
 
           <text
-            x={`${300 * 0.25}px`}
-            y="70%"
+            x={`${480 * 0.25}px`}
+            y="95%"
             textAnchor="middle"
             className={percent >= 1 ? "svgtext" : "svgtextvisibility"}
           >
             {percent <= 25 ? percent / 100 : 0.25}
           </text>
           <text
-            x={`${300 * 0.5}px`}
-            y="70%"
+            x={`${480 * 0.5}px`}
+            y="95%"
             textAnchor="middle"
             className={percent > 25 ? "svgtext" : "svgtextvisibility"}
           >
             {percent > 25 && percent < 50 ? percent / 100 : 0.5}
           </text>
           <text
-            x={`${300 * 0.75}px`}
-            y="70%"
+            x={`${480 * 0.75}px`}
+            y="95%"
             textAnchor="middle"
             className={percent > 50 ? "svgtext" : "svgtextvisibility"}
           >
             {percent > 50 && percent < 75 ? percent / 100 : 0.75}
           </text>
           <text
-            x={`${300 * 1}px`}
-            y="70%"
+            x={`${480 * 1}px`}
+            y="95%"
             textAnchor="end"
             className={percent > 75 ? "svgtext" : "svgtextvisibility"}
           >
@@ -87,9 +88,17 @@ const ProgressBar = ({ remainderTime, remainingTime, futureTime, timeNow }) => {
 
 const Wrapper = styled.div`
   /*background: skyblue;*/
-  background: yellow;
+  /* background: yellow; */
+  h4 {
+    margin-bottom: 0%;
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    font-size: 1.2rem;
+    color: var(--lightVariation);
+  }
   svg {
-    background: purple;
+    /* background: purple; */
   }
   line {
     stroke-linecap: round;
@@ -99,6 +108,7 @@ const Wrapper = styled.div`
   .svgtext {
     visibility: visible;
     font-size: 0.7em;
+    color: #2d1433;
   }
   .svgtextvisibility {
     visibility: hidden;
