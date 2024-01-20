@@ -69,12 +69,14 @@ const Wrapper = styled.div`
     margin-right: 1rem;
     display: inline-block;
   }
-  /* @media screen and (min-width: 676px) {
-    .button-center {
-      width: 70%;
-      max-width: 600px;
+  @media screen and (max-width: 400px) {
+    .btn {
+      margin-right: 0.5rem;
     }
-  } */
+    .disable {
+      margin-right: 0.5rem;
+    }
+  }
 `;
 
 export default ButtonsComponent;

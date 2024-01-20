@@ -48,7 +48,7 @@ const UserPage = () => {
         {/* <h2>UserPage</h2> */}
         <div className="user-page">
           <Navbar />
-          <LiveTime />
+          {/* <LiveTime /> */}
           <div>
             <Outlet context={{ user }} />
             {/* <Outlet /> */}
@@ -61,18 +61,8 @@ const UserPage = () => {
 
 const Wrapper = styled.div`
   .user-page {
-    /* background: skyblue; */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* flex-wrap: wrap; */
-    /* width: 100vw; */
-    /* max-width: 700px; */
     margin: 0 auto;
   }
-  /* .user-page > div {
-    display: block;
-  } */
 `;
 
 export default UserPage;

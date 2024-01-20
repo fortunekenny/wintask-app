@@ -89,7 +89,7 @@ const SingleTask = ({
     <Wrapper>
       <div className="single-task-center">
         {/* <h4>task page</h4> */}
-        <h3 className="task-title">{title}</h3>
+        <h4 className="task-title">{title}</h4>
         {/* <hr /> */}
         <div className="feature-center">
           <div className="">
@@ -119,6 +119,7 @@ const Wrapper = styled.div`
     padding: 1rem;
     padding-top: 0;
     box-shadow: var(--shadowMD);
+    /* position: relative; */
     /*  */
   }
   .single-task-center:hover {
@@ -130,7 +131,9 @@ const Wrapper = styled.div`
     padding: 0 0.5rem;
     padding-top: 0.5rem;
     padding-left: 2rem;
-    letter-spacing: 0.2rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    /* letter-spacing: 0.2rem; */
   }
   .feature-center {
     border: 2px solid var(--lightVariation);
@@ -138,6 +141,15 @@ const Wrapper = styled.div`
     border-bottom-right-radius: 0.5rem;
     position: relative;
   }
+
+  @media screen and (max-width: 500px) {
+  }
+  @media screen and (max-width: 400px) {
+    .task-title {
+      font-size: 1.2rem;
+    }
+  }
+
   @media screen and (min-width: 676px) {
     .single-task-center {
       width: 70%;
@@ -147,7 +159,7 @@ const Wrapper = styled.div`
       box-shadow: var(--shadowMD);
     }
     .task-title {
-      letter-spacing: 0.5rem;
+      /* letter-spacing: 0.5rem; */
       font-size: 1.953rem;
     }
   }

@@ -1,8 +1,7 @@
 import { toast } from "react-toastify";
 import { TasksComponent } from "../components";
 import customFetch from "../utils/customFetch";
-import { useLoaderData, Link, NavLink } from "react-router-dom";
-import { CiSquarePlus } from "react-icons/ci";
+import { useLoaderData } from "react-router-dom";
 import { useContext, createContext } from "react";
 import { styled } from "styled-components";
 
@@ -23,9 +22,6 @@ const Tasks = () => {
   return (
     <>
       {/* <h2>Tasks</h2> */}
-      <Link to="createtask">
-        <CiSquarePlus /> createTask
-      </Link>
       <TasksContext.Provider value={{ data }}>
         <TasksComponent />
       </TasksContext.Provider>
@@ -33,9 +29,9 @@ const Tasks = () => {
   );
 };
 
-const Wrapper = styled.div`
-  /* background: skyblue; */
-`;
+// const Wrapper = styled.div`
+//   /* background: skyblue; */
+// `;
 
 export default Tasks;
 export const useTasksContext = () => useContext(TasksContext);

@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
 import SingleTask from "./SingleTask";
+import { Link } from "react-router-dom";
+import { CiSquarePlus } from "react-icons/ci";
 
 const TasksComponent = () => {
   const { data } = useTasksContext();
@@ -23,6 +25,11 @@ const TasksComponent = () => {
   return (
     <Wrapper>
       {/* <h4>TasksComponent</h4> */}
+      <div className="lnk">
+        <Link to="createtask" className="icon">
+          +
+        </Link>
+      </div>
       <div className="">
         {tasks.map((task) => {
           return <SingleTask key={task._id} {...task} />;
@@ -34,6 +41,31 @@ const TasksComponent = () => {
 
 const Wrapper = styled.div`
   margin-bottom: 2rem;
+  position: relative;
+  .lnk {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 5rem;
+    margin: auto auto;
+    background: var(--primaryColor);
+    box-shadow: var(--shadowLG);
+    position: fixed;
+    top: 30rem;
+    right: 1rem;
+    z-index: 5;
+  }
+  .lnk:hover {
+    background: var(--darkVariation);
+    box-shadow: var(--shadowXLG);
+  }
+  .icon {
+    color: var(--lightestVariation);
+  }
 `;
 
 export default TasksComponent;

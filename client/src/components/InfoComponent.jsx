@@ -98,6 +98,11 @@ const Wrapper = styled.div`
     margin-bottom: 0;
     color: var(--mediumVariation);
   }
+  @media screen and (max-width: 400px) {
+    .center-info {
+      display: none;
+    }
+  }
 `;
 
 export default InfoComponent;
