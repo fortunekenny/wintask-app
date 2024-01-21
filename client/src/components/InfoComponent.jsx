@@ -13,10 +13,11 @@ const InfoComponent = ({
   today,
   tomorrow,
   dur,
+  info,
 }) => {
   return (
     <Wrapper>
-      <div className="center-info">
+      <div className={info ? "center-info" : "hide-info"}>
         <div className="repeat">
           <h5>
             <span>{repeat ? "Repeated" : "Created"} At:</span>
@@ -52,6 +53,7 @@ const InfoComponent = ({
 
 const Wrapper = styled.div`
   /* background: skyblue; */
+  transition: 1s cubic-bezier(0, 0.33, 0.78, 0.51) all;
   .center-info {
     display: flex;
     justify-content: space-around;
@@ -97,6 +99,9 @@ const Wrapper = styled.div`
     left: 0%;
     margin-bottom: 0;
     color: var(--mediumVariation);
+  }
+  .hide-info {
+    display: none;
   }
   @media screen and (max-width: 400px) {
     .center-info {

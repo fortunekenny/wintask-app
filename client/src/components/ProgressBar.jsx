@@ -108,7 +108,7 @@ const Wrapper = styled.div`
   .svgtext {
     visibility: visible;
     font-size: 0.7em;
-    color: #2d1433;
+    color: #f9f5fa;
   }
   .svgtextvisibility {
     visibility: hidden;

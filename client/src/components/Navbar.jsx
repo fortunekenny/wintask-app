@@ -71,6 +71,12 @@ const Wrapper = styled.div`
     visibility: visible;
     margin-right: 1rem;
   }
+  /* @media screen and (max-width: 400px) {
+    .nav-center {
+      margin-bottom: 2rem;
+      min-width: 400px;
+    }
+  } */
   @media screen and (min-width: 676px) {
     .nav-center {
       width: 70%;

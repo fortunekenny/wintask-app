@@ -25,6 +25,7 @@ const TasksComponent = () => {
   return (
     <Wrapper>
       {/* <h4>TasksComponent</h4> */}
+      {/* <div className="main"> */}
       <div className="lnk">
         <Link to="createtask" className="icon">
           +
@@ -35,13 +36,13 @@ const TasksComponent = () => {
           return <SingleTask key={task._id} {...task} />;
         })}
       </div>
+      {/* </div> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   margin-bottom: 2rem;
-  position: relative;
   .lnk {
     cursor: pointer;
     display: flex;
@@ -50,13 +51,14 @@ const Wrapper = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    font-size: 5rem;
+    font-size: 4rem;
     margin: auto auto;
     background: var(--primaryColor);
     box-shadow: var(--shadowLG);
     position: fixed;
-    top: 30rem;
+    top: 25rem;
     right: 1rem;
+    transform: translate(0rem 0rem);
     z-index: 5;
   }
   .lnk:hover {
@@ -65,6 +67,35 @@ const Wrapper = styled.div`
   }
   .icon {
     color: var(--lightestVariation);
+  }
+  @media screen and (min-width: 676px) {
+    .lnk {
+      top: 496px;
+      right: 102.4px;
+      /* transform: translateY(-0.6rem);
+      transform: translateX(17rem); */
+      /* font-size: 2rem;
+      width: 40px;
+      height: 40px; */
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .lnk {
+      top: 496px;
+      right: 115px;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .lnk {
+      top: 496px;
+      right: 190px;
+    }
+  }
+  @media screen and (min-width: 1170px) {
+    .lnk {
+      top: 496px;
+      right: 285px;
+    }
   }
 `;
 

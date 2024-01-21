@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import remainingTimeConverter from "../utils/remainingTimeConverter";
-const TimeRemainder = ({ remainderTime, futureTimeMonth, futureTimeYear }) => {
+const TimeRemainder = ({
+  remainderTime,
+  futureTimeMonth,
+  futureTimeYear,
+  showButton,
+  setShowButton,
+}) => {
   remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
   let { remainingHours, remainingMinutes, remainingSeconds } =
@@ -18,7 +24,10 @@ const TimeRemainder = ({ remainderTime, futureTimeMonth, futureTimeYear }) => {
 
   return (
     <Wrapper>
-      <div className="time-remainder">
+      <div
+        className="time-remainder"
+        onClick={() => setShowButton(!showButton)}
+      >
         <h4 className={remainderTime === 0 ? "hides" : "shows"}>remaining:</h4>
         <div className="time-texts">
           <h2>
@@ -41,7 +50,9 @@ const TimeRemainder = ({ remainderTime, futureTimeMonth, futureTimeYear }) => {
 
 const Wrapper = styled.div`
   .time-remainder {
-    padding: 0.5rem 0;
+    cursor: pointer;
+    padding-top: 0.5rem;
+    padding-bottom: 0;
     position: relative;
     /* border-bottom: 1px solid var(--lightVariation); */
     /* background: ; */
@@ -74,9 +85,7 @@ const Wrapper = styled.div`
     margin-bottom: 0;
   }
   .hides {
-    visibility: hidden;
-    margin-bottom: 0;
-    font-size: 0;
+    display: none;
   }
 `;
 
