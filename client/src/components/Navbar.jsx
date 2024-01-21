@@ -29,6 +29,7 @@ const Navbar = () => {
 };
 
 const Wrapper = styled.div`
+  width: 100%;
   .nav-center {
     width: 100%;
     display: flex;
@@ -79,7 +80,7 @@ const Wrapper = styled.div`
   } */
   @media screen and (min-width: 676px) {
     .nav-center {
-      width: 70%;
+      /* width: 100%; */
       max-width: 600px;
       margin-top: 5rem;
       padding: 0.5rem 0.5rem;

@@ -2,8 +2,8 @@ const Task = require("../model/tasks");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
-const currentTime = new Date();
-console.log(currentTime);
+// const currentTime = new Date();
+// console.log(currentTime);
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
