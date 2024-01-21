@@ -2,7 +2,8 @@ const Task = require("../model/tasks");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
-
+const currentTime = new Date();
+console.log(currentTime);
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
@@ -44,7 +45,7 @@ const createTask = async (req, res) => {
   futureTime =
     ampmNow === "PM" && ampm === "AM"
       ? pmamFutureTime2()
-      : alarmHour === 0
+      : alarmHour === 0 && ampmNow === PM
       ? pmamFutureTime2()
       : futureTime;
 
@@ -256,7 +257,11 @@ const updateTask = async (req, res) => {
   );
 
   futureTime =
-    ampmNow === "PM" && ampm === "AM" ? pmamFutureTime2() : futureTime;
+    ampmNow === "PM" && ampm === "AM"
+      ? pmamFutureTime2()
+      : alarmHour === 0
+      ? pmamFutureTime2()
+      : futureTime;
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
