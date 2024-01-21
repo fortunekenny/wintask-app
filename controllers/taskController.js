@@ -42,7 +42,11 @@ const createTask = async (req, res) => {
   );
 
   futureTime =
-    ampmNow === "PM" && ampm === "AM" ? pmamFutureTime2() : futureTime;
+    ampmNow === "PM" && ampm === "AM"
+      ? pmamFutureTime2()
+      : alarmHour === 0
+      ? pmamFutureTime2()
+      : futureTime;
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
