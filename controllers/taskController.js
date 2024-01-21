@@ -14,7 +14,7 @@ const createTask = async (req, res) => {
   let day = timeNow.getDate();
   alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
-  alarmHour = alarmHour > 24 ? 0 : alarmHour;
+  alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmMinute = Number(alarmMinute);
   alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
@@ -24,7 +24,7 @@ const createTask = async (req, res) => {
   };
 
   const pmamFutureTime2 = () => {
-    alarmHour = alarmHour > 24 ? 0 : alarmHour;
+    alarmHour = alarmHour > 23 ? 0 : alarmHour;
 
     let daysInThisMonth = daysInMonth(month, year);
     day = day + 1;
@@ -225,7 +225,7 @@ const updateTask = async (req, res) => {
   let day = timeNow.getDate();
   alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
-  alarmHour = alarmHour > 24 ? 0 : alarmHour;
+  alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmMinute = Number(alarmMinute);
   alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
@@ -235,7 +235,7 @@ const updateTask = async (req, res) => {
     return new Date(year, month, 0).getDate();
   };
   const pmamFutureTime2 = () => {
-    alarmHour = alarmHour === 24 ? 0 : alarmHour;
+    alarmHour = alarmHour === 23 ? 0 : alarmHour;
     let daysInThisMonth = daysInMonth(month, year);
     day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
