@@ -120,6 +120,8 @@ const SingleTask = ({
 
 const Wrapper = styled.div`
   /* background: skyblue; */
+  /* width: 100%; */
+  margin: auto;
   .single-task-center {
     /* border: 1px solid red; */
     /* display: inline-block; */
@@ -127,11 +129,12 @@ const Wrapper = styled.div`
     /* border: 2px solid var(--lightVariation); */
     border: transparent;
     border-radius: 0.5rem;
-    margin: 1rem;
+    margin: auto;
     margin-bottom: 2.5rem;
     padding: 1rem;
     padding-top: 0;
     box-shadow: var(--shadowSM);
+    width: 100%;
     /* position: relative; */
     /*  */
   }

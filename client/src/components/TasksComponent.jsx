@@ -25,24 +25,33 @@ const TasksComponent = () => {
   return (
     <Wrapper>
       {/* <h4>TasksComponent</h4> */}
-      {/* <div className="main"> */}
-      <div className="lnk">
-        <Link to="createtask" className="icon">
-          +
-        </Link>
+      <div className="main">
+        <div className="lnk">
+          <Link to="createtask" className="icon">
+            +
+          </Link>
+        </div>
+        <div className="cont">
+          {tasks.map((task) => {
+            return <SingleTask key={task._id} {...task} />;
+          })}
+        </div>
       </div>
-      <div className="">
-        {tasks.map((task) => {
-          return <SingleTask key={task._id} {...task} />;
-        })}
-      </div>
-      {/* </div> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   margin-bottom: 2rem;
+  .main {
+    width: 80vw;
+    max-width: 600px;
+    position: relative;
+    margin: 1rem auto;
+  }
+  .cont {
+    margin: auto;
+  }
   .lnk {
     cursor: pointer;
     display: flex;
@@ -52,7 +61,7 @@ const Wrapper = styled.div`
     height: 50px;
     border-radius: 50%;
     font-size: 4rem;
-    margin: auto auto;
+    /* margin: 0 auto; */
     background: var(--primaryColor);
     box-shadow: var(--shadowLG);
     position: fixed;
@@ -77,6 +86,12 @@ const Wrapper = styled.div`
       /* font-size: 2rem;
       width: 40px;
       height: 40px; */
+    }
+    .main {
+      /* width: 80vw; */
+      max-width: 700px;
+      /* position: relative;
+      margin: 1rem auto; */
     }
   }
   @media screen and (min-width: 768px) {
