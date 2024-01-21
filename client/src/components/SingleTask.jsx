@@ -173,7 +173,7 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 676px) {
     .single-task-center {
-      width: 70%;
+      width: 100%;
       max-width: 600px;
       margin: 2rem auto;
       box-shadow: var(--shadowSM);

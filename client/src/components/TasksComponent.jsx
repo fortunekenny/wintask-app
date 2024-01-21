@@ -65,7 +65,7 @@ const Wrapper = styled.div`
     background: var(--primaryColor);
     box-shadow: var(--shadowLG);
     position: fixed;
-    top: 24rem;
+    top: 21rem;
     right: 1rem;
     transform: translate(0rem 0rem);
     z-index: 5;
