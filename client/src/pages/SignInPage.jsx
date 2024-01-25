@@ -63,6 +63,7 @@ const Wrapper = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+  /* flex: 0 0 0; */
   background: var(--lightestVariation);
   width: 100vw;
   height: 100vh;
@@ -73,15 +74,15 @@ const Wrapper = styled.div`
     /* border: 1px solid red; */
     width: 55%;
     max-width: 300px;
+    min-width: 300px;
     background: var(--white);
-    border-radius: var(--borderRadius);
-    /* margin: auto; */
     box-shadow: var(--shadowLG);
   }
   .form-center .form {
     margin-left: 5%;
     margin-right: 5%;
   }
+
   .form-center h4 {
     text-align: center;
     margin: 1rem auto;
@@ -97,7 +98,6 @@ const Wrapper = styled.div`
     margin-left: 0;
   }
   .signup-btn {
-    /* letter-spacing: 0; */
     padding: 0.375rem 0.5rem;
   }
   .form-center p {
@@ -106,6 +106,7 @@ const Wrapper = styled.div`
   .form-center p a {
     display: inline-block;
     margin-left: 0.3rem;
+    color: var(--primaryColor);
   }
   .img-center {
     display: none;
