@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import LiveTime from "../components/LiveTime";
 import hero from "../assets/images/hero.svg";
 import hero2 from "../assets/images/hero2.svg";
+import hero3 from "../assets/images/hero3.svg";
 
 const LandingPage = () => {
   let [date, setDate] = useState(new Date());
@@ -47,7 +48,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--lightestVariation);
-  /* background: url(${hero}); */
   width: 100vw;
   height: 100vh;
   .landing-center {
@@ -57,6 +57,7 @@ const Wrapper = styled.div`
     max-width: 500px;
     border-radius: 1rem;
     padding-bottom: 2rem;
+    box-shadow: var(--shadowLG);
   }
   .landing-text {
     text-align: center;
@@ -72,7 +73,6 @@ const Wrapper = styled.div`
     min-width: 225px;
     margin: auto;
     margin-bottom: 1rem;
-    font-family: var();
   }
   .btn-landing {
     letter-spacing: 0;
@@ -84,7 +84,7 @@ const Wrapper = styled.div`
   /* tablet min 601 */
   /* tablet max 1024 */
   /* pc min 1170 */
-  @media screen and (min-width: 1170px) {
+  @media screen and (min-width: 990px) {
     .img-center {
       display: block;
     }
