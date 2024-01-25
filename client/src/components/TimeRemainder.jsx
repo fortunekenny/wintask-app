@@ -49,18 +49,21 @@ const TimeRemainder = ({
 };
 
 const Wrapper = styled.div`
+  padding-top: 0.5rem;
+  position: relative;
   .time-remainder {
     cursor: pointer;
-    padding-top: 0.5rem;
-    padding-bottom: 0;
-    position: relative;
-    /* border-bottom: 1px solid var(--lightVariation); */
-    /* background: ; */
+    width: 90%;
+    margin: 0 auto;
   }
   .time-texts {
     display: flex;
     flex: 0 0 0;
     justify-content: center;
+  }
+  .time-texts:active {
+    background: var(--darkestVariation);
+    color: var(--lightestVariation);
   }
   h2 {
     margin-top: auto;

@@ -94,6 +94,7 @@ const Wrapper = styled.div`
       margin: 1rem auto; */
     }
   }
+
   @media screen and (min-width: 768px) {
     .lnk {
       top: 496px;

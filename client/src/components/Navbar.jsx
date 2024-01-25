@@ -31,7 +31,7 @@ const Navbar = () => {
 const Wrapper = styled.div`
   width: 100%;
   .nav-center {
-    width: 100%;
+    max-width: 600px;
     display: flex;
     justify-content: space-between;
     background: var(--white);
@@ -82,6 +82,7 @@ const Wrapper = styled.div`
     .nav-center {
       /* width: 100%; */
       max-width: 600px;
+      margin: auto;
       margin-top: 5rem;
       padding: 0.5rem 0.5rem;
     }

@@ -120,7 +120,7 @@ const SingleTask = ({
 
 const Wrapper = styled.div`
   /* background: skyblue; */
-  /* width: 100%; */
+  width: 100%;
   margin: auto;
   .single-task-center {
     /* border: 1px solid red; */
@@ -134,7 +134,7 @@ const Wrapper = styled.div`
     padding: 1rem;
     padding-top: 0;
     box-shadow: var(--shadowSM);
-    width: 100%;
+    /* width: 100%; */
     /* position: relative; */
     /*  */
   }
@@ -149,9 +149,15 @@ const Wrapper = styled.div`
     cursor: pointer;
     border: transparent;
     background: transparent;
+    width: 30px;
+    height: 30px;
     font-size: 1.2rem;
     margin: auto 0.5rem;
     /* border-radius: 50%; */
+  }
+  .title button:hover {
+    border-radius: 50%;
+    border: 1px solid var(--primaryColor);
   }
   .task-title {
     background: var(--white);
@@ -173,7 +179,7 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 676px) {
     .single-task-center {
-      width: 100%;
+      /* width: 100%; */
       max-width: 600px;
       margin: 2rem auto;
       box-shadow: var(--shadowSM);

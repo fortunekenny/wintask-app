@@ -49,7 +49,7 @@ html {
 
 body {
   background: var(--lightestVariation);
-  font-family: var(--font);
+  font-family: var(--bodyFont);
   font-weight: 400;
   line-height: var(--lineHeightBody);
   color: var(--darkestVariation);
