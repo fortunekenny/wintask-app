@@ -12,16 +12,6 @@ const TimeRemainder = ({
   let { remainingHours, remainingMinutes, remainingSeconds } =
     remainingTimeConverter(remainderTime, futureTimeMonth, futureTimeYear);
 
-  // if (remainingHours < 0) {
-  //   return 0;
-  // }
-  // if (remainingMinutes < 0) {
-  //   return 0;
-  // }
-  // if (remainingSeconds < 0) {
-  //   return 0;
-  // }
-
   return (
     <Wrapper>
       <div
@@ -63,6 +53,8 @@ const Wrapper = styled.div`
   }
   .time-texts:active {
     background: var(--darkestVariation);
+  }
+  .time-texts:active h2 {
     color: var(--lightestVariation);
   }
   h2 {

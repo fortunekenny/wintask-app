@@ -32,15 +32,15 @@ const SignInPage = () => {
           <h4>Sign-In</h4>
           <FormRow type="email" name="email" labelText="email" />
           <FormRow type="password" name="password" labelText="password" />
-          <div className="signup-btns">
+          <div className="signin-btns">
             <button
               type="submit"
-              className="btn signup-btn"
+              className="btn signin-btn"
               disabled={isSubmitting}
             >
               {isSubmitting ? "submitting..." : "submit"}
             </button>
-            <button type="button" className="btn signup-btn">
+            <button type="button" className="btn signin-btn">
               explore app
             </button>
           </div>
@@ -72,7 +72,7 @@ const Wrapper = styled.div`
 
   .form-center {
     /* border: 1px solid red; */
-    width: 55%;
+    /* width: 55%; */
     max-width: 300px;
     min-width: 300px;
     background: var(--white);
@@ -88,7 +88,7 @@ const Wrapper = styled.div`
     margin: 1rem auto;
   }
 
-  .signup-btns {
+  .signin-btns {
     display: flex;
     justify-content: space-between;
     max-width: 173px;
@@ -97,7 +97,7 @@ const Wrapper = styled.div`
     margin-top: 0;
     margin-left: 0;
   }
-  .signup-btn {
+  .signin-btn {
     padding: 0.375rem 0.5rem;
   }
   .form-center p {
@@ -107,6 +107,10 @@ const Wrapper = styled.div`
     display: inline-block;
     margin-left: 0.3rem;
     color: var(--primaryColor);
+  }
+  .form-center p a:hover {
+    color: var(--darkestVariaton);
+    text-decoration: underline;
   }
   .img-center {
     display: none;
