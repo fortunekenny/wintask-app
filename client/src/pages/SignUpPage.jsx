@@ -55,18 +55,18 @@ const Wrapper = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  /* flex: 0 0 0; */
   background: var(--lightestVariation);
   width: 100vw;
   height: 100vh;
   text-transform: capitalize;
   margin: auto;
   .signup-center {
-    max-width: 300px;
-    min-width: 300px;
+    max-width: 400px;
+    min-width: 350px;
     padding-bottom: 1rem;
     background: var(--white);
     box-shadow: var(--shadowLG);
+    border-radius: var(--borderRadius);
   }
   .signup-center .form {
     margin-left: 5%;
@@ -94,6 +94,9 @@ const Wrapper = styled.div`
   }
   @media screen and (min-width: 990px) {
     width: 75vw;
+    .signup-center {
+      margin-top: -5rem;
+    }
     .img-center {
       display: block;
     }

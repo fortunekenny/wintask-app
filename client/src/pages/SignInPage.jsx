@@ -73,10 +73,11 @@ const Wrapper = styled.div`
   .form-center {
     /* border: 1px solid red; */
     /* width: 55%; */
-    max-width: 300px;
-    min-width: 300px;
+    max-width: 400px;
+    min-width: 350px;
     background: var(--white);
     box-shadow: var(--shadowLG);
+    border-radius: var(--borderRadius);
   }
   .form-center .form {
     margin-left: 5%;

@@ -21,11 +21,7 @@ const LiveTime = () => {
 
 const Wrapper = styled.div`
   .time-center {
-    /* display: inline-block; */
-    /* border: 1px solid red; */
     margin: 2rem auto;
-    /* margin-top: 2rem; */
-    /* margin-bottom: 2rem; */
     text-align: center;
   }
   .time-center h1 {

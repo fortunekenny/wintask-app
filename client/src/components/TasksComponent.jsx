@@ -1,10 +1,49 @@
+import { useState, useEffect, useRef, useCallback } from "react";
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
 import SingleTask from "./SingleTask";
 import { Link } from "react-router-dom";
-import { CiSquarePlus } from "react-icons/ci";
 
 const TasksComponent = () => {
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [contRight, setContRight] = useState(0);
+  const contRightRef = useRef(null);
+
+  console.log(windowWidth);
+
+  // const [windowHeight, setWindowHeight] = useState(0);
+  let resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+    // setWindowHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    resizeWindow();
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, []);
+
+  // useEffect(() => {
+  //   setContRight(contRightRef.current.getBoundingClientRect().left);
+  // }, []);
+
+  // const ref = React.useRef(null);
+  // const [height, setHeight] = React.useState(0);
+
+  const onResize = useCallback(() => {
+    if (contRightRef.current)
+      setContRight(contRightRef.current.getBoundingClientRect().left);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+    onResize();
+    return () => {
+      window.removeEventListener("resize", onResize);
+    };
+  }, [onResize]);
+  console.log(contRight);
+
   const { data } = useTasksContext();
   let { tasks } = data;
   // Sorting Tasks according to future time
@@ -21,17 +60,18 @@ const TasksComponent = () => {
       </Wrapper>
     );
   }
+  // style={{ width: `${300 - labelWidth}px` }}
 
   return (
     <Wrapper>
       {/* <h4>TasksComponent</h4> */}
       <div className="main">
-        <div className="lnk">
+        <div className="lnk" style={{ right: `${contRight}px` }}>
           <Link to="createtask" className="icon">
             +
           </Link>
         </div>
-        <div className="cont">
+        <div className="cont" ref={contRightRef}>
           {tasks.map((task) => {
             return <SingleTask key={task._id} {...task} />;
           })}
@@ -66,8 +106,7 @@ const Wrapper = styled.div`
     box-shadow: var(--shadowLG);
     position: fixed;
     top: 24.5rem;
-    right: 1rem;
-    transform: translate(0rem 0rem);
+    /* transform: translate(0rem 0rem); */
     z-index: 5;
   }
   .lnk:hover {
@@ -79,8 +118,8 @@ const Wrapper = styled.div`
   }
   @media screen and (min-width: 676px) {
     .lnk {
-      top: 496px;
-      right: 102.4px;
+      /*top: 496px;
+      right: 102.4px;*/
       /* transform: translateY(-0.6rem);
       transform: translateX(17rem); */
       /* font-size: 2rem;
@@ -95,7 +134,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and (min-width: 768px) {
+  /*@media screen and (min-width: 768px) {
     .lnk {
       top: 496px;
       right: 115px;
@@ -112,7 +151,7 @@ const Wrapper = styled.div`
       top: 496px;
       right: 285px;
     }
-  }
+  }*/
 `;
 
 export default TasksComponent;

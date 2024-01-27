@@ -29,9 +29,8 @@ const Navbar = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   .nav-center {
-    max-width: 600px;
     display: flex;
     justify-content: space-between;
     background: var(--white);
