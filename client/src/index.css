@@ -23,7 +23,7 @@ html {
   --white: #ffffff;
 
   /* fonts */
-  --headingFont: "Lato", serif;
+  --headingFont: "Lato", sans-serif;
   --bodyFont: "Lato", sans-serif;
   --smallText: 0.7em;
   --lineHeightHeadings: 1.3;

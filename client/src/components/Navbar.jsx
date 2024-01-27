@@ -78,10 +78,11 @@ const Wrapper = styled.div`
     }
   } */
   @media screen and (min-width: 676px) {
+    width: 600px;
+    margin: auto;
+    max-width: 600px;
     .nav-center {
-      /* width: 100%; */
-      max-width: 600px;
-      margin: auto;
+      /* width: 600px; */
       margin-top: 5rem;
       padding: 0.5rem 0.5rem;
     }

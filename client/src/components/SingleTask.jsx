@@ -95,14 +95,12 @@ const SingleTask = ({
   return (
     <Wrapper>
       <div className="single-task-center">
-        {/* <h4>task page</h4> */}
         <div className="title">
           <h4 className="task-title">{title}</h4>
           <button className="info-btn" onClick={() => setInfo(!info)}>
             <CiMenuKebab />
           </button>
         </div>
-        {/* <hr /> */}
         <div className="feature-center">
           <div className="tim-but">
             <TimeRemainder {...data} />
@@ -119,14 +117,10 @@ const SingleTask = ({
 };
 
 const Wrapper = styled.div`
-  /* background: skyblue; */
   width: 100%;
   margin: auto;
   .single-task-center {
-    /* border: 1px solid red; */
-    /* display: inline-block; */
     background: var(--white);
-    /* border: 2px solid var(--lightVariation); */
     border: transparent;
     border-radius: 0.5rem;
     margin: auto;
@@ -134,9 +128,6 @@ const Wrapper = styled.div`
     padding: 1rem;
     padding-top: 0;
     box-shadow: var(--shadowSM);
-    /* width: 100%; */
-    /* position: relative; */
-    /*  */
   }
   .single-task-center:hover {
     box-shadow: var(--shadowXLG);
@@ -153,7 +144,6 @@ const Wrapper = styled.div`
     height: 30px;
     font-size: 1.2rem;
     margin: auto 0.5rem;
-    /* border-radius: 50%; */
   }
   .title button:hover {
     border-radius: 50%;
@@ -167,10 +157,8 @@ const Wrapper = styled.div`
     padding-left: 2rem;
     font-weight: 400;
     text-transform: capitalize;
-    /* letter-spacing: 0.2rem; */
   }
   .feature-center {
-    /* border: 2px solid var(--lightVariation); */
     border: transparent;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -179,13 +167,11 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 676px) {
     .single-task-center {
-      /* width: 100%; */
       max-width: 600px;
       margin: 2rem auto;
       box-shadow: var(--shadowSM);
     }
     .task-title {
-      /* letter-spacing: 0.5rem; */
       font-size: 1.953rem;
     }
   }

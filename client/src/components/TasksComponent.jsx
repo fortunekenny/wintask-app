@@ -5,16 +5,16 @@ import SingleTask from "./SingleTask";
 import { Link } from "react-router-dom";
 
 const TasksComponent = () => {
-  const [windowWidth, setWindowWidth] = useState(0);
+  // const [windowWidth, setWindowWidth] = useState(0);
+  // const [windowHeight, setWindowHeight] = useState(0);
   const [contRight, setContRight] = useState(0);
   const contRightRef = useRef(null);
 
-  console.log(windowWidth);
-
-  // const [windowHeight, setWindowHeight] = useState(0);
+  /*
+  LISTENING TO WINDOW SIZE
   let resizeWindow = () => {
     setWindowWidth(window.innerWidth);
-    // setWindowHeight(window.innerHeight);
+    setWindowHeight(window.innerHeight);
   };
 
   useEffect(() => {
@@ -22,14 +22,10 @@ const TasksComponent = () => {
     window.addEventListener("resize", resizeWindow);
     return () => window.removeEventListener("resize", resizeWindow);
   }, []);
+  LISTENING TO WINDOW SIZE END
+  */
 
-  // useEffect(() => {
-  //   setContRight(contRightRef.current.getBoundingClientRect().left);
-  // }, []);
-
-  // const ref = React.useRef(null);
-  // const [height, setHeight] = React.useState(0);
-
+  // LISTENING TO ELEMENT LEFT BOUNDING BOX LOCATION
   const onResize = useCallback(() => {
     if (contRightRef.current)
       setContRight(contRightRef.current.getBoundingClientRect().left);
@@ -42,10 +38,11 @@ const TasksComponent = () => {
       window.removeEventListener("resize", onResize);
     };
   }, [onResize]);
-  console.log(contRight);
+  // LISTENING TO ELEMENT LEFT BOUNDING BOX LOCATION END
 
   const { data } = useTasksContext();
   let { tasks } = data;
+
   // Sorting Tasks according to future time
   tasks = tasks.sort(function (x, y) {
     let a = new Date(x.updatedAt).getTime(),
@@ -60,13 +57,14 @@ const TasksComponent = () => {
       </Wrapper>
     );
   }
-  // style={{ width: `${300 - labelWidth}px` }}
 
   return (
     <Wrapper>
-      {/* <h4>TasksComponent</h4> */}
       <div className="main">
-        <div className="lnk" style={{ right: `${contRight}px` }}>
+        <div
+          className="lnk"
+          style={{ right: `${contRight - 30}px`, top: `${60}%` }}
+        >
           <Link to="createtask" className="icon">
             +
           </Link>
@@ -85,7 +83,7 @@ const Wrapper = styled.div`
   margin-bottom: 2rem;
   .main {
     width: 80vw;
-    max-width: 600px;
+    min-width: 390px;
     position: relative;
     margin: 1rem auto;
   }
@@ -96,17 +94,13 @@ const Wrapper = styled.div`
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    font-size: 4rem;
-    /* margin: 0 auto; */
     background: var(--primaryColor);
     box-shadow: var(--shadowLG);
     position: fixed;
-    top: 24.5rem;
-    /* transform: translate(0rem 0rem); */
     z-index: 5;
   }
   .lnk:hover {
@@ -115,43 +109,15 @@ const Wrapper = styled.div`
   }
   .icon {
     color: var(--lightestVariation);
+    align-self: center;
+    font-size: 2rem;
   }
   @media screen and (min-width: 676px) {
-    .lnk {
-      /*top: 496px;
-      right: 102.4px;*/
-      /* transform: translateY(-0.6rem);
-      transform: translateX(17rem); */
-      /* font-size: 2rem;
-      width: 40px;
-      height: 40px; */
-    }
     .main {
-      /* width: 80vw; */
-      max-width: 700px;
-      /* position: relative;
-      margin: 1rem auto; */
+      width: 600px;
+      max-width: 600px;
     }
   }
-
-  /*@media screen and (min-width: 768px) {
-    .lnk {
-      top: 496px;
-      right: 115px;
-    }
-  }
-  @media screen and (min-width: 992px) {
-    .lnk {
-      top: 496px;
-      right: 190px;
-    }
-  }
-  @media screen and (min-width: 1170px) {
-    .lnk {
-      top: 496px;
-      right: 285px;
-    }
-  }*/
 `;
 
 export default TasksComponent;
