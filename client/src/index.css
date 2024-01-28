@@ -32,9 +32,8 @@ html {
   /* other vars */
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
-  --transition: 0.5s cubic-bezier(0, 0.33, 0.78, 0.51) all;
-  /* --maxWidth: px; */
-  /* --fixedWidth: 600px; */
+  /* --transition: 0.5s cubic-bezier(0, 0.33, 0.78, 0.51) all; */
+  --transition: 0.5s cubic-bezier(0.5, 0.01, 0.54, 0.99) all;
 
   /* box shadow*/
   --shadowSM: 0 1px 3px 0 rgba(45, 20, 51, 0.1),

@@ -1,11 +1,9 @@
 import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { Navbar } from "../components";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useRef, useEffect } from "react";
 import customFetch from "../utils/customFetch";
-// import { Toast } from "react-toastify/dist/components";
 import { toast } from "react-toastify";
-import LiveTime from "../components/LiveTime";
 
 export const loader = async ({ request }) => {
   try {
@@ -20,14 +18,31 @@ export const loader = async ({ request }) => {
 const UserContext = createContext();
 
 const UserPage = () => {
+  const [contain, setContain] = useState(false);
   const navigate = useNavigate();
   const { user } = useLoaderData();
 
-  // const [showAdmin, setShowAdmin] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const toggleDarkTheme = () => {
     console.log("toggle dark theme");
   };
+
+  useEffect(() => {
+    let elms = Array.from(document.getElementsByTagName("div"));
+    elms.map((elm) => {
+      let userpage = Array.from(elm.getElementsByClassName("user-page")).map(
+        (div) => {
+          const userpageDivs = Array.from(div.getElementsByTagName("div")).map(
+            (userpageDiv) => {
+              if (userpageDiv.classList.contains("create-task-center")) {
+                setContain(true);
+              }
+            }
+          );
+        }
+      );
+    });
+  });
 
   const logoutUser = async () => {
     navigate("/");
@@ -47,7 +62,7 @@ const UserPage = () => {
       <Wrapper>
         {/* <h2>UserPage</h2> */}
         <div className="user-page">
-          <Navbar />
+          <Navbar contain={contain} />
           {/* <LiveTime /> */}
           <div>
             <Outlet context={{ user }} />

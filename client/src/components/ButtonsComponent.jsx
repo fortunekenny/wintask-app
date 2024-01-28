@@ -8,8 +8,12 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
   return (
     <Wrapper>
-      <div className={showButton ? "button-center" : "hide-button"}>
-        <Form method="post" action={`./repeattask/${_id}`}>
+      <div className={showButton ? "button-center" : "reduce-height"}>
+        <Form
+          method="post"
+          action={`./repeattask/${_id}`}
+          className={showButton ? "show" : "hide"}
+        >
           <button
             type="submit"
             disabled={remainderTime > 1}
@@ -19,7 +23,11 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
             <p>Repeat</p>
           </button>
         </Form>
-        <Form method="post" action={`./canceltask/${_id}`}>
+        <Form
+          method="post"
+          action={`./canceltask/${_id}`}
+          className={showButton ? "show" : "hide"}
+        >
           <button
             type="submit"
             disabled={remainderTime < 1}
@@ -29,7 +37,7 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
             <p>Cancel</p>
           </button>
         </Form>
-        <Link to={`./edittask/${_id}`}>
+        <Link to={`./edittask/${_id}`} className={showButton ? "show" : "hide"}>
           <button
             type="button"
             disabled={remainderTime > 1}
@@ -39,7 +47,11 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
             <p>Edit</p>
           </button>
         </Link>
-        <Form method="post" action={`./deletetask/${_id}`}>
+        <Form
+          method="post"
+          action={`./deletetask/${_id}`}
+          className={showButton ? "show" : "hide"}
+        >
           <button type="submit" className="btn2">
             <RiDeleteBin2Line />
             <p>Delete</p>
@@ -60,6 +72,7 @@ const Wrapper = styled.div`
     justify-content: center;
     /* background: var(--lightestVariation); */
     border-radius: 2rem;
+    transition: var(--transition);
   }
   .btn2 {
     display: flex;
@@ -118,8 +131,18 @@ const Wrapper = styled.div`
   .disable svg {
     font-size: 1.5rem;
   }
-  .hide-button {
+  .reduce-height {
+    /* display: none; */
+    height: 0px;
+    transition: var(--transition);
+  }
+  .show {
+    display: inline-block;
+  }
+  .hide {
     display: none;
+    /* height: 0px; */
+    transition: var(--transition);
   }
   /* @media screen and (max-width: 400px) {
     .btn {

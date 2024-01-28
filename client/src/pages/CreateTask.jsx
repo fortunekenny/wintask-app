@@ -2,11 +2,10 @@ import { styled } from "styled-components";
 import { FormRow } from "../components";
 import { Form, useNavigation, redirect, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { RiCheckboxBlankFill } from "react-icons/ri";
 import customFetch from "../utils/customFetch";
-import { CiSquarePlus } from "react-icons/ci";
 import LiveTime from "../components/LiveTime";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import hero3 from "../assets/images/hero3.svg";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -73,11 +72,14 @@ const CreateTask = () => {
             <button type="submit" className="btn" disabled={isSubmitting}>
               {isSubmitting ? "submitting..." : "submit"}
             </button>
-            <Link to=".." className="btn-back">
+            <Link to=".." className="btn-back" reloadDocument>
               <IoIosArrowRoundBack /> back
             </Link>
           </div>
         </Form>
+      </div>
+      <div className="img-center">
+        <img src={hero3} alt="hero image" />
       </div>
     </Wrapper>
   );
@@ -90,7 +92,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: var(--lightestVariation);
   width: 100vw;
-  height: calc(100vh - 61.41px);
+  height: 100vh;
   text-transform: capitalize;
   margin: auto;
   .create-task-center {
@@ -99,6 +101,7 @@ const Wrapper = styled.div`
     padding-bottom: 1rem;
     background: var(--white);
     box-shadow: var(--shadowLG);
+    border-radius: var(--borderRadius);
   }
   .create-task-center .time-center {
     margin-bottom: 1rem;
@@ -151,10 +154,22 @@ const Wrapper = styled.div`
   .btn-back:hover {
     color: var(--darkestVariation);
   }
-  @media screen and (min-width: 676px) {
-    height: calc(100vh - 134px);
+  .img-center {
+    display: none;
+  }
+  @media screen and (min-width: 990px) {
+    /* height: calc(100vh - 134px); */
     .create-task-center {
       margin-top: -10rem;
+    }
+    .img-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+    }
+    .img-center img {
+      width: 80%;
     }
   }
 `;

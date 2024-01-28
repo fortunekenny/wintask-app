@@ -45,7 +45,7 @@ const EditTask = () => {
   return (
     <Wrapper>
       <h3>EditTask Page</h3>
-      <Link to="..">
+      <Link to=".." reloadDocument>
         <CiSquarePlus /> userpage
       </Link>
       <Form method="post" className="">

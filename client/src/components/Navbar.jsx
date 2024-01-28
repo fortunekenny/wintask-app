@@ -2,14 +2,28 @@ import { NavLink } from "react-router-dom";
 import { useUserContext } from "../pages/UserPage";
 import { styled } from "styled-components";
 import LogoutComponent from "./LogoutComponent";
+import { useRef, useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ contain }) => {
   const { user } = useUserContext();
   const { name, role } = user;
+  const hideNavRef = useRef(null);
+  useEffect(() => {
+    if (contain) {
+      // setContain(hideNavRef.current.classList);
+      hideNavRef.current.style.display = "none";
+    }
+  });
+
+  // }
+  // ),[]};
+
+  // let disp = contain ? "none" : "flex";
+  //
   return (
     <Wrapper>
       {/* <h3>Navbar</h3> */}
-      <nav className="nav-center">
+      <nav className="nav-center" ref={hideNavRef}>
         <h5 className="navtext">
           {/* Welcome */}
           <span> {name}</span>

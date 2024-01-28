@@ -18,13 +18,13 @@ const InfoComponent = ({
   return (
     <Wrapper>
       <div className={info ? "center-info" : "hide-info"}>
-        <div className="repeat">
+        <div className={info ? "repeat" : "hide"}>
           <h5>
             <span>{repeat ? "Repeated" : "Created"} At:</span>
             {updatedTime}
           </h5>
         </div>
-        <div className="expire">
+        <div className={info ? "expire" : "hide"}>
           <h5>
             <span>
               {remainderTime < 1 && !cancel
@@ -53,12 +53,13 @@ const InfoComponent = ({
 
 const Wrapper = styled.div`
   /* background: skyblue; */
-  transition: 1s cubic-bezier(0, 0.33, 0.78, 0.51) all;
+  transition: var(--transition);
   .center-info {
     display: flex;
     justify-content: space-around;
     margin-top: 0;
     /* margin-bottom: 0; */
+    transition: var(--transition);
   }
   .center-info span {
     font-size: 1rem;
@@ -101,12 +102,14 @@ const Wrapper = styled.div`
     color: var(--mediumVariation);
   }
   .hide-info {
-    display: none;
+    /* display: none; */
+    height: 0px;
+    transition: var(--transition);
   }
-  @media screen and (max-width: 400px) {
-    .center-info {
-      display: none;
-    }
+  .hide {
+    display: none;
+    /* height: 0px; */
+    transition: var(--transition);
   }
 `;
 
