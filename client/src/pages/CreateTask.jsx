@@ -166,7 +166,7 @@ const Wrapper = styled.div`
       width: 50%;
     }
     .img-center img {
-      width: 100%;
+      width: 80%;
     }
   }
 `;
