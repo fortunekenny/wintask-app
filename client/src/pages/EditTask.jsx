@@ -126,7 +126,8 @@ const Wrapper = styled.div`
   align-items: center;
   background: var(--lightestVariation);
   width: 100vw;
-  height: calc(100vh - 64.38px);
+  height: 100vh;
+  /* height: calc(100vh - 64.38px); */
   text-transform: capitalize;
   margin: auto;
   .edit-task-center {
@@ -183,7 +184,7 @@ const Wrapper = styled.div`
       width: 50%;
     }
     .img-center img {
-      width: 100%;
+      width: 80%;
     }
   }
 `;

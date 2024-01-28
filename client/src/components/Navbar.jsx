@@ -5,14 +5,16 @@ import LogoutComponent from "./LogoutComponent";
 import { useRef, useEffect } from "react";
 
 const Navbar = ({ contain }) => {
+  console.log(contain);
   const { user } = useUserContext();
   const { name, role } = user;
   const hideNavRef = useRef(null);
   useEffect(() => {
     if (contain) {
       hideNavRef.current.style.display = "none";
+    } else {
+      hideNavRef.current.style.display = "flex";
     }
-    hideNavRef.current.style.display = "flex";
   });
 
   return (
