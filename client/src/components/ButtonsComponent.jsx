@@ -63,14 +63,10 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
 };
 
 const Wrapper = styled.div`
-  /* background: skyblue; */
   .button-center {
-    /* border: 1px solid red; */
     display: flex;
     padding: 0.5rem 0;
-    /* flex-direction: column; */
     justify-content: center;
-    /* background: var(--lightestVariation); */
     border-radius: 2rem;
     transition: var(--transition);
   }
@@ -82,11 +78,8 @@ const Wrapper = styled.div`
     background: transparent;
     border: transparent;
     border-radius: var(--borderRadius);
-    /* padding: 0.375rem 0.75rem; */
-    /* box-shadow: var(--shadowSM); */
     transition: var(--transition);
     text-transform: capitalize;
-    /* text-align: center; */
     letter-spacing: var(--letterSpacing);
     margin-right: 1rem;
     width: 2.5rem;
@@ -100,7 +93,6 @@ const Wrapper = styled.div`
   .btn2 p {
     margin-bottom: 0.1rem;
     font-size: 0.65rem;
-    /* text-align: center; */
   }
   .btn2 svg {
     font-size: 1.5rem;
@@ -115,24 +107,19 @@ const Wrapper = styled.div`
     border: transparent;
     border-radius: var(--borderRadius);
     letter-spacing: var(--letterSpacing);
-    /* padding: 0.375rem 0.75rem; */
-    /* box-shadow: var(--shadowSM); */
     text-transform: capitalize;
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 1rem;
-    /* display: inline-block; */
   }
   .disable p {
     margin-bottom: 0.1rem;
     font-size: 0.65rem;
-    /* text-align: center; */
   }
   .disable svg {
     font-size: 1.5rem;
   }
   .reduce-height {
-    /* display: none; */
     height: 0px;
     transition: var(--transition);
   }
@@ -141,17 +128,8 @@ const Wrapper = styled.div`
   }
   .hide {
     display: none;
-    /* height: 0px; */
     transition: var(--transition);
   }
-  /* @media screen and (max-width: 400px) {
-    .btn {
-      margin-right: 0.5rem;
-    }
-    .disable {
-      margin-right: 0.5rem;
-    }
-  } */
 `;
 
 export default ButtonsComponent;

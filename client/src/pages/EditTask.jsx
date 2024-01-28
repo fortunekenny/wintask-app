@@ -43,7 +43,6 @@ const EditTask = () => {
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
   let secondsNow = new Date().getSeconds();
-  // reloadDocument
   return (
     <Wrapper>
       <div className="edit-task-center">
@@ -127,7 +126,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: var(--lightestVariation);
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64.38px);
   text-transform: capitalize;
   margin: auto;
   .edit-task-center {
@@ -153,7 +152,6 @@ const Wrapper = styled.div`
   }
   .selector select:focus {
     outline: none;
-    /* outline: 1px solid var(--primaryColor); */
   }
   .editBtns {
     display: flex;
@@ -175,7 +173,6 @@ const Wrapper = styled.div`
   }
 
   @media screen and (min-width: 990px) {
-    /* height: calc(100vh - 134px); */
     .edit-task-center {
       margin-top: -10rem;
     }

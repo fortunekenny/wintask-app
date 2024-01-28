@@ -63,13 +63,10 @@ const UserPage = () => {
       }}
     >
       <Wrapper>
-        {/* <h2>UserPage</h2> */}
         <div className="user-page">
           <Navbar contain={contain} />
-          {/* <LiveTime /> */}
-          <div>
+          <div className="outlet">
             <Outlet context={{ user }} />
-            {/* <Outlet /> */}
           </div>
         </div>
       </Wrapper>
@@ -78,6 +75,7 @@ const UserPage = () => {
 };
 
 const Wrapper = styled.div`
+  height: 100vh;
   .user-page {
     margin: 0 auto;
   }

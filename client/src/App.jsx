@@ -14,7 +14,6 @@ import {
   UserPage,
   Admin,
   Profile,
-  // AdminSingleUserPage,
 } from "./pages";
 
 import { action as signupAction } from "./pages/SignUpPage";
@@ -30,7 +29,6 @@ import { action as repeatTaskAction } from "./pages/RepeatTask";
 import { loader as cancelTaskLoader } from "./pages/CancelTask";
 import { action as cancelTaskAction } from "./pages/CancelTask";
 import { loader as usersLoader } from "./pages/Admin";
-// import { loader as singleUserLoader } from "./pages/AdminSingleUserPage";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +76,7 @@ const router = createBrowserRouter([
           {
             path: "deletetask/:id",
             action: deleteTaskAction,
+            element: <Navigate to=".." />,
           },
           {
             path: "repeattask/:id",
@@ -100,11 +99,6 @@ const router = createBrowserRouter([
             loader: usersLoader,
             element: <Admin />,
           },
-          // {
-          //   path: "/userpage/admin/singleuserpage/:id",
-          //   loader: singleUserLoader,
-          //   element: <AdminSingleUserPage />,
-          // },
         ],
       },
     ],
@@ -116,60 +110,3 @@ const App = () => {
 };
 
 export default App;
-
-/**
- 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomeLayout />,
-    children: [
-      {
-        path: "/",
-        element: <LandingPage />,
-        children: [
-          {
-            path: "signin",
-            element: <SignInPage />,
-            action: signinAction,
-          },
-          {
-            path: "signup",
-            element: <SignUpPage />,
-            action: signupAction,
-          },
-        ],
-      },
-      {
-        path: "userpage",
-        element: <UserPage />,
-        loader: userpageLoader, // loaders ar used to get data from the backend
-        children: [
-          {
-            // index: true,
-            path: "createTask",
-            element: <CreateTask />,
-            // loader: createTaskLoader,
-            action: createTaskAction,
-          },
-          {
-            index: true,
-            // path: "tasks",
-            element: <Tasks />,
-            loader: tasksLoader,
-          },
-          {
-            path: "edittask",
-            element: <EditTask />,
-          },
-          {
-            path: "admin",
-            element: <Admin />,
-          },
-        ],
-      },
-    ],
-  },
-]);
- 
- */

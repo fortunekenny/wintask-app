@@ -11,7 +11,6 @@ const LandingPage = () => {
 
   useEffect(() => {
     let timer = setInterval(() => setDate(new Date()), 1000);
-    // timer = timer;
     return function cleanup() {
       clearInterval(timer);
     };
@@ -20,10 +19,8 @@ const LandingPage = () => {
   return (
     <Wrapper>
       <div className="landing-center">
-        {/* <div className="landing-display"> */}
         <h1 className="landing-text">WinTask</h1>
         <LiveTime />
-        {/* </div> */}
         <div className="links">
           <Link to="/signup" className="btn btn-landing">
             Register
@@ -42,7 +39,6 @@ const LandingPage = () => {
 };
 
 const Wrapper = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   position: relative;
   justify-content: center;
@@ -51,7 +47,6 @@ const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
   .landing-center {
-    /* border: 1px solid red; */
     background: var(--white);
     width: 90%;
     max-width: 500px;

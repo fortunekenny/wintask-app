@@ -10,22 +10,15 @@ const Navbar = ({ contain }) => {
   const hideNavRef = useRef(null);
   useEffect(() => {
     if (contain) {
-      // setContain(hideNavRef.current.classList);
       hideNavRef.current.style.display = "none";
     }
+    hideNavRef.current.style.display = "flex";
   });
 
-  // }
-  // ),[]};
-
-  // let disp = contain ? "none" : "flex";
-  //
   return (
     <Wrapper>
-      {/* <h3>Navbar</h3> */}
       <nav className="nav-center" ref={hideNavRef}>
         <h5 className="navtext">
-          {/* Welcome */}
           <span> {name}</span>
         </h5>
         <div className="link-center">
@@ -58,7 +51,6 @@ const Wrapper = styled.div`
     margin: auto 0;
   }
   .navtext span {
-    /* /* display: inline-block;  */
     background: var(--lightestVariation);
     color: var(--primaryColor);
     border-radius: var(--borderRadius);
@@ -85,18 +77,12 @@ const Wrapper = styled.div`
     visibility: visible;
     margin-right: 1rem;
   }
-  /* @media screen and (max-width: 400px) {
-    .nav-center {
-      margin-bottom: 2rem;
-      min-width: 400px;
-    }
-  } */
+
   @media screen and (min-width: 676px) {
     width: 600px;
-    margin: auto;
     max-width: 600px;
+    margin: auto;
     .nav-center {
-      /* width: 600px; */
       margin-top: 5rem;
       padding: 0.5rem 0.5rem;
     }

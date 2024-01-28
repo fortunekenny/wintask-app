@@ -5,13 +5,10 @@ const ProgressBar = ({ remainderTime, remainingTime, futureTime, timeNow }) => {
     ((remainingTime - remainderTime) / remainingTime) * 100
   );
   percent = percent < 0 ? 0 : percent > 100 ? 100 : percent;
-  // console.log("times", remainingTime, futureTime - timeNow, percent);
-  // console.log("difs", remainingTime - (futureTime - timeNow));
   return (
     <Wrapper>
       <h4>{percent}%</h4>
       <div className="container">
-        {/* <svg height="30" width="500"> */}
         <svg viewBox="-10 0 500 20">
           <defs>
             <linearGradient
@@ -28,25 +25,8 @@ const ProgressBar = ({ remainderTime, remainingTime, futureTime, timeNow }) => {
               <stop stopColor="red" offset="75%" />
             </linearGradient>
           </defs>
-          <line
-            x1="0"
-            y1="15"
-            x2="480"
-            y2="15"
-            stroke="#ddd"
-            // strokeLinecap="round"
-            // strokeWidth="17"
-          />
-          <line
-            x1="0"
-            y1="15"
-            x2={percent * 4.8}
-            y2="15"
-            stroke="#af3dcc"
-            // stroke="url(#e)"
-            // strokeLinecap="round"
-            // strokeWidth="15"
-          />
+          <line x1="0" y1="15" x2="480" y2="15" stroke="#ddd" />
+          <line x1="0" y1="15" x2={percent * 4.8} y2="15" stroke="#af3dcc" />
 
           <text
             x={`${480 * 0.25}px`}
@@ -87,8 +67,6 @@ const ProgressBar = ({ remainderTime, remainingTime, futureTime, timeNow }) => {
 };
 
 const Wrapper = styled.div`
-  /*background: skyblue;*/
-  /* background: yellow; */
   h4 {
     margin-bottom: 0%;
     position: absolute;
@@ -98,7 +76,6 @@ const Wrapper = styled.div`
     color: var(--lightVariation);
   }
   svg {
-    /* background: purple; */
   }
   line {
     stroke-linecap: round;

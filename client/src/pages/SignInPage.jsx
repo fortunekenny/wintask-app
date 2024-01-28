@@ -14,7 +14,6 @@ export const action = async ({ request }) => {
     await customFetch.post("/auth/login", data);
     toast.success("You are logged in");
     return redirect("/userpage");
-    // return null;
   } catch (error) {
     toast.error(error?.response?.data?.msg);
     return error;
@@ -58,12 +57,10 @@ const SignInPage = () => {
 };
 
 const Wrapper = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
-  /* flex: 0 0 0; */
   background: var(--lightestVariation);
   width: 100vw;
   height: 100vh;
@@ -71,8 +68,6 @@ const Wrapper = styled.div`
   margin: auto;
 
   .form-center {
-    /* border: 1px solid red; */
-    /* width: 55%; */
     max-width: 400px;
     min-width: 350px;
     background: var(--white);
@@ -92,8 +87,8 @@ const Wrapper = styled.div`
   .signin-btns {
     display: flex;
     justify-content: space-between;
-    max-width: 173px;
-    min-width: 173px;
+    max-width: 200px;
+    min-width: 200px;
     margin: 0.5rem auto;
     margin-top: 0;
     margin-left: 0;
@@ -122,7 +117,7 @@ const Wrapper = styled.div`
       display: block;
     }
     .img-center img {
-      width: 80%;
+      width: 100%;
     }
   }
 `;

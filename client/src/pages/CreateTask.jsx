@@ -10,6 +10,7 @@ import hero3 from "../assets/images/hero3.svg";
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+  console.log(typeof data.alarmHour);
   try {
     await customFetch.post("/tasks", data);
     toast.success("Task created");
@@ -31,7 +32,6 @@ const CreateTask = () => {
     <Wrapper>
       <div className="create-task-center">
         <LiveTime />
-
         <Form method="post" className="form">
           <div className="selector">
             <FormRow type="text" name="title" labelText="Title" />
@@ -62,7 +62,7 @@ const CreateTask = () => {
             </select>
             <select name="ampm" id="ampm">
               <option value={""}>AM/PM</option>
-              <option value={timeNow}>{timeNow}</option>
+              <option value={`${timeNow}`}>{timeNow}</option>
               <option value={timeNow === "AM" ? "PM" : "AM"}>
                 {timeNow === "AM" ? "PM" : "AM"}
               </option>
@@ -92,7 +92,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: var(--lightestVariation);
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 64.38px);
   text-transform: capitalize;
   margin: auto;
   .create-task-center {
@@ -128,11 +128,9 @@ const Wrapper = styled.div`
   }
   .selector select:focus {
     outline: none;
-    /* outline: 1px solid var(--primaryColor); */
   }
   .selector select option {
     font-size: 1rem;
-    /* display: flex; */
   }
   .selector select option:hover {
     background: var(--darkVariation);
@@ -157,7 +155,6 @@ const Wrapper = styled.div`
     display: none;
   }
   @media screen and (min-width: 990px) {
-    /* height: calc(100vh - 134px); */
     .create-task-center {
       margin-top: -10rem;
     }

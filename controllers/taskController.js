@@ -2,8 +2,7 @@ const Task = require("../model/tasks");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
-// const currentTime = new Date();
-// console.log(currentTime);
+
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
@@ -13,16 +12,22 @@ const createTask = async (req, res) => {
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
+
   alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
-  alarmMinute = Number(alarmMinute);
-  alarmSeconds = Number(alarmSeconds);
+  alarmHour = String(alarmHour);
+  // alarmMinute = Number(alarmMinute);
+  // alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
+
+  let futureTime = new Date(
+    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
+  );
 
   const pmamFutureTime2 = () => {
     alarmHour = alarmHour > 23 ? 0 : alarmHour;
@@ -37,10 +42,6 @@ const createTask = async (req, res) => {
       `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
-
-  let futureTime = new Date(
-    `${year}/${month}/${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
-  );
 
   futureTime =
     ampmNow === "PM" && ampm === "AM"
@@ -75,8 +76,8 @@ const createTask = async (req, res) => {
     previouseFutureTime,
     lastTimeUpdated,
     lastTimeUpdatedBeforeCanceling,
-    futureTimeMonth,
-    futureTimeYear,
+    // futureTimeMonth,
+    // futureTimeYear,
   });
   res.status(StatusCodes.CREATED).json({ task });
 };
@@ -231,8 +232,9 @@ const updateTask = async (req, res) => {
   alarmHour = Number(alarmHour);
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
-  alarmMinute = Number(alarmMinute);
-  alarmSeconds = Number(alarmSeconds);
+  alarmHour = String(alarmHour);
+  // alarmMinute = Number(alarmMinute);
+  // alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 

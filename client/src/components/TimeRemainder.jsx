@@ -68,7 +68,6 @@ const Wrapper = styled.div`
     color: var(--mediumVariation);
   }
   .shows {
-    /* border: 1px solid red; */
     visibility: visible;
     position: absolute;
     top: 0;

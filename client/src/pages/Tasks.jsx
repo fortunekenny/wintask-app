@@ -3,7 +3,6 @@ import { TasksComponent } from "../components";
 import customFetch from "../utils/customFetch";
 import { useLoaderData } from "react-router-dom";
 import { useContext, createContext } from "react";
-import { styled } from "styled-components";
 
 export const loader = async ({ request }) => {
   try {
@@ -21,17 +20,12 @@ const Tasks = () => {
   const { data } = useLoaderData();
   return (
     <>
-      {/* <h2>Tasks</h2> */}
       <TasksContext.Provider value={{ data }}>
         <TasksComponent />
       </TasksContext.Provider>
     </>
   );
 };
-
-// const Wrapper = styled.div`
-//   /* background: skyblue; */
-// `;
 
 export default Tasks;
 export const useTasksContext = () => useContext(TasksContext);

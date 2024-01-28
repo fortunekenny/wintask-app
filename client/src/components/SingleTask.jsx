@@ -35,7 +35,6 @@ const SingleTask = ({
   let [showButton, setShowButton] = useState(false);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
-  // console.log(futureTime, timeNow);
 
   useEffect(() => {
     let remainder = setInterval(() => {
@@ -62,8 +61,6 @@ const SingleTask = ({
   let today = day(futureTime).isToday();
   let tomorrow = day(futureTime).isTomorrow();
   let dur = day.duration(day(timeNow).diff(futureTime));
-
-  // console.log(dur.$d.days);
 
   let data = {
     cancel,

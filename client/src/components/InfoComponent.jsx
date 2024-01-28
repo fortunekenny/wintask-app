@@ -52,13 +52,11 @@ const InfoComponent = ({
 };
 
 const Wrapper = styled.div`
-  /* background: skyblue; */
   transition: var(--transition);
   .center-info {
     display: flex;
     justify-content: space-around;
     margin-top: 0;
-    /* margin-bottom: 0; */
     transition: var(--transition);
   }
   .center-info span {
@@ -72,7 +70,6 @@ const Wrapper = styled.div`
   }
   .expire span {
     color: var(--mediumVariation);
-    /* margin-bottom: 0; */
   }
   .repeat h5 {
     margin-bottom: 0;
@@ -102,13 +99,11 @@ const Wrapper = styled.div`
     color: var(--mediumVariation);
   }
   .hide-info {
-    /* display: none; */
     height: 0px;
     transition: var(--transition);
   }
   .hide {
     display: none;
-    /* height: 0px; */
     transition: var(--transition);
   }
 `;
