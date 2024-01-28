@@ -34,7 +34,10 @@ const UserPage = () => {
         (div) => {
           const userpageDivs = Array.from(div.getElementsByTagName("div")).map(
             (userpageDiv) => {
-              if (userpageDiv.classList.contains("create-task-center")) {
+              if (
+                userpageDiv.classList.contains("create-task-center") ||
+                userpageDiv.classList.contains("edit-task-center")
+              ) {
                 setContain(true);
               }
             }

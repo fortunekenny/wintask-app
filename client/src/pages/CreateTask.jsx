@@ -26,11 +26,11 @@ const CreateTask = () => {
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
   let secondsNow = new Date().getSeconds();
+  // reloadDocument;
   return (
     <Wrapper>
       <div className="create-task-center">
         <LiveTime />
-        {/* <h3>CreateTask</h3> */}
 
         <Form method="post" className="form">
           <div className="selector">
@@ -125,7 +125,6 @@ const Wrapper = styled.div`
     background: var(--lightestVariation);
     border-radius: var(--borderRadius);
     border: 1px solid var(--mediumVariation);
-    /* display: flex; */
   }
   .selector select:focus {
     outline: none;
@@ -169,7 +168,7 @@ const Wrapper = styled.div`
       width: 50%;
     }
     .img-center img {
-      width: 80%;
+      width: 100%;
     }
   }
 `;
