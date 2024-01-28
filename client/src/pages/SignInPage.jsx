@@ -87,8 +87,8 @@ const Wrapper = styled.div`
   .signin-btns {
     display: flex;
     justify-content: space-between;
-    max-width: 200px;
-    min-width: 200px;
+    max-width: 230px;
+    min-width: 230px;
     margin: 0.5rem auto;
     margin-top: 0;
     margin-left: 0;
