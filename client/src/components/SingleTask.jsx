@@ -161,7 +161,11 @@ const Wrapper = styled.div`
     border-bottom-right-radius: 0.5rem;
     position: relative;
   }
-
+  @media screen and (max-width: 502px) {
+    .single-task-center {
+      /* width: 90%; */
+    }
+  }
   @media screen and (min-width: 676px) {
     .single-task-center {
       max-width: 600px;

@@ -5,7 +5,7 @@ import LogoutComponent from "./LogoutComponent";
 import { useRef, useEffect } from "react";
 
 const Navbar = ({ contain }) => {
-  console.log(contain);
+  // console.log(contain);
   const { user } = useUserContext();
   const { name, role } = user;
   const hideNavRef = useRef(null);
@@ -38,13 +38,14 @@ const Navbar = ({ contain }) => {
 };
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
+  margin: 0rem auto;
   .nav-center {
     display: flex;
     justify-content: space-between;
     background: var(--white);
     padding: 2% 2%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     flex: 0 0 0;
   }
 
@@ -79,14 +80,24 @@ const Wrapper = styled.div`
     visibility: visible;
     margin-right: 1rem;
   }
+  @media screen and (max-width: 502px) {
+    margin: 0 auto;
+    max-width: 100vw;
+    .nav-center {
+      /* width: 100vw; */
+      /* margin: 0 auto; */
+    }
+  }
 
   @media screen and (min-width: 676px) {
-    width: 600px;
+    /* width: 600px; */
     max-width: 600px;
     margin: auto;
+    margin-top: 5rem;
+    padding: 0.5rem 0.5rem;
     .nav-center {
-      margin-top: 5rem;
-      padding: 0.5rem 0.5rem;
+      /* margin-top: 5rem;
+      padding: 0.5rem 0.5rem; */
     }
   }
 `;

@@ -75,8 +75,17 @@ const UserPage = () => {
 };
 
 const Wrapper = styled.div`
-  height: 100vh;
+  width: 90vw;
+  margin: 0 auto;
+  /* height: 100vh; */
+
   .user-page {
+    margin: 0 auto;
+    /* width: 100vw; */
+    /* height: 100vh; */
+  }
+  @media screen and (max-width: 502px) {
+    width: 100vw;
     margin: 0 auto;
   }
 `;

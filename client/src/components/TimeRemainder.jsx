@@ -81,6 +81,14 @@ const Wrapper = styled.div`
   .hides {
     display: none;
   }
+  @media screen and (max-width: 502px) {
+    h2 {
+      font-size: 2rem;
+    }
+    h2 span {
+      font-size: 0.5em;
+    }
+  }
 `;
 
 export default TimeRemainder;

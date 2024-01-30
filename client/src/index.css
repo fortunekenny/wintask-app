@@ -52,6 +52,7 @@ body {
   font-weight: 400;
   line-height: var(--lineHeightBody);
   color: var(--darkestVariation);
+  /* width: 100vw; */
 }
 
 p {
