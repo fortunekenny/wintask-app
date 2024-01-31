@@ -32,7 +32,7 @@ const TasksComponent = () => {
       setContRight(contRightRef.current.getBoundingClientRect().left);
     }
   }, []);
-  console.log(contRight, windowWidth);
+  // console.log(contRight, windowWidth);
   useEffect(() => {
     window.addEventListener("resize", onResize);
     onResize();
@@ -63,15 +63,13 @@ const TasksComponent = () => {
   return (
     <Wrapper>
       <div className="main">
-        <div
+        <Link
+          to="createtask"
           className="lnk"
           style={{ right: `${rightLoc}px`, top: `${topLoc}px` }}
-          // style={{ right: `${contRight - 30}px`, top: `${60}%` }}
         >
-          <Link to="createtask" className="icon">
-            +
-          </Link>
-        </div>
+          +
+        </Link>
         <div className="cont" ref={contRightRef}>
           {tasks.map((task) => {
             return <SingleTask key={task._id} {...task} />;
@@ -86,7 +84,6 @@ const Wrapper = styled.div`
   margin-bottom: 2rem;
   .main {
     width: 100%;
-    /* min-width: 390px; */
     position: relative;
     margin: 1rem auto;
   }
@@ -98,9 +95,11 @@ const Wrapper = styled.div`
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 50px;
     height: 50px;
+    color: var(--lightestVariation);
+    font-size: 1.8rem;
     border-radius: 50%;
     background: var(--primaryColor);
     box-shadow: var(--shadowLG);
@@ -111,19 +110,11 @@ const Wrapper = styled.div`
     background: var(--darkVariation);
     box-shadow: var(--shadowXLG);
   }
-  .icon {
-    color: var(--lightestVariation);
-    align-self: center;
-    font-size: 2rem;
-  }
+
   @media screen and (max-width: 502px) {
-    .main {
-      /* width: 100%; */
-    }
     .lnk {
       width: 40px;
       height: 40px;
-      /* top: 370px; */
     }
   }
   @media screen and (min-width: 676px) {

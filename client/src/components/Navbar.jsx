@@ -5,7 +5,6 @@ import LogoutComponent from "./LogoutComponent";
 import { useRef, useEffect } from "react";
 
 const Navbar = ({ contain }) => {
-  // console.log(contain);
   const { user } = useUserContext();
   const { name, role } = user;
   const hideNavRef = useRef(null);
@@ -45,7 +44,6 @@ const Wrapper = styled.div`
     justify-content: space-between;
     background: var(--white);
     padding: 2% 2%;
-    /* margin: 0 auto; */
     flex: 0 0 0;
   }
 
