@@ -17,6 +17,8 @@ const createTask = async (req, res) => {
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmHour = String(alarmHour);
+  alarmMinute = String(alarmMinute);
+  alarmSeconds = String(alarmSeconds);
   // alarmMinute = Number(alarmMinute);
   // alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
@@ -183,6 +185,9 @@ const repeatTask = async (req, res) => {
     month = month - 12;
     year = year + mt;
   }
+  // alarmHour = String(alarmHour);
+  // alarmMinute = String(alarmMinute);
+  // alarmSeconds = String(alarmSeconds);
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(
@@ -233,6 +238,8 @@ const updateTask = async (req, res) => {
   alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmHour = String(alarmHour);
+  alarmMinute = String(alarmMinute);
+  alarmSeconds = String(alarmSeconds);
   // alarmMinute = Number(alarmMinute);
   // alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
