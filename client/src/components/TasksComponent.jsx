@@ -8,7 +8,9 @@ const TasksComponent = () => {
   const [windowWidth, setWindowWidth] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
   const [contRight, setContRight] = useState(0);
+  const [locX,setLocX] = useState(0)
   const contRightRef = useRef(null);
+  const dragRef = useRef(null);
 
   let rightLoc = windowWidth > 676 ? contRight - 50 : contRight;
   let topLoc = windowWidth < 502 ? 375 : 390;

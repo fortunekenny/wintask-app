@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { styled } from "styled-components";
+import day from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
 const LiveTime = () => {
-  let [date, setDate] = useState(new Date());
+  let [time, setTime] = useState(new Date());
+  let timeNow = day(time).format("hh:mm:ss A");
 
   useEffect(() => {
-    let timer = setInterval(() => setDate(new Date()), 1000);
+    let timer = setInterval(() => setTime(new Date()), 1000);
     return function cleanup() {
       clearInterval(timer);
     };
@@ -13,7 +16,8 @@ const LiveTime = () => {
   return (
     <Wrapper>
       <div className="time-center">
-        <h1>{date.toLocaleTimeString()}</h1>
+        {/* <h1>{timeNow.toLocaleTimeString()}</h1> */}
+        <h1>{timeNow}</h1>
       </div>
     </Wrapper>
   );
