@@ -2,6 +2,7 @@ const Task = require("../model/tasks");
 const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
+const dayjs = require("dayjs");
 
 // const currentTime = new Date();
 // console.log(currentTime);
@@ -36,9 +37,10 @@ const createTask = async (req, res) => {
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
-
+  // "2015-03-25T12:00:00Z";
   let futureTime = new Date(
-    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   const pmamFutureTime2 = () => {
@@ -51,7 +53,8 @@ const createTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
     return new Date(
-      `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+      `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
+      // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
 

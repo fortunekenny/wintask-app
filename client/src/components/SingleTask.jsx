@@ -47,7 +47,7 @@ const SingleTask = ({
   );
   console.log(timeNow);
   */
-  // console.log(futureTimes);
+  // console.log(day(futureTime));
 
   useEffect(() => {
     let remainder = setInterval(() => {
