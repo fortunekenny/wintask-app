@@ -18,8 +18,14 @@ const createTask = async (req, res) => {
   // let timeZoneOffSet = timeNow.getTimezoneOffset();
 
   alarmHour = Number(alarmHour);
-  alarmHour = alarmHour > 12 ? alarmHour + 12 : alarmHour;
-  alarmHour = alarmHour > 23 ? 0 : alarmHour;
+  alarmHour =
+    alarmHour === 12 && ampm === "AM"
+      ? 0
+      : alarmHour === 12 && ampm === "PM"
+      ? 12
+      : alarmHour < 12 && ampm === "PM"
+      ? alarmHour + 12
+      : alarmHour;
   alarmHour = String(alarmHour);
   alarmMinute = String(alarmMinute);
   alarmSeconds = String(alarmSeconds);
@@ -50,9 +56,7 @@ const createTask = async (req, res) => {
   };
 
   futureTime =
-    ampmNow === "PM" && ampm === "AM"
-      ? pmamFutureTime2()
-      : alarmHour === 0 && ampmNow === PM
+    (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
       ? pmamFutureTime2()
       : futureTime;
 
@@ -82,8 +86,8 @@ const createTask = async (req, res) => {
     previouseFutureTime,
     lastTimeUpdated,
     lastTimeUpdatedBeforeCanceling,
-    // futureTimeMonth,
-    // futureTimeYear,
+    futureTimeMonth,
+    futureTimeYear,
   });
   res.status(StatusCodes.CREATED).json({ task });
 };
@@ -239,8 +243,14 @@ const updateTask = async (req, res) => {
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
   alarmHour = Number(alarmHour);
-  alarmHour = alarmHour > 12 ? alarmHour + 12 : alarmHour;
-  alarmHour = alarmHour > 23 ? 0 : alarmHour;
+  alarmHour =
+    alarmHour === 12 && ampm === "AM"
+      ? 0
+      : alarmHour === 12 && ampm === "PM"
+      ? 12
+      : alarmHour < 12 && ampm === "PM"
+      ? alarmHour + 12
+      : alarmHour;
   alarmHour = String(alarmHour);
   alarmMinute = String(alarmMinute);
   alarmSeconds = String(alarmSeconds);
@@ -270,9 +280,7 @@ const updateTask = async (req, res) => {
   );
 
   futureTime =
-    ampmNow === "PM" && ampm === "AM"
-      ? pmamFutureTime2()
-      : alarmHour === 0
+    (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
       ? pmamFutureTime2()
       : futureTime;
 
