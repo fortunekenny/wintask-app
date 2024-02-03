@@ -38,8 +38,11 @@ const createTask = async (req, res) => {
     return new Date(year, month, 0).getDate();
   };
   // "2015-03-25T12:00:00Z";
-  let futureTime = new Date(
+  let futureTime = dayjs(
     `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    /*  let futureTime = new Date(
+    `"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
+    // `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
@@ -52,8 +55,11 @@ const createTask = async (req, res) => {
     month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
-    return new Date(
+    s;
+    return dayjs(
       `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
+      /*    return new Date(
+      `"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
       // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
@@ -63,8 +69,13 @@ const createTask = async (req, res) => {
       ? pmamFutureTime2()
       : futureTime;
 
-  let futureTimeMonth = futureTime.getMonth();
-  let futureTimeYear = futureTime.getFullYear();
+  futureTime = dayjs(futureTime);
+  console.log(futureTime);
+
+  let futureTimeMonth = futureTime.month();
+  // let futureTimeMonth = futureTime.getMonth();
+  let futureTimeYear = futureTime.year();
+  // let futureTimeYear = futureTime.getFullYear();
 
   const remainingTime = futureTime - currentTime;
   let previouseFutureTime = futureTime;
