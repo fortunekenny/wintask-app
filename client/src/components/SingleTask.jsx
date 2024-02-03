@@ -29,12 +29,25 @@ const SingleTask = ({
   updatedAt,
   futureTimeMonth,
   futureTimeYear,
+  alarmHour,
+  alarmMinute,
+  alarmSeconds,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let [info, setInfo] = useState(false);
   let [showButton, setShowButton] = useState(false);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
+  /*
+  let year = timeNow.getFullYear();
+  let month = timeNow.getMonth() + 1;
+  let days = timeNow.getDate();
+  let futureTimes = new Date(
+    `${year}/${month}/${days}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+  );
+  console.log(timeNow);
+  */
+  // console.log(futureTimes);
 
   useEffect(() => {
     let remainder = setInterval(() => {

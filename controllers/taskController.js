@@ -3,6 +3,9 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
 
+// const currentTime = new Date();
+// console.log(currentTime);
+
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
@@ -15,21 +18,21 @@ const createTask = async (req, res) => {
   // let timeZoneOffSet = timeNow.getTimezoneOffset();
 
   alarmHour = Number(alarmHour);
-  alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
+  alarmHour = alarmHour > 12 ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmHour = String(alarmHour);
   alarmMinute = String(alarmMinute);
   alarmSeconds = String(alarmSeconds);
   // alarmMinute = Number(alarmMinute);
   // alarmSeconds = Number(alarmSeconds);
-  // const seconds = timeNow.getSeconds();
+  const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
-  // Date("2015-03-25T12:00:00Z");
+
   let futureTime = new Date(
-    `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   const pmamFutureTime2 = () => {
@@ -42,7 +45,7 @@ const createTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;
     return new Date(
-      `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+      `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
 
@@ -192,7 +195,7 @@ const repeatTask = async (req, res) => {
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(
-    `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
@@ -236,7 +239,7 @@ const updateTask = async (req, res) => {
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
   alarmHour = Number(alarmHour);
-  alarmHour = ampm === "PM" ? alarmHour + 12 : alarmHour;
+  alarmHour = alarmHour > 12 ? alarmHour + 12 : alarmHour;
   alarmHour = alarmHour > 23 ? 0 : alarmHour;
   alarmHour = String(alarmHour);
   alarmMinute = String(alarmMinute);
@@ -258,12 +261,12 @@ const updateTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month > 12 ? year + 1 : year;
     return new Date(
-      `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+      `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
 
   let futureTime = new Date(
-    `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   futureTime =
@@ -326,7 +329,7 @@ const cancelTask = async (req, res) => {
   let alarmSeconds = timeNow.getSeconds();
 
   futureTime = new Date(
-    `"${year}/${month}/${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}Z"`
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   const remainingTime = futureTime - currentTime;
