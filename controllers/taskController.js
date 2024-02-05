@@ -28,7 +28,7 @@ const createTask = async (req, res) => {
   alarmHour = Number(alarmHour);
   alarmHour =
     alarmHour === 12 && ampm === "AM"
-      ? 0
+      ? 23
       : alarmHour === 12 && ampm === "PM"
       ? 12
       : alarmHour < 12 && ampm === "PM"
@@ -52,7 +52,7 @@ const createTask = async (req, res) => {
       : `${alarmHour + timezoneOffset / 60}`; // minus offset
   console.log(alarmHour);
 
-  alarmHour = alarmHour < 0 ? 0 : alarmHour;
+  alarmHour = alarmHour < 0 ? 23 : alarmHour;
 
   alarmHour = String(alarmHour);
   alarmMinute = String(alarmMinute);
@@ -76,26 +76,27 @@ const createTask = async (req, res) => {
   // .utc(true)
   // .format();
   console.log(futureTime);
-
+  /*
   const pmamFutureTime2 = () => {
     let daysInThisMonth = daysInMonth(month, year);
     day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
     month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
-    year = month === 1 ? year + 1 : year;
+    year = month === 1 ? year + 1 : year;*/
 
-    // return dayjs(
-    //   `${year}-${month}-${day} ${alarmHour}:${alarmMinute}:${alarmSeconds}`
-    return new Date(
-      /*`"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
-      `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
-    );
-    // .utc(true)
-    // .format();
-  };
+  // return dayjs(
+  //   `${year}-${month}-${day} ${alarmHour}:${alarmMinute}:${alarmSeconds}`
 
-  console.log(pmamFutureTime2());
+  // return new Date(
+  /*`"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
+  // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+  // );
+  // .utc(true)
+  // .format();
+  // };
+
+  // console.log(pmamFutureTime2());
 
   futureTime =
     (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
