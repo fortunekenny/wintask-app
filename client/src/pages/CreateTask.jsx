@@ -10,7 +10,7 @@ import hero3 from "../assets/images/hero3.svg";
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(typeof data.alarmHour);
+  // console.log(typeof data.alarmHour);
   try {
     await customFetch.post("/tasks", data);
     toast.success("Task created");
