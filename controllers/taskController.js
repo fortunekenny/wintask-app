@@ -7,17 +7,13 @@ const AdvancedFormat = require("dayjs/plugin/advancedFormat");
 // import advancedFormat from "dayjs/plugin/advancedFormat";
 const utc = require("dayjs/plugin/utc");
 
-const currentTime = new Date();
-// console.log(currentTime);
-
 dayjs.extend(AdvancedFormat);
 dayjs.extend(utc);
 
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
-  // console.log(req.body);
-  let currentTime = dayjs();
-  currentTime = currentTime.$d;
+
+  let currentTime = new Date();
 
   const timeNow = new Date();
   let timezoneOffset = timeNow.getTimezoneOffset();
@@ -50,13 +46,12 @@ const createTask = async (req, res) => {
     Math.sign(timezoneOffset) === 1
       ? `${alarmHour - timezoneOffset / 60}` //add offset
       : `${alarmHour + timezoneOffset / 60}`; // minus offset
-  console.log(alarmHour);
 
   alarmHour = alarmHour < 0 ? 23 : alarmHour;
 
-  alarmHour = String(alarmHour);
-  alarmMinute = String(alarmMinute);
-  alarmSeconds = String(alarmSeconds);
+  // alarmHour = String(alarmHour);
+  // alarmMinute = String(alarmMinute);
+  // alarmSeconds = String(alarmSeconds);
   // alarmMinute = Number(alarmMinute);
   // alarmSeconds = Number(alarmSeconds);
   // const seconds = timeNow.getSeconds();
@@ -64,18 +59,11 @@ const createTask = async (req, res) => {
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
-  // "2015-03-25T12:00:00Z";
-  // dayjs("2016-05-03 22:15:01").utc(true).format();
-  // let futureTime = dayjs(
-  // `${year}-${month}-${day} ${alarmHour}:${alarmMinute}:${alarmSeconds}`
+
   let futureTime = new Date(
-    /*`"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
-    // `${year}-${month}-${day}-${alarmHour}:${alarmMinute}:${alarmSeconds}`
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
-  // .utc(true)
-  // .format();
-  console.log(futureTime);
+
   /*
   const pmamFutureTime2 = () => {
     let daysInThisMonth = daysInMonth(month, year);
@@ -85,18 +73,10 @@ const createTask = async (req, res) => {
     month = month > 12 ? 1 : month;
     year = month === 1 ? year + 1 : year;*/
 
-  // return dayjs(
-  //   `${year}-${month}-${day} ${alarmHour}:${alarmMinute}:${alarmSeconds}`
-
   // return new Date(
-  /*`"${year}-${month}-${day}T${alarmHour}:${alarmMinute}:${alarmSeconds}.000Z"`*/
   // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   // );
-  // .utc(true)
-  // .format();
   // };
-
-  // console.log(pmamFutureTime2());
 
   /*
   futureTime =
@@ -104,11 +84,7 @@ const createTask = async (req, res) => {
       ? pmamFutureTime2()
       : futureTime;*/
 
-  // futureTime = dayjs(futureTime);
-
-  // let futureTimeMonth = futureTime.utc().month();
   let futureTimeMonth = futureTime.getMonth();
-  // let futureTimeYear = futureTime.utc().year();
   let futureTimeYear = futureTime.getFullYear();
 
   const remainingTime = futureTime - currentTime;
