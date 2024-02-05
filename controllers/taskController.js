@@ -30,18 +30,7 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
-  /*if (alarmHour === 12 && ampm === "AM") {
-    alarmHour = 0;
-    ampm = "AM";
-  } else if (alarmHour === 12 && ampm === "PM") {
-    alarmHour = 12;
-    ampm = "PM";
-  } else if (alarmHour < 12 && ampm === "PM") {
-    alarmHour = alarmHour + 12;
-    ampm = "PM";
-  } else {
-    alarmHour;
-  }*/
+
   alarmHour =
     Math.sign(timezoneOffset) === 1
       ? `${alarmHour - timezoneOffset / 60}` //add offset
@@ -49,12 +38,6 @@ const createTask = async (req, res) => {
 
   alarmHour = alarmHour < 0 ? 23 : alarmHour;
 
-  // alarmHour = String(alarmHour);
-  // alarmMinute = String(alarmMinute);
-  // alarmSeconds = String(alarmSeconds);
-  // alarmMinute = Number(alarmMinute);
-  // alarmSeconds = Number(alarmSeconds);
-  // const seconds = timeNow.getSeconds();
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
@@ -258,34 +241,43 @@ const updateTask = async (req, res) => {
 
   checkPermissions(req.user, task.user);
 
-  const currentTime = new Date();
+  let currentTime = new Date();
 
   let editCount = task.editCount + 1;
 
   const timeNow = new Date();
+  let timezoneOffset = timeNow.getTimezoneOffset();
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
+
   alarmHour = Number(alarmHour);
   alarmHour =
     alarmHour === 12 && ampm === "AM"
-      ? 0
+      ? 23
       : alarmHour === 12 && ampm === "PM"
       ? 12
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
-  alarmHour = String(alarmHour);
-  alarmMinute = String(alarmMinute);
-  alarmSeconds = String(alarmSeconds);
-  // alarmMinute = Number(alarmMinute);
-  // alarmSeconds = Number(alarmSeconds);
-  // const seconds = timeNow.getSeconds();
-  let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
+  alarmHour =
+    Math.sign(timezoneOffset) === 1
+      ? `${alarmHour - timezoneOffset / 60}` //add offset
+      : `${alarmHour + timezoneOffset / 60}`; // minus offset
+
+  alarmHour = alarmHour < 0 ? 23 : alarmHour;
+
+  let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
+
+  let futureTime = new Date(
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+  );
+
+  /*
   const pmamFutureTime2 = () => {
     alarmHour = alarmHour === 23 ? 0 : alarmHour;
     let daysInThisMonth = daysInMonth(month, year);
@@ -298,15 +290,13 @@ const updateTask = async (req, res) => {
       `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
+  */
 
-  let futureTime = new Date(
-    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
-  );
-
+  /*
   futureTime =
     (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
       ? pmamFutureTime2()
-      : futureTime;
+      : futureTime;*/
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
