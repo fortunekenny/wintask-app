@@ -36,7 +36,16 @@ const createTask = async (req, res) => {
       ? `${alarmHour - timezoneOffset / 60}` //add offset
       : `${alarmHour + timezoneOffset / 60}`; // minus offset
 
-  alarmHour = alarmHour < 0 ? 23 : alarmHour;
+  // alarmHour = alarmHour < 0 ? 23 : alarmHour;
+  if (alarmHour < 0) {
+    alarmHour = 23;
+  } else if ((alarmHour = 11 && ampm === "PM")) {
+    alarmHour = 11;
+    ampm = "AM";
+  } else {
+    alarmHour;
+    ampm;
+  }
 
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
