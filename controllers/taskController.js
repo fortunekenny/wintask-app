@@ -98,10 +98,11 @@ const createTask = async (req, res) => {
 
   // console.log(pmamFutureTime2());
 
+  /*
   futureTime =
     (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
       ? pmamFutureTime2()
-      : futureTime;
+      : futureTime;*/
 
   // futureTime = dayjs(futureTime);
 
