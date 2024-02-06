@@ -9,7 +9,7 @@ import isTomorrow from "dayjs/plugin/isTomorrow";
 import isYesterday from "dayjs/plugin/isYesterday";
 import isToday from "dayjs/plugin/isToday";
 import duration from "dayjs/plugin/duration";
-import dayjs from "dayjs";
+
 day.extend(isYesterday);
 day.extend(isTomorrow);
 day.extend(isToday);
@@ -30,33 +30,12 @@ const SingleTask = ({
   updatedAt,
   futureTimeMonth,
   futureTimeYear,
-  alarmHour,
-  alarmMinute,
-  alarmSeconds,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let [info, setInfo] = useState(false);
   let [showButton, setShowButton] = useState(false);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
-
-  // console.log(Math.sign(timeNow.getTimezoneOffset()));
-  let rslt =
-    Math.sign(timeNow.getTimezoneOffset()) === 1
-      ? `${5 - timeNow.getTimezoneOffset() / 60} positive`
-      : `${5 + timeNow.getTimezoneOffset() / 60} negative`;
-  // console.log(rslt);
-  // console.log(5 + timeNow.getTimezoneOffset() / 60);
-  /*
-  let year = timeNow.getFullYear();
-  let month = timeNow.getMonth() + 1;
-  let days = timeNow.getDate();
-  let futureTimes = new Date(
-    `${year}/${month}/${days}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
-  );
-  */
-  // console.log(dayjs());
-  // console.log(day(futureTime));
 
   useEffect(() => {
     let remainder = setInterval(() => {
