@@ -86,7 +86,6 @@ const createTask = async (req, res) => {
   let previouseFutureTime = futureTime;
   let lastTimeUpdated = new Date();
   let lastTimeUpdatedBeforeCanceling = new Date();
-  alarmHour = alarmHourTZ;
 
   if (ampm === ampmNow && futureTime < currentTime) {
     throw new CustomError.BadRequestError(
