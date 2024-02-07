@@ -30,28 +30,28 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
-  // console.log(`b4 offset ${alarmHour}`);
-  // console.log(timezoneOffset);
+  console.log(`b4 offset ${alarmHour}`);
+  console.log(timezoneOffset);
 
-  alarmHour =
+  let alarmHourTZ =
     Math.sign(timezoneOffset) === 1
       ? `${alarmHour - timezoneOffset / 60}` //add offset
       : `${alarmHour + timezoneOffset / 60}`; // minus offset
-  // console.log(alarmHour);
+  console.log(alarmHourTZ);
 
   // alarmHour = alarmHour < 0 ? 23 :  :alarmHour;
 
-  if (alarmHour < 0) {
-    alarmHour = 23;
+  if (alarmHourTZ < 0) {
+    alarmHourTZ = 23;
   }
-  if (alarmHour === 11 && ampm === "PM") {
+  if (alarmHourTZ === 11 && ampm === "PM") {
     ampm = "AM";
   }
   // else {
   //   alarmHour;
   //   ampm;
   // }
-  // console.log(alarmHour);
+  console.log(alarmHourTZ);
 
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
@@ -59,9 +59,9 @@ const createTask = async (req, res) => {
   };
 
   let futureTime = new Date(
-    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    `${year}/${month}/${day}/${alarmHourTZ}:${alarmMinute}:${alarmSeconds}`
   );
-  // console.log(futureTime);
+  console.log(futureTime);
 
   /*
   const pmamFutureTime2 = () => {
@@ -90,6 +90,7 @@ const createTask = async (req, res) => {
   let previouseFutureTime = futureTime;
   let lastTimeUpdated = new Date();
   let lastTimeUpdatedBeforeCanceling = new Date();
+  alarmHour = alarmHourTZ;
 
   if (ampm === ampmNow && futureTime < currentTime) {
     throw new CustomError.BadRequestError(
