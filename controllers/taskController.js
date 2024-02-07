@@ -28,7 +28,7 @@ const createTask = async (req, res) => {
       : alarmHour === 12 && ampm === "PM"
       ? 11
       : alarmHour < 12 && ampm === "PM"
-      ? alarmHour + 12
+      ? alarmHour + 11
       : alarmHour;
   console.log(`b4 offset ${alarmHour}`);
   console.log(timezoneOffset);
@@ -53,7 +53,7 @@ const createTask = async (req, res) => {
   // }
   console.log(alarmHourTZ);
 
-  let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
+  let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
