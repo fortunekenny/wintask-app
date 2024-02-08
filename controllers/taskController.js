@@ -271,9 +271,9 @@ const updateTask = async (req, res) => {
     alarmHour === 12 && ampm === "AM"
       ? 23
       : alarmHour === 12 && ampm === "PM"
-      ? 12
+      ? 11
       : alarmHour < 12 && ampm === "PM"
-      ? alarmHour + 12
+      ? alarmHour + 11
       : alarmHour;
 
   alarmHour =
@@ -285,12 +285,14 @@ const updateTask = async (req, res) => {
 
   if (alarmHour < 0) {
     alarmHour = 23;
-  } else if (alarmHour === 11 && ampm === "PM") {
-    ampm = "AM";
-  } else {
-    alarmHour;
-    ampm;
   }
+  if (alarmHour === 11 && ampm === "PM") {
+    ampm = "AM";
+  }
+  // else {
+  //   alarmHour;
+  //   ampm;
+  // }
 
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
   let daysInMonth = (month, year) => {
@@ -327,11 +329,15 @@ const updateTask = async (req, res) => {
 
   const remainingTime = futureTime - currentTime;
 
-  if (ampm === ampmNow && futureTime < currentTime) {
+  if (
+    (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
+    (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
+  ) {
     throw new CustomError.BadRequestError(
       "Alarm time is bellow current time, please reset time"
     );
   }
+
   task.title = title;
   task.alarmHour = alarmHour;
   task.alarmMinute = alarmMinute;
