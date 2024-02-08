@@ -235,7 +235,7 @@ console.log(
   // console.log(alarmMonth);
   let alarmDay = Math.floor((futureMiliDate % oneMonth) / oneDay);
   // console.log(alarmDay);
-  // let alarmDays = (oneDay * dayNow) / oneDay;
+  let alarmDays = (oneDay * dayNow) / oneDay;
   // console.log(alarmDays);
   alarmHour = Math.floor((futureMiliDate % oneDay) / oneHour);
   // console.log(alarmHour);
@@ -247,7 +247,7 @@ console.log(
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
   let futureTime = new Date(
-    `${alarmYear}/${alarmMonth}/${alarmDay}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    `${alarmYear}/${alarmMonth}/${alarmDays}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
   // let futureTime = new Date(
