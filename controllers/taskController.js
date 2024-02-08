@@ -87,7 +87,10 @@ const createTask = async (req, res) => {
   let lastTimeUpdated = new Date();
   let lastTimeUpdatedBeforeCanceling = new Date();
 
-  if (ampm === ampmNow && futureTime < currentTime) {
+  if (
+    (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
+    (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
+  ) {
     throw new CustomError.BadRequestError(
       "Alarm time is bellow current time, please reset time"
     );
