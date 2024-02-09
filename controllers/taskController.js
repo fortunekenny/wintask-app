@@ -6,92 +6,10 @@ const dayjs = require("dayjs");
 const AdvancedFormat = require("dayjs/plugin/advancedFormat");
 // import advancedFormat from "dayjs/plugin/advancedFormat";
 const utc = require("dayjs/plugin/utc");
+const { string } = require("joi");
 
 dayjs.extend(AdvancedFormat);
 dayjs.extend(utc);
-
-/*
-let timeNow = new Date().getTime();
-let timeNowStr = new Date();
-
-console.log(timeNowStr);
-console.log(timeNow);
-
-let yearNow = new Date().getFullYear();
-let monthNow = new Date().getMonth() + 1;
-let dayNow = new Date().getDate();
-let hourNow = new Date().getHours();
-let minuteNow = new Date().getMinutes();
-let secondNow = new Date().getSeconds();
-// console.log(dayNow);
-
-console.log(
-  `yearNow ${yearNow}`,
-  `monthNow ${monthNow}`,
-  `dayNow ${dayNow}`,
-  `hourNow ${hourNow}`,
-  `minuteNow ${minuteNow}`,
-  `secondNow ${secondNow}`
-);
-
-const daysInYear = (year) => {
-  return (year % 4 === 0 && year % 100 > 0) || year % 400 == 0 ? 366 : 365;
-};
-let daysInDisYear = daysInYear(yearNow);
-console.log(daysInDisYear);
-let daysInMonth = (month, year) => {
-  return new Date(year, month, 0).getDate();
-};
-let daysInThisMonth = daysInMonth(monthNow, yearNow);
-console.log(daysInThisMonth);
-const oneSecond = 1000;
-const oneMinute = oneSecond * 60;
-const oneHour = oneMinute * 60;
-const oneDay = oneHour * 24;
-const oneMonth = daysInThisMonth * oneDay;
-const oneYear = oneDay * daysInDisYear;
-console.log(
-  `oneYear ${oneYear}`,
-  `oneMonth ${oneMonth}`,
-  `oneDay ${oneDay}`,
-  `oneHour ${oneHour}`,
-  `oneMinute ${oneMinute}`,
-  `oneSecond ${oneSecond}`
-);
-
-console.log(
-  `MiliYear ${oneYear * yearNow}`,
-  `MiliMonth ${oneMonth * monthNow}`,
-  `MiliDay ${oneDay * dayNow}`,
-  `MiliHour ${oneHour * hourNow}`,
-  `MiliMinute ${oneMinute * minuteNow}`,
-  `MiliSecond ${oneSecond * secondNow}`
-);
-let miliDate =
-  oneYear * yearNow +
-  oneMonth * monthNow +
-  oneDay * dayNow +
-  // oneDay * 9 +
-  oneHour * hourNow +
-  oneMinute * minuteNow +
-  oneSecond * secondNow;
-console.log(miliDate);
-
-let alarmYear = Math.floor(miliDate / oneYear);
-console.log(alarmYear);
-let alarmMonth = Math.floor((miliDate % oneYear) / oneMonth);
-console.log(alarmMonth);
-let alarmDay = Math.floor((miliDate % oneMonth) / oneDay);
-// let alarmDays = (oneDay * dayNow) / oneDay;
-console.log(alarmDay);
-// console.log(alarmDays);
-let alarmHour = Math.floor((miliDate % oneDay) / oneHour);
-console.log(alarmHour);
-let alarmMinute = Math.floor((miliDate % oneHour) / oneMinute);
-console.log(alarmMinute);
-let alarmSeconds = Math.floor((miliDate % oneMinute) / oneSecond);
-console.log(alarmSeconds);
-*/
 
 const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
@@ -99,7 +17,8 @@ const createTask = async (req, res) => {
   let currentTime = new Date();
 
   const timeNow = new Date();
-  let timezoneOffset = timeNow.getTimezoneOffset();
+
+  let timezoneOffset = new Date().getTimezoneOffset();
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
@@ -120,9 +39,11 @@ const createTask = async (req, res) => {
       : Math.sign(timezoneOffset) === -1
       ? `${alarmHour + timezoneOffset / 60}` // minus offset
       : alarmHour;
-  // console.log(alarmHour);
-
+  // console.log(typeof alarmHour);
   // alarmHour = alarmHour < 0 ? 23 :  :alarmHour;
+  alarmHour = Number(alarmHour);
+  alarmMinute = Number(alarmMinute);
+  alarmSeconds = Number(alarmSeconds);
 
   if (alarmHour < 0) {
     alarmHour = 23;
@@ -130,149 +51,38 @@ const createTask = async (req, res) => {
   if (alarmHour === 11 && ampm === "PM") {
     ampm = "AM";
   }
-  // else {
-  //   alarmHour;
-  //   ampm;
-  // }
-
-  /*
-let timesNow = new Date().getTime();
-let timeNowStr = new Date();
-*/
-
-  /*
-console.log(timeNowStr);
-console.log(timesNow);
-*/
-
-  /*
-let yearNow = new Date().getFullYear();
-let monthNow = new Date().getMonth() + 1;
-let dayNow = new Date().getDate();
-let hourNow = new Date().getHours();
-let minuteNow = new Date().getMinutes();
-let secondNow = new Date().getSeconds();
-*/
-
-  let yearNow = timeNow.getFullYear();
-  let monthNow = timeNow.getMonth() + 1;
-  let dayNow = timeNow.getDate();
-  let hourNow = timeNow.getHours();
-  let minuteNow = timeNow.getMinutes();
-  let secondNow = timeNow.getSeconds();
-  // console.log(dayNow);
-
-  /*
-console.log(
-  `yearNow ${yearNow}`,
-  `monthNow ${monthNow}`,
-  `dayNow ${dayNow}`,
-  `hourNow ${hourNow}`,
-  `minuteNow ${minuteNow}`,
-  `secondNow ${secondNow}`
-);
-*/
-
-  const daysInYear = (years) => {
-    return (years % 4 === 0 && year % 100 > 0) || years % 400 == 0 ? 366 : 365;
-  };
-  let daysInDisYear = daysInYear(yearNow);
-  // console.log(daysInDisYear);
-  let daysInMonth = (months, years) => {
-    return new Date(years, months, 0).getDate();
-  };
-  let daysInThisMonth = daysInMonth(monthNow, yearNow);
-  // console.log(daysInThisMonth);
-  const oneSecond = 1000;
-  const oneMinute = oneSecond * 60;
-  const oneHour = oneMinute * 60;
-  const oneDay = oneHour * 24;
-  const oneMonth = daysInThisMonth * oneDay;
-  const oneYear = oneDay * daysInDisYear;
-
-  /*
-console.log(
-  `oneYear ${oneYear}`,
-  `oneMonth ${oneMonth}`,
-  `oneDay ${oneDay}`,
-  `oneHour ${oneHour}`,
-  `oneMinute ${oneMinute}`,
-  `oneSecond ${oneSecond}`
-);
-*/
-
-  /*
-console.log(
-  `MiliYear ${oneYear * yearNow}`,
-  `MiliMonth ${oneMonth * monthNow}`,
-  `MiliDay ${oneDay * dayNow}`,
-  `MiliHour ${oneHour * hourNow}`,
-  `MiliMinute ${oneMinute * minuteNow}`,
-  `MiliSecond ${oneSecond * secondNow}`
-);
-*/
-
-  let miliDateNow =
-    oneYear * yearNow +
-    oneMonth * monthNow +
-    oneDay * dayNow +
-    oneHour * hourNow +
-    oneMinute * minuteNow +
-    oneSecond * secondNow;
-
-  let futureMiliTime =
-    alarmHour * oneHour + alarmMinute * oneMinute + alarmSeconds * oneSecond;
-
-  let futureMiliDate = miliDateNow + futureMiliTime;
-
-  // let year = Math.floor(miliDate / oneYear);
-  // let month = Math.floor((miliDate % oneYear) / oneMonth);
-  // let day = Math.floor((miliDate % oneMonth) / oneDay);
-
-  let alarmYear = Math.floor(futureMiliDate / oneYear);
-  // console.log(alarmYear);
-  let alarmMonth = Math.floor((futureMiliDate % oneYear) / oneMonth);
-  // console.log(alarmMonth);
-  let alarmDay = Math.floor((futureMiliDate % oneMonth) / oneDay);
-  // console.log(alarmDay);
-  let alarmDays = (oneDay * dayNow) / oneDay;
-  // console.log(alarmDays);
-  alarmHour = Math.floor((futureMiliDate % oneDay) / oneHour);
-  // console.log(alarmHour);
-  alarmMinute = Math.floor((futureMiliDate % oneHour) / oneMinute);
-  // console.log(alarmMinute);
-  alarmSeconds = Math.floor((futureMiliDate % oneMinute) / oneSecond);
-  // console.log(alarmSeconds);
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
-  let futureTime = new Date(
-    `${alarmYear}/${alarmMonth}/${alarmDays}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+  let alarmTimeToday = new Date(
+    `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
+  console.log(alarmTimeToday);
 
-  // let futureTime = new Date(
-  //   `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
-  // );
-
-  /*
-  const pmamFutureTime2 = () => {
+  const alarmTimeFuture = () => {
     let daysInThisMonth = daysInMonth(month, year);
-    day = day + 1;
+
+    day = alarmHour === 23 && ampm === "AM" ? day : day + 1;
     day = day >= daysInThisMonth ? 1 : day;
     month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
-    year = month === 1 ? year + 1 : year;*/
+    year = month === 1 ? year + 1 : year;
 
-  // return new Date(
-  // `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
-  // );
-  // };
+    return new Date(
+      `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
+    );
+  };
+  console.log(alarmTimeFuture());
 
-  /*
   futureTime =
-    (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
-      ? pmamFutureTime2()
-      : futureTime;*/
+    alarmTimeToday < currentTime ? alarmTimeFuture() : alarmTimeToday;
+  console.log(futureTime);
+  console.log(currentTime);
+
+  // futureTime =
+  //   (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
+  //     ? pmamFutureTime2()
+  //     : futureTime;
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
@@ -282,14 +92,14 @@ console.log(
   let lastTimeUpdated = new Date();
   let lastTimeUpdatedBeforeCanceling = new Date();
 
-  if (
-    (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
-    (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
-  ) {
-    throw new CustomError.BadRequestError(
-      "Alarm time is bellow current time, please reset time"
-    );
-  }
+  // if (
+  //   (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
+  //   (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
+  // ) {
+  //   throw new CustomError.BadRequestError(
+  //     "Alarm time is bellow current time, please reset time"
+  //   );
+  // }
 
   const task = await Task.create({
     title,
