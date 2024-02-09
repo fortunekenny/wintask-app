@@ -60,6 +60,10 @@ const createTask = async (req, res) => {
   console.log(alarmTimeToday);
 
   const alarmTimeFuture = () => {
+    let daysInMonth = (month, year) => {
+      return new Date(year, month, 0).getDate();
+    };
+
     let daysInThisMonth = daysInMonth(month, year);
 
     day = alarmHour === 23 && ampm === "AM" ? day : day + 1;
