@@ -18,7 +18,7 @@ const remainingTimeConverter = (remainderTime, month, year, ampm) => {
   let currentMonth = timeNow.getMonth();
   let currentYear = timeNow.getFullYear();*/
 
-  let timezoneOffset = timeNow.getTimezoneOffset();
+  let timezoneOffset = currentTime.getTimezoneOffset();
   // console.log(timezoneOffset);
 
   // let remainingHours = Math.floor(remainderTime / oneHour);
