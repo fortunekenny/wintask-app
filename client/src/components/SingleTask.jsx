@@ -37,6 +37,11 @@ const SingleTask = ({
   let timeNow = new Date();
   futureTime = new Date(futureTime);
 
+  // futureTime =
+  //   futureTime < timeNow.getTime() ? futureTime + 86400000 : futureTime;
+  // console.log(futureTime);
+  // console.log(timeNow);
+
   useEffect(() => {
     let remainder = setInterval(() => {
       setRemainderTime(() => {

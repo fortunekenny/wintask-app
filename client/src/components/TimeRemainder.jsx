@@ -6,11 +6,17 @@ const TimeRemainder = ({
   futureTimeYear,
   showButton,
   setShowButton,
+  futureTime,
 }) => {
   remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
   let { remainingHours, remainingMinutes, remainingSeconds } =
-    remainingTimeConverter(remainderTime, futureTimeMonth, futureTimeYear);
+    remainingTimeConverter(
+      remainderTime,
+      futureTimeMonth,
+      futureTimeYear,
+      futureTime
+    );
 
   return (
     <Wrapper>

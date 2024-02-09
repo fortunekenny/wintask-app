@@ -17,18 +17,18 @@ const createTask = async (req, res) => {
   let currentTime = new Date();
 
   const timeNow = new Date();
-  console.log(timeNow);
+  // console.log(timeNow);
 
-  let timezoneOffset = timeNow.getTimezoneOffset();
-  console.log(timezoneOffset);
+  // let timezoneOffset = timeNow.getTimezoneOffset();
+  // console.log(timezoneOffset);
 
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
 
   alarmHour = Number(alarmHour);
-  alarmMinute = Number(alarmMinute);
-  alarmSeconds = Number(alarmSeconds);
+  // alarmMinute = Number(alarmMinute);
+  // alarmSeconds = Number(alarmSeconds);
 
   alarmHour =
     alarmHour === 12 && ampm === "AM"
@@ -38,13 +38,14 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 11
       : alarmHour;
-  console.log(alarmHour);
-
+  // console.log(alarmHour);
+  /*
   alarmHour =
     Math.sign(timezoneOffset) === 1
       ? alarmHour - timezoneOffset / 60 //add offset
       : alarmHour + timezoneOffset / 60; // minus offset
   console.log(alarmHour);
+  */
   /*
   alarmHour =
     Math.sign(timezoneOffset) === 1
@@ -54,9 +55,9 @@ const createTask = async (req, res) => {
       : alarmHour;
       */
   // alarmHour = alarmHour < 0 ? 23 :  :alarmHour;
-  alarmHour = Number(alarmHour);
-  alarmMinute = Number(alarmMinute);
-  alarmSeconds = Number(alarmSeconds);
+  // alarmHour = Number(alarmHour);
+  // alarmMinute = Number(alarmMinute);
+  // alarmSeconds = Number(alarmSeconds);
 
   if (alarmHour < 0) {
     alarmHour = 23;
@@ -65,23 +66,26 @@ const createTask = async (req, res) => {
     ampm = "AM";
   }
 
-  console.log(alarmHour);
+  // console.log(alarmHour);
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
   let alarmTimeToday = new Date(
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
-  console.log(alarmTimeToday);
+  // console.log(alarmTimeToday);
+  // if (futureTime < timeNow) {
+  //   return remainingTimeCount + 86400000;
+  // }
 
-  const alarmTimeFuture = () => {
+  const alarmFutureTime = () => {
     let daysInMonth = (month, year) => {
       return new Date(year, month, 0).getDate();
     };
 
     let daysInThisMonth = daysInMonth(month, year);
 
-    day = alarmHour === 23 && ampm === "AM" ? day : day + 1;
+    day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
     month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
@@ -93,11 +97,16 @@ const createTask = async (req, res) => {
   };
   // console.log(alarmTimeFuture());
 
-  futureTime = alarmTimeToday; //< currentTime ? alarmTimeFuture() : alarmTimeToday;
+  // futureTime = alarmTimeToday; //< currentTime ? alarmTimeFuture() : alarmTimeToday;
+  if (alarmTimeToday < currentTime) {
+    futureTime = alarmFutureTime();
+  } else {
+    futureTime = alarmTimeToday;
+  }
 
+  // console.log(futureTime);
   // futureTime =
   //   alarmTimeToday < currentTime ? alarmTimeFuture() : alarmTimeToday;
-  console.log(futureTime);
   // console.log(currentTime);
 
   // futureTime =
@@ -111,6 +120,7 @@ const createTask = async (req, res) => {
   const remainingTime = futureTime - currentTime;
   let previouseFutureTime = futureTime;
   let lastTimeUpdated = new Date();
+  let futureTimeInNumber = futureTime.getTime();
   let lastTimeUpdatedBeforeCanceling = new Date();
 
   // if (
@@ -134,6 +144,7 @@ const createTask = async (req, res) => {
     previouseFutureTime,
     lastTimeUpdated,
     lastTimeUpdatedBeforeCanceling,
+    futureTimeInNumber,
     futureTimeMonth,
     futureTimeYear,
   });
