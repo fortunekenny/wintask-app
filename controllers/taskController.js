@@ -32,9 +32,9 @@ const createTask = async (req, res) => {
 
   alarmHour =
     alarmHour === 12 && ampm === "AM"
-      ? 23
+      ? 0
       : alarmHour === 12 && ampm === "PM"
-      ? 11
+      ? 12
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 11
       : alarmHour;
@@ -59,12 +59,13 @@ const createTask = async (req, res) => {
   // alarmMinute = Number(alarmMinute);
   // alarmSeconds = Number(alarmSeconds);
 
+  /*
   if (alarmHour < 0) {
     alarmHour = 23;
   }
   if (alarmHour === 11 && ampm === "PM") {
     ampm = "AM";
-  }
+  }*/
 
   // console.log(alarmHour);
 
