@@ -17,6 +17,7 @@ const createTask = async (req, res) => {
   let currentTime = new Date();
 
   const timeNow = new Date();
+  console.log(timeNow);
 
   let timezoneOffset = timeNow.getTimezoneOffset();
   console.log(timezoneOffset);
