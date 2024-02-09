@@ -18,7 +18,8 @@ const createTask = async (req, res) => {
 
   const timeNow = new Date();
 
-  let timezoneOffset = new Date().getTimezoneOffset();
+  let timezoneOffset = timeNow.getTimezoneOffset();
+
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
