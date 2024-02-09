@@ -24,6 +24,9 @@ const createTask = async (req, res) => {
   let day = timeNow.getDate();
 
   alarmHour = Number(alarmHour);
+  alarmMinute = Number(alarmMinute);
+  alarmSeconds = Number(alarmSeconds);
+
   alarmHour =
     alarmHour === 12 && ampm === "AM"
       ? 23
@@ -36,11 +39,11 @@ const createTask = async (req, res) => {
 
   alarmHour =
     Math.sign(timezoneOffset) === 1
-      ? `${alarmHour - timezoneOffset / 60}` //add offset
+      ? alarmHour - timezoneOffset / 60 //add offset
       : Math.sign(timezoneOffset) === -1
-      ? `${alarmHour + timezoneOffset / 60}` // minus offset
+      ? alarmHour + timezoneOffset / 60 // minus offset
       : alarmHour;
-  // console.log(typeof alarmHour);
+  console.log(alarmHour);
   // alarmHour = alarmHour < 0 ? 23 :  :alarmHour;
   alarmHour = Number(alarmHour);
   alarmMinute = Number(alarmMinute);
