@@ -1,4 +1,4 @@
-const remainingTimeConverter = (remainderTime, month, year, futureTime) => {
+const remainingTimeConverter = (remainderTime, month, year, ampm) => {
   let daysInMonth = (month, year) => {
     return new Date(year, month, 0).getDate();
   };
@@ -11,14 +11,12 @@ const remainingTimeConverter = (remainderTime, month, year, futureTime) => {
   const oneYear = oneDay * 365;
 
   let currentTime = new Date();
+  let timeNow = new Date().getHours() >= 12 ? "PM" : "AM";
   /*
   let currentHour = timeNow.getHours();
   let currentDate = timeNow.getDate();
   let currentMonth = timeNow.getMonth();
   let currentYear = timeNow.getFullYear();*/
-
-  const timeNow = new Date();
-  // console.log(timeNow);
 
   let timezoneOffset = timeNow.getTimezoneOffset();
   // console.log(timezoneOffset);
@@ -40,14 +38,20 @@ const remainingTimeConverter = (remainderTime, month, year, futureTime) => {
   if (Math.sign(timezoneOffset) === 1) {
     remainingHours = remainingHours - timezoneOffset / 60; //add offset
   }
+  if (Math.sign(timezoneOffset) === 1 && ampm === "AM" && timeNow === "PM") {
+    remainingHours = remainingHours - timezoneOffset / 60; //add offset
+  }
   if (Math.sign(timezoneOffset) === -1) {
+    remainingHours = remainingHours + timezoneOffset / 60; // minus offset
+  }
+  if (Math.sign(timezoneOffset) === -1 && ampm === "AM" && timeNow === "PM") {
     remainingHours = remainingHours + timezoneOffset / 60; // minus offset
   }
   if (Math.sign(timezoneOffset) === 0) {
     return remainingHours;
   }
   remainingHours = remainingHours < 0 ? 0 : remainingHours;
-  console.log(remainingHours);
+  // console.log(remainingHours);
   // remainingHours =
   //   Math.sign(timezoneOffset) === 1
   //     ? remainingHours - timezoneOffset / 60 //add offset

@@ -6,7 +6,7 @@ const TimeRemainder = ({
   futureTimeYear,
   showButton,
   setShowButton,
-  futureTime,
+  ampm,
 }) => {
   remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
@@ -15,7 +15,7 @@ const TimeRemainder = ({
       remainderTime,
       futureTimeMonth,
       futureTimeYear,
-      futureTime
+      ampm
     );
 
   return (
