@@ -32,6 +32,7 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 11
       : alarmHour;
+  console.log(alarmHour);
 
   alarmHour =
     Math.sign(timezoneOffset) === 1
@@ -51,6 +52,8 @@ const createTask = async (req, res) => {
   if (alarmHour === 11 && ampm === "PM") {
     ampm = "AM";
   }
+
+  console.log(alarmHour);
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
@@ -76,12 +79,14 @@ const createTask = async (req, res) => {
       `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
-  console.log(alarmTimeFuture());
+  // console.log(alarmTimeFuture());
 
-  futureTime =
-    alarmTimeToday < currentTime ? alarmTimeFuture() : alarmTimeToday;
+  futureTime = alarmTimeToday; //< currentTime ? alarmTimeFuture() : alarmTimeToday;
+
+  // futureTime =
+  //   alarmTimeToday < currentTime ? alarmTimeFuture() : alarmTimeToday;
   console.log(futureTime);
-  console.log(currentTime);
+  // console.log(currentTime);
 
   // futureTime =
   //   (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
