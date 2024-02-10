@@ -30,12 +30,17 @@ const SingleTask = ({
   updatedAt,
   futureTimeMonth,
   futureTimeYear,
+  ampm,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let [info, setInfo] = useState(false);
   let [showButton, setShowButton] = useState(false);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
+
+  let dateNow = new Date().getHours() >= 12 ? "PM" : "AM";
+  let currentTime = new Date();
+  let timezoneOffset = currentTime.getTimezoneOffset();
 
   // futureTime =
   //   futureTime < timeNow.getTime() ? futureTime + 86400000 : futureTime;
@@ -57,11 +62,50 @@ const SingleTask = ({
     return () => clearInterval(remainder);
   }, [futureTime, timeNow]);
 
-  let expiresAt = day(futureTime).format("hh:mm:ss A");
+  let expiresAt =
+    Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM"
+      ? day(futureTime) - timezoneOffset * 60000
+      : Math.sign(timezoneOffset) === -1 && ampm === "AM" && dateNow === "PM"
+      ? day(futureTime) + timezoneOffset * 60000
+      : day(futureTime);
+  expiresAt = day(expiresAt).format("hh:mm:ss A");
+  // console.log(
+  //   day(day(futureTime) - timezoneOffset * 60000).format("hh:mm:ss A")
+  // );
+
+  /*
+  let expiresAt =
+    Math.sign(timezoneOffset) === 1 ||
+    (Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM")
+      ? day(futureTime) - timezoneOffset * 60000
+      : Math.sign(timezoneOffset) === -1 ||
+        (Math.sign(timezoneOffset) === -1 && ampm === "AM" && dateNow === "PM")
+      ? day(futureTime) + timezoneOffset * 60000
+      : day(futureTime);
+  expiresAt = day(expiresAt).format("hh:mm:ss A");
+  console.log(
+    day(day(futureTime) - timezoneOffset * 60000).format("hh:mm:ss A")
+  );
+  */
+  // let expiresAt = day(futureTime).format("hh:mm:ss A");
+
   let updatedTime =
     repeat || cancel
       ? day(lastTimeUpdatedBeforeCanceling).format("hh:mm:ss A")
       : day(updatedAt).format("hh:mm:ss A");
+  /*
+    let expiresAt =
+      Math.sign(timezoneOffset) === 1 ||
+      (Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM")
+        ? day(futureTime) - timezoneOffset * 1000
+        : Math.sign(timezoneOffset) === -1 ||
+          (Math.sign(timezoneOffset) === -1 &&
+            ampm === "AM" &&
+            dateNow === "PM")
+        ? day(futureTime) + timezoneOffset * 1000
+        : day(futureTime);
+    expiresAt = day(expiresAt).format("hh:mm:ss A");
+    */
 
   let yesterday = day(futureTime).isYesterday();
   let today = day(futureTime).isToday();
