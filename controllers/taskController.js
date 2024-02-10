@@ -36,7 +36,7 @@ const createTask = async (req, res) => {
       : alarmHour === 12 && ampm === "PM"
       ? 12
       : alarmHour < 12 && ampm === "PM"
-      ? alarmHour + 11
+      ? alarmHour + 12
       : alarmHour;
   // console.log(alarmHour);
   /*
