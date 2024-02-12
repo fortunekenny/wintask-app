@@ -60,6 +60,7 @@ const UserPage = () => {
         isDarkTheme,
         toggleDarkTheme,
         logoutUser,
+        contain,
       }}
     >
       <Wrapper>
@@ -76,7 +77,7 @@ const UserPage = () => {
 
 const Wrapper = styled.div`
   width: 90vw;
-  margin: 0 auto;
+  margin: auto;
 
   .user-page {
     margin: 0 auto;

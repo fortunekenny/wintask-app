@@ -12,6 +12,7 @@ import customFetch from "../utils/customFetch";
 import LiveTime from "../components/LiveTime";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import hero3 from "../assets/images/hero3.svg";
+import { useUserContext } from "../pages/UserPage";
 
 export const loader = async ({ params }) => {
   try {
@@ -38,6 +39,7 @@ export const action = async ({ request, params }) => {
 const EditTask = () => {
   const navigation = useNavigation();
   const { task } = useLoaderData();
+  const { contain } = useUserContext();
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -45,7 +47,10 @@ const EditTask = () => {
   let secondsNow = new Date().getSeconds();
   return (
     <Wrapper>
-      <div className="edit-task-center">
+      <div
+        className="edit-task-center"
+        style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
+      >
         <LiveTime />
         <Form method="post" className="form">
           <div className="selector">

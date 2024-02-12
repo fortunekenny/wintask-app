@@ -6,6 +6,7 @@ import customFetch from "../utils/customFetch";
 import LiveTime from "../components/LiveTime";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import hero3 from "../assets/images/hero3.svg";
+import { useUserContext } from "../pages/UserPage";
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -22,6 +23,8 @@ export const action = async ({ request }) => {
 };
 
 const CreateTask = () => {
+  const { contain } = useUserContext();
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
@@ -30,7 +33,11 @@ const CreateTask = () => {
   // reloadDocument;
   return (
     <Wrapper>
-      <div className="create-task-center">
+      {/* style={ isLoggedIn ? { display:'block'} : {display : 'none'} } */}
+      <div
+        className="create-task-center"
+        style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
+      >
         <LiveTime />
         <Form method="post" className="form">
           <div className="selector">
@@ -93,9 +100,11 @@ const Wrapper = styled.div`
   background: var(--lightestVariation);
   width: 100%;
   height: 100%;
+
   /* height: calc(100vh - 64.38px); */
   text-transform: capitalize;
   margin: auto;
+  /* margin: calc((100vh - 286px) / 2) auto; */
   .create-task-center {
     max-width: 400px;
     min-width: 400px;

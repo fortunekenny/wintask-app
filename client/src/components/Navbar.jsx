@@ -11,14 +11,17 @@ const Navbar = ({ contain }) => {
   useEffect(() => {
     if (contain) {
       hideNavRef.current.style.display = "none";
+      hideNavRef.current.style.width = 0;
+      hideNavRef.current.style.height = 0;
+      // hideNavRef.current.style.marginBottom = `${10}%`;
     } else {
-      hideNavRef.current.style.display = "flex";
+      hideNavRef.current.style.display = "block";
     }
   });
 
   return (
-    <Wrapper>
-      <nav className="nav-center" ref={hideNavRef}>
+    <Wrapper ref={hideNavRef}>
+      <nav className="nav-center">
         <h5 className="navtext">
           <span> {name}</span>
         </h5>
@@ -37,12 +40,16 @@ const Navbar = ({ contain }) => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  margin: 0rem auto;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* width: 100%; */
+  margin: auto;
   .nav-center {
     display: flex;
     justify-content: space-between;
     background: var(--white);
+    /* width: 100%; */
+    margin: auto;
     padding: 2% 2%;
     flex: 0 0 0;
   }
@@ -82,18 +89,19 @@ const Wrapper = styled.div`
     margin: 0 auto;
     max-width: 100vw;
     .nav-center {
-      /* width: 100vw; */
+      /* width: 100%; */
       /* margin: 0 auto; */
     }
   }
 
   @media screen and (min-width: 676px) {
     /* width: 600px; */
-    max-width: 600px;
+    /* max-width: 600px; */
     margin: auto;
     margin-top: 5rem;
     padding: 0.5rem 0.5rem;
     .nav-center {
+      /* width: 100%; */
       /* margin-top: 5rem;
       padding: 0.5rem 0.5rem; */
     }
