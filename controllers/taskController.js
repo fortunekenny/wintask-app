@@ -15,7 +15,6 @@ const createTask = async (req, res) => {
   let { title, alarmHour, alarmMinute, alarmSeconds, ampm } = req.body;
 
   let currentTime = new Date();
-
   const timeNow = new Date();
 
   let year = timeNow.getFullYear();
@@ -32,14 +31,12 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
-  
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
   let alarmTimeToday = new Date(
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
-
 
   const alarmFutureTime = () => {
     let daysInMonth = (month, year) => {
@@ -65,8 +62,6 @@ const createTask = async (req, res) => {
     futureTime = alarmTimeToday;
   }
 
-
-
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
 
@@ -75,8 +70,6 @@ const createTask = async (req, res) => {
   let lastTimeUpdated = new Date();
   let futureTimeInNumber = futureTime.getTime();
   let lastTimeUpdatedBeforeCanceling = new Date();
-
-
 
   const task = await Task.create({
     title,
@@ -198,6 +191,9 @@ const repeatTask = async (req, res) => {
     month = month - 12;
     year = year + mt;
   }
+  // alarmHour = String(alarmHour);
+  // alarmMinute = String(alarmMinute);
+  // alarmSeconds = String(alarmSeconds);
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(
@@ -238,9 +234,7 @@ const updateTask = async (req, res) => {
 
   let editCount = task.editCount + 1;
 
-
   let currentTime = new Date();
-
   const timeNow = new Date();
 
   let year = timeNow.getFullYear();
@@ -288,22 +282,31 @@ const updateTask = async (req, res) => {
     futureTime = alarmTimeToday;
   }
 
-  
+  let futureTimeMonth = futureTime.getMonth();
+  let futureTimeYear = futureTime.getFullYear();
+
+  const remainingTime = futureTime - currentTime;
+  let previouseFutureTime = futureTime;
+  let lastTimeUpdated = new Date();
+  let futureTimeInNumber = futureTime.getTime();
+  let lastTimeUpdatedBeforeCanceling = new Date();
+
   task.title = title;
   task.alarmHour = alarmHour;
   task.alarmMinute = alarmMinute;
   task.alarmSeconds = alarmSeconds;
   task.ampm = ampm;
   task.futureTime = futureTime;
-  task.previouseFutureTime = futureTime;
-  task.lastTimeUpdated = new Date();
+  task.previouseFutureTime = previouseFutureTime;
+  task.lastTimeUpdated = lastTimeUpdated;
   task.remainingTime = remainingTime;
-  task.lastTimeUpdatedBeforeCanceling = new Date();
+  task.lastTimeUpdatedBeforeCanceling = lastTimeUpdatedBeforeCanceling;
   task.editCount = editCount;
   task.cancel = false;
   task.repeat = false;
   task.futureTimeMonth = futureTimeMonth;
   task.futureTimeYear = futureTimeYear;
+  task.futureTimeInNumber = futureTimeInNumber;
 
   await task.save();
 
