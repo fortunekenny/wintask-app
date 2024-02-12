@@ -32,12 +32,14 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
+  
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
   let alarmTimeToday = new Date(
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
+
 
   const alarmFutureTime = () => {
     let daysInMonth = (month, year) => {
@@ -63,6 +65,8 @@ const createTask = async (req, res) => {
     futureTime = alarmTimeToday;
   }
 
+
+
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
 
@@ -71,6 +75,8 @@ const createTask = async (req, res) => {
   let lastTimeUpdated = new Date();
   let futureTimeInNumber = futureTime.getTime();
   let lastTimeUpdatedBeforeCanceling = new Date();
+
+
 
   const task = await Task.create({
     title,
@@ -192,9 +198,6 @@ const repeatTask = async (req, res) => {
     month = month - 12;
     year = year + mt;
   }
-  // alarmHour = String(alarmHour);
-  // alarmMinute = String(alarmMinute);
-  // alarmSeconds = String(alarmSeconds);
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(
@@ -232,6 +235,9 @@ const updateTask = async (req, res) => {
   }
 
   checkPermissions(req.user, task.user);
+
+  let editCount = task.editCount + 1;
+
 
   let currentTime = new Date();
 
@@ -282,20 +288,7 @@ const updateTask = async (req, res) => {
     futureTime = alarmTimeToday;
   }
 
-  let futureTimeMonth = futureTime.getMonth();
-  let futureTimeYear = futureTime.getFullYear();
-
-  const remainingTime = futureTime - currentTime;
-
-  // if (
-  //   (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
-  //   (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
-  // ) {
-  //   throw new CustomError.BadRequestError(
-  //     "Alarm time is bellow current time, please reset time"
-  //   );
-  // }
-
+  
   task.title = title;
   task.alarmHour = alarmHour;
   task.alarmMinute = alarmMinute;
