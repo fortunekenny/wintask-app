@@ -17,18 +17,12 @@ const createTask = async (req, res) => {
   let currentTime = new Date();
 
   const timeNow = new Date();
-  // console.log(timeNow);
-
-  // let timezoneOffset = timeNow.getTimezoneOffset();
-  // console.log(timezoneOffset);
 
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
 
   alarmHour = Number(alarmHour);
-  // alarmMinute = Number(alarmMinute);
-  // alarmSeconds = Number(alarmSeconds);
 
   alarmHour =
     alarmHour === 12 && ampm === "AM"
@@ -38,46 +32,12 @@ const createTask = async (req, res) => {
       : alarmHour < 12 && ampm === "PM"
       ? alarmHour + 12
       : alarmHour;
-  // console.log(alarmHour);
-  /*
-  alarmHour =
-    Math.sign(timezoneOffset) === 1
-      ? alarmHour - timezoneOffset / 60 //add offset
-      : alarmHour + timezoneOffset / 60; // minus offset
-  console.log(alarmHour);
-  */
-  /*
-  alarmHour =
-    Math.sign(timezoneOffset) === 1
-      ? alarmHour - timezoneOffset / 60 //add offset
-      : Math.sign(timezoneOffset) === -1
-      ? alarmHour + timezoneOffset / 60 // minus offset
-      : alarmHour;
-      */
-  // alarmHour = alarmHour < 0 ? 23 :  :alarmHour;
-  // alarmHour = Number(alarmHour);
-  // alarmMinute = Number(alarmMinute);
-  // alarmSeconds = Number(alarmSeconds);
-
-  /*
-  if (alarmHour < 0) {
-    alarmHour = 23;
-  }
-  if (alarmHour === 11 && ampm === "PM") {
-    ampm = "AM";
-  }*/
-
-  // console.log(alarmHour);
 
   let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
   let alarmTimeToday = new Date(
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
-  // console.log(alarmTimeToday);
-  // if (futureTime < timeNow) {
-  //   return remainingTimeCount + 86400000;
-  // }
 
   const alarmFutureTime = () => {
     let daysInMonth = (month, year) => {
@@ -96,24 +56,12 @@ const createTask = async (req, res) => {
       `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
-  // console.log(alarmTimeFuture());
 
-  // futureTime = alarmTimeToday; //< currentTime ? alarmTimeFuture() : alarmTimeToday;
   if (alarmTimeToday < currentTime) {
     futureTime = alarmFutureTime();
   } else {
     futureTime = alarmTimeToday;
   }
-
-  // console.log(futureTime);
-  // futureTime =
-  //   alarmTimeToday < currentTime ? alarmTimeFuture() : alarmTimeToday;
-  // console.log(currentTime);
-
-  // futureTime =
-  //   (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
-  //     ? pmamFutureTime2()
-  //     : futureTime;
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
@@ -123,15 +71,6 @@ const createTask = async (req, res) => {
   let lastTimeUpdated = new Date();
   let futureTimeInNumber = futureTime.getTime();
   let lastTimeUpdatedBeforeCanceling = new Date();
-
-  // if (
-  //   (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
-  //   (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
-  // ) {
-  //   throw new CustomError.BadRequestError(
-  //     "Alarm time is bellow current time, please reset time"
-  //   );
-  // }
 
   const task = await Task.create({
     title,
@@ -296,85 +235,66 @@ const updateTask = async (req, res) => {
 
   let currentTime = new Date();
 
-  let editCount = task.editCount + 1;
-
   const timeNow = new Date();
-  let timezoneOffset = timeNow.getTimezoneOffset();
+
   let year = timeNow.getFullYear();
   let month = timeNow.getMonth() + 1;
   let day = timeNow.getDate();
 
   alarmHour = Number(alarmHour);
+
   alarmHour =
     alarmHour === 12 && ampm === "AM"
-      ? 23
+      ? 0
       : alarmHour === 12 && ampm === "PM"
-      ? 11
+      ? 12
       : alarmHour < 12 && ampm === "PM"
-      ? alarmHour + 11
+      ? alarmHour + 12
       : alarmHour;
 
-  alarmHour =
-    Math.sign(timezoneOffset) === 1
-      ? `${alarmHour - timezoneOffset / 60}` //add offset
-      : `${alarmHour + timezoneOffset / 60}`; // minus offset
+  let ampmNow = currentTime.getHours() > 12 ? "PM" : "AM";
 
-  // alarmHour = alarmHour < 0 ? 23 : alarmHour;
-
-  if (alarmHour < 0) {
-    alarmHour = 23;
-  }
-  if (alarmHour === 11 && ampm === "PM") {
-    ampm = "AM";
-  }
-  // else {
-  //   alarmHour;
-  //   ampm;
-  // }
-
-  let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
-  let daysInMonth = (month, year) => {
-    return new Date(year, month, 0).getDate();
-  };
-
-  let futureTime = new Date(
+  let alarmTimeToday = new Date(
     `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
   );
 
-  /*
-  const pmamFutureTime2 = () => {
-    alarmHour = alarmHour === 23 ? 0 : alarmHour;
+  const alarmFutureTime = () => {
+    let daysInMonth = (month, year) => {
+      return new Date(year, month, 0).getDate();
+    };
+
     let daysInThisMonth = daysInMonth(month, year);
+
     day = day + 1;
     day = day >= daysInThisMonth ? 1 : day;
-    month = day === 1 ? month + 1 : month;
+    month = day >= daysInThisMonth ? month + 1 : month;
     month = month > 12 ? 1 : month;
-    year = month > 12 ? year + 1 : year;
+    year = month === 1 ? year + 1 : year;
+
     return new Date(
       `${year}/${month}/${day}/${alarmHour}:${alarmMinute}:${alarmSeconds}`
     );
   };
-  */
 
-  /*
-  futureTime =
-    (ampmNow === "PM" && ampm === "AM") || alarmHour === 0
-      ? pmamFutureTime2()
-      : futureTime;*/
+  if (alarmTimeToday < currentTime) {
+    futureTime = alarmFutureTime();
+  } else {
+    futureTime = alarmTimeToday;
+  }
 
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
 
   const remainingTime = futureTime - currentTime;
 
-  if (
-    (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
-    (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
-  ) {
-    throw new CustomError.BadRequestError(
-      "Alarm time is bellow current time, please reset time"
-    );
-  }
+  // if (
+  //   (futureTime < currentTime && ampm === "AM" && ampmNow === "AM") ||
+  //   (futureTime < currentTime && ampm === "PM" && ampmNow === "PM")
+  // ) {
+  //   throw new CustomError.BadRequestError(
+  //     "Alarm time is bellow current time, please reset time"
+  //   );
+  // }
 
   task.title = title;
   task.alarmHour = alarmHour;
