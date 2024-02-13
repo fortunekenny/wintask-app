@@ -75,10 +75,7 @@ const Wrapper = styled.div`
   .img-center {
     display: none;
   }
-  /*  mobile max 414 */
-  /* tablet min 601 */
-  /* tablet max 1024 */
-  /* pc min 1170 */
+
   @media screen and (min-width: 990px) {
     .img-center {
       display: block;

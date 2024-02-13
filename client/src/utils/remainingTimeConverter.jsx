@@ -12,23 +12,8 @@ const remainingTimeConverter = (remainderTime, month, year, ampm) => {
 
   let currentTime = new Date();
   let timeNow = new Date().getHours() >= 12 ? "PM" : "AM";
-  /*
-  let currentHour = timeNow.getHours();
-  let currentDate = timeNow.getDate();
-  let currentMonth = timeNow.getMonth();
-  let currentYear = timeNow.getFullYear();*/
 
   let timezoneOffset = currentTime.getTimezoneOffset();
-  // console.log(timezoneOffset);
-
-  // let remainingHours = Math.floor(remainderTime / oneHour);
-  // let remainingMinutes = Math.floor((remainderTime % oneHour) / oneMinute);
-  // let remainingSeconds = Math.floor((remainderTime % oneMinute) / 1000);
-
-  // remainderTime =
-  //   futureTime < currentTime ? remainderTime + 86400000 : remainderTime;
-  // console.log(futureTime);
-  // console.log(currentTime);
 
   let remainingYear = Math.floor(remainderTime / oneYear);
   let remainingMonth = Math.floor((remainderTime % oneYear) / oneMonth);
@@ -51,13 +36,7 @@ const remainingTimeConverter = (remainderTime, month, year, ampm) => {
     return remainingHours;
   }
   remainingHours = remainingHours < 0 ? 0 : remainingHours;
-  // console.log(remainingHours);
-  // remainingHours =
-  //   Math.sign(timezoneOffset) === 1
-  //     ? remainingHours - timezoneOffset / 60 //add offset
-  //     : remainingHours + timezoneOffset / 60; // minus offset
-  // console.log(remainingHours);
-  // remainingHours < 0 ? 0 : remainingHours;
+
   let remainingMinutes = Math.floor((remainderTime % oneHour) / oneMinute);
   let remainingSeconds = Math.floor((remainderTime % oneMinute) / oneSecond);
   return { remainingHours, remainingMinutes, remainingSeconds };

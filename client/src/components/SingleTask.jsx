@@ -42,11 +42,6 @@ const SingleTask = ({
   let currentTime = new Date();
   let timezoneOffset = currentTime.getTimezoneOffset();
 
-  // futureTime =
-  //   futureTime < timeNow.getTime() ? futureTime + 86400000 : futureTime;
-  // console.log(futureTime);
-  // console.log(timeNow);
-
   useEffect(() => {
     let remainder = setInterval(() => {
       setRemainderTime(() => {
@@ -71,43 +66,11 @@ const SingleTask = ({
       ? day(futureTime) + timezoneOffset * 60000
       : day(futureTime);
   expiresAt = day(expiresAt).format("hh:mm:ss A");
-  // console.log(
-  //   day(day(futureTime) - timezoneOffset * 60000).format("hh:mm:ss A")
-  // );
-
-  /*
-  let expiresAt =
-    Math.sign(timezoneOffset) === 1 ||
-    (Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM")
-      ? day(futureTime) - timezoneOffset * 60000
-      : Math.sign(timezoneOffset) === -1 ||
-        (Math.sign(timezoneOffset) === -1 && ampm === "AM" && dateNow === "PM")
-      ? day(futureTime) + timezoneOffset * 60000
-      : day(futureTime);
-  expiresAt = day(expiresAt).format("hh:mm:ss A");
-  console.log(
-    day(day(futureTime) - timezoneOffset * 60000).format("hh:mm:ss A")
-  );
-  */
-  // let expiresAt = day(futureTime).format("hh:mm:ss A");
 
   let updatedTime =
     repeat || cancel
       ? day(lastTimeUpdatedBeforeCanceling).format("hh:mm:ss A")
       : day(updatedAt).format("hh:mm:ss A");
-  /*
-    let expiresAt =
-      Math.sign(timezoneOffset) === 1 ||
-      (Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM")
-        ? day(futureTime) - timezoneOffset * 1000
-        : Math.sign(timezoneOffset) === -1 ||
-          (Math.sign(timezoneOffset) === -1 &&
-            ampm === "AM" &&
-            dateNow === "PM")
-        ? day(futureTime) + timezoneOffset * 1000
-        : day(futureTime);
-    expiresAt = day(expiresAt).format("hh:mm:ss A");
-    */
 
   let yesterday = day(futureTime).isYesterday();
   let today = day(futureTime).isToday();
@@ -213,9 +176,8 @@ const Wrapper = styled.div`
     border-bottom-right-radius: 0.5rem;
     position: relative;
   }
-  @media screen and (max-width: 502px) {
+  @media screen and (max-width: 500px) {
     .single-task-center {
-      /* width: 90%; */
     }
   }
   @media screen and (min-width: 676px) {

@@ -1,7 +1,7 @@
 import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { Navbar } from "../components";
-import { createContext, useContext, useState, useRef, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 
@@ -18,34 +18,29 @@ export const loader = async ({ request }) => {
 const UserContext = createContext();
 
 const UserPage = () => {
-  const [contain, setContain] = useState(false);
-  const navigate = useNavigate();
   const { user } = useLoaderData();
-
+  // const [contain, setContain] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+  const navigate = useNavigate();
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  // LISTENING TO WINDOW SIZE
+  let resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
+  };
+  useEffect(() => {
+    resizeWindow();
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, []);
+  // LISTENING TO WINDOW SIZE END
+
   const toggleDarkTheme = () => {
     console.log("toggle dark theme");
   };
-
-  useEffect(() => {
-    let elms = Array.from(document.getElementsByTagName("div"));
-    elms.map((elm) => {
-      let userpage = Array.from(elm.getElementsByClassName("user-page")).map(
-        (div) => {
-          const userpageDivs = Array.from(div.getElementsByTagName("div")).map(
-            (userpageDiv) => {
-              if (
-                userpageDiv.classList.contains("create-task-center") ||
-                userpageDiv.classList.contains("edit-task-center")
-              ) {
-                setContain(true);
-              }
-            }
-          );
-        }
-      );
-    });
-  });
 
   const logoutUser = async () => {
     navigate("/");
@@ -60,12 +55,15 @@ const UserPage = () => {
         isDarkTheme,
         toggleDarkTheme,
         logoutUser,
-        contain,
+        windowWidth,
+        windowHeight,
+        showNavbar,
+        setShowNavbar,
       }}
     >
       <Wrapper>
         <div className="user-page">
-          <Navbar contain={contain} />
+          {showNavbar ? <Navbar /> : null}
           <div className="outlet">
             <Outlet context={{ user }} />
           </div>

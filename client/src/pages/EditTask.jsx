@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { FormRow } from "../components";
 import {
@@ -39,7 +40,11 @@ export const action = async ({ request, params }) => {
 const EditTask = () => {
   const navigation = useNavigation();
   const { task } = useLoaderData();
-  const { contain } = useUserContext();
+  const { setShowNavbar } = useUserContext();
+
+  // TO HIDE NAVBAR
+  useEffect(() => setShowNavbar(false), [setShowNavbar]);
+  // END
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -49,7 +54,7 @@ const EditTask = () => {
     <Wrapper>
       <div
         className="edit-task-center"
-        style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
+        // style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
       >
         <LiveTime />
         <Form method="post" className="form">
@@ -130,22 +135,21 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--lightestVariation);
-  width: 100%;
-  height: 100%;
-  /* height: calc(100vh - 64.38px); */
+  max-width: 450px;
   text-transform: capitalize;
   margin: auto;
+  margin-top: 10rem;
+
   .edit-task-center {
-    max-width: 400px;
-    min-width: 400px;
+    width: 100%;
     padding-bottom: 1rem;
     background: var(--white);
     box-shadow: var(--shadowLG);
     border-radius: var(--borderRadius);
   }
   .edit-task-center .form {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
   }
   .selector select {
     height: 1.5rem;
@@ -178,18 +182,34 @@ const Wrapper = styled.div`
     display: none;
   }
 
+  @media screen and (max-width: 500px) {
+    margin-top: 40%;
+    width: 95%;
+    .edir-task-center {
+      width: 100%;
+    }
+  }
+
   @media screen and (min-width: 990px) {
+    margin-top: 10%;
+    width: 100%;
+    max-width: 1000px;
     .edit-task-center {
-      margin-top: -10rem;
+      margin-top: -20%;
+      width: 100%;
+      max-width: 450px;
     }
     .img-center {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50%;
+      width: 40rem;
     }
     .img-center img {
-      width: 80%;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2.9rem;
     }
   }
 `;

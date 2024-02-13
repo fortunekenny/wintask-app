@@ -2,15 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
 const FormRow = ({ type, name, labelText, defaultValue, min, max }) => {
   const [labelWidth, setLabelWidth] = useState(0);
+  const [wrapperWidth, setWrapperWidth] = useState(0);
   const labelWidthRef = useRef(null);
+  const wrapperWidthRef = useRef(null);
 
   useEffect(() => {
     setLabelWidth(labelWidthRef.current.getBoundingClientRect().width);
   }, []);
+  useEffect(() => {
+    setWrapperWidth(wrapperWidthRef.current.getBoundingClientRect().width);
+  }, []);
 
   return (
     // <div>
-    <Wrapper>
+    <Wrapper ref={wrapperWidthRef}>
       <label htmlFor={name} className="label" ref={labelWidthRef}>
         {labelText || name}
       </label>
@@ -22,16 +27,14 @@ const FormRow = ({ type, name, labelText, defaultValue, min, max }) => {
         defaultValue={defaultValue}
         min={min}
         max={max}
-        style={{ width: `${300 - labelWidth}px` }}
+        style={{ width: `${wrapperWidth - labelWidth - 30}px` }}
         required
       />
-      {/* </div> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  /* margin-left: 1rem; */
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
@@ -43,8 +46,6 @@ const Wrapper = styled.div`
     border: 1px solid var(--mediumVariation);
     border-radius: var(--borderRadius);
     height: 1.5rem;
-    /* width: calc(300px - {widthOfLabel}); */
-    /* outline-color: none; */
   }
   .input:focus {
     outline: 1px solid var(--primaryColor);

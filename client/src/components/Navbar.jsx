@@ -2,25 +2,13 @@ import { NavLink } from "react-router-dom";
 import { useUserContext } from "../pages/UserPage";
 import { styled } from "styled-components";
 import LogoutComponent from "./LogoutComponent";
-import { useRef, useEffect } from "react";
 
-const Navbar = ({ contain }) => {
+const Navbar = () => {
   const { user } = useUserContext();
   const { name, role } = user;
-  const hideNavRef = useRef(null);
-  useEffect(() => {
-    if (contain) {
-      hideNavRef.current.style.display = "none";
-      hideNavRef.current.style.width = 0;
-      hideNavRef.current.style.height = 0;
-      // hideNavRef.current.style.marginBottom = `${10}%`;
-    } else {
-      hideNavRef.current.style.display = "block";
-    }
-  });
 
   return (
-    <Wrapper ref={hideNavRef}>
+    <Wrapper>
       <nav className="nav-center">
         <h5 className="navtext">
           <span> {name}</span>
@@ -96,7 +84,7 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 676px) {
     /* width: 600px; */
-    /* max-width: 600px; */
+    max-width: 600px;
     margin: auto;
     margin-top: 5rem;
     padding: 0.5rem 0.5rem;

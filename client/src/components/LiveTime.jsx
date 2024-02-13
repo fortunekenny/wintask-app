@@ -24,8 +24,10 @@ const LiveTime = () => {
 };
 
 const Wrapper = styled.div`
+  margin: 2rem 5%;
   .time-center {
-    margin: 2rem auto;
+    width: 100%;
+    margin: auto;
     text-align: center;
   }
   .time-center h1 {
@@ -35,11 +37,12 @@ const Wrapper = styled.div`
     border-radius: 1rem;
     margin: auto;
     padding: 1rem 1rem;
-    /*  */
+    letter-spacing: 5px;
   }
-  @media screen and (min-width: 676px) {
+  @media screen and (max-width: 500px) {
     .time-center h1 {
-      letter-spacing: 5px;
+      letter-spacing: 0.2rem;
+      font-size: 230%;
     }
   }
 `;

@@ -191,9 +191,7 @@ const repeatTask = async (req, res) => {
     month = month - 12;
     year = year + mt;
   }
-  // alarmHour = String(alarmHour);
-  // alarmMinute = String(alarmMinute);
-  // alarmSeconds = String(alarmSeconds);
+
   let ampmNow = timeNow.getHours() > 12 ? "PM" : "AM";
 
   futureTime = new Date(

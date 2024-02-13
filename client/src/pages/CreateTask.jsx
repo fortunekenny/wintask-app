@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { styled } from "styled-components";
 import { FormRow } from "../components";
 import { Form, useNavigation, redirect, Link } from "react-router-dom";
@@ -11,7 +12,6 @@ import { useUserContext } from "../pages/UserPage";
 export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  // console.log(typeof data.alarmHour);
   try {
     await customFetch.post("/tasks", data);
     toast.success("Task created");
@@ -23,20 +23,27 @@ export const action = async ({ request }) => {
 };
 
 const CreateTask = () => {
-  const { contain } = useUserContext();
+  const { setShowNavbar } = useUserContext();
+
+  // TO HIDE NAVBAR
+  useEffect(() => setShowNavbar(false), [setShowNavbar]);
+  // END
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
   let secondsNow = new Date().getSeconds();
-  // reloadDocument;
+
   return (
     <Wrapper>
-      {/* style={ isLoggedIn ? { display:'block'} : {display : 'none'} } */}
       <div
         className="create-task-center"
-        style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
+        // style={
+        //   contain && windowWidth < 990
+        //     ? { marginTop: `${20}%` }
+        //     : { marginTop: `${-15}%` }
+        // }
       >
         <LiveTime />
         <Form method="post" className="form">
@@ -98,16 +105,12 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--lightestVariation);
-  width: 100%;
-  height: 100%;
-
-  /* height: calc(100vh - 64.38px); */
+  max-width: 450px;
   text-transform: capitalize;
   margin: auto;
-  /* margin: calc((100vh - 286px) / 2) auto; */
+  margin-top: 10rem;
   .create-task-center {
-    max-width: 400px;
-    min-width: 400px;
+    width: 100%;
     padding-bottom: 1rem;
     background: var(--white);
     box-shadow: var(--shadowLG);
@@ -118,8 +121,8 @@ const Wrapper = styled.div`
   }
 
   .create-task-center .form {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
   }
 
   .form {
@@ -164,18 +167,35 @@ const Wrapper = styled.div`
   .img-center {
     display: none;
   }
-  @media screen and (min-width: 990px) {
+
+  @media screen and (max-width: 500px) {
+    margin-top: 40%;
+    width: 95%;
     .create-task-center {
-      margin-top: -10rem;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    margin-top: 10%;
+    width: 100%;
+    max-width: 1000px;
+    .create-task-center {
+      margin-top: -20%;
+      width: 100%;
+      max-width: 450px;
     }
     .img-center {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 50%;
+      width: 40rem;
     }
     .img-center img {
-      width: 80%;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2.9rem;
     }
   }
 `;
