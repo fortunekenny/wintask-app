@@ -60,10 +60,10 @@ const SingleTask = ({
   let expiresAt =
     Math.sign(timezoneOffset) === 1 ||
     (Math.sign(timezoneOffset) === 1 && ampm === "AM" && dateNow === "PM")
-      ? day(futureTime) - timezoneOffset * 60000
+      ? day(futureTime) + timezoneOffset * 60000
       : Math.sign(timezoneOffset) === -1 ||
         (Math.sign(timezoneOffset) === -1 && ampm === "AM" && dateNow === "PM")
-      ? day(futureTime) + timezoneOffset * 60000
+      ? day(futureTime) - timezoneOffset * 60000
       : day(futureTime);
   expiresAt = day(expiresAt).format("hh:mm:ss A");
 
