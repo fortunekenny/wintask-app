@@ -15,6 +15,8 @@ const InfoComponent = ({
   dur,
   info,
 }) => {
+  let CancelledTime = day().format("hh:mm:ss A");
+
   return (
     <Wrapper>
       <div className={info ? "center-info" : "hide-info"}>
@@ -34,7 +36,7 @@ const InfoComponent = ({
                 : "Expires "}
               At:
             </span>
-            {expiresAt}
+            {cancel ? CancelledTime : expiresAt}
           </h5>
           <span>
             {tomorrow

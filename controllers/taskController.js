@@ -200,11 +200,11 @@ const repeatTask = async (req, res) => {
   let futureTimeMonth = futureTime.getMonth();
   let futureTimeYear = futureTime.getFullYear();
 
-  if (task.ampm === ampmNow && futureTime < currentTime) {
-    throw new CustomError.BadRequestError(
-      "Alarm time is bellow current time, please reset time"
-    );
-  }
+  // if (task.ampm === ampmNow && futureTime < currentTime) {
+  //   throw new CustomError.BadRequestError(
+  //     "Alarm time is bellow current time, please reset time"
+  //   );
+  // }
 
   task.futureTime = futureTime;
   task.futureTimeInNumber = futureTime.getTime();
