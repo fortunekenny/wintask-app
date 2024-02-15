@@ -14,8 +14,9 @@ const InfoComponent = ({
   tomorrow,
   dur,
   info,
+  cancelledAt,
 }) => {
-  let CancelledTime = day().format("hh:mm:ss A");
+  let CancelledTime = day(cancelledAt).format("hh:mm:ss A");
 
   return (
     <Wrapper>

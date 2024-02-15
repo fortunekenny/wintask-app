@@ -31,6 +31,7 @@ const SingleTask = ({
   futureTimeMonth,
   futureTimeYear,
   ampm,
+  cancelledAt,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let [info, setInfo] = useState(false);
@@ -100,6 +101,7 @@ const SingleTask = ({
     setInfo,
     showButton,
     setShowButton,
+    cancelledAt,
   };
 
   // const navigation = useNavigation();

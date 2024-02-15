@@ -1,4 +1,10 @@
-import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
+import {
+  Outlet,
+  redirect,
+  useLoaderData,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import { styled } from "styled-components";
 import { Navbar } from "../components";
 import { createContext, useContext, useState, useEffect } from "react";
@@ -26,11 +32,26 @@ const UserPage = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
 
+  // TO SET NAVBAR TO SHOW
+  // useEffect(() => setShowNavbar(true), [setShowNavbar]);
+  // END
+
+  // useEffect(() => {
+  //   const handleLoad = () => {
+  //     // Perform actions after the component has fully loaded
+  //   };
+  //   window.addEventListener("load", handleLoad);
+  //   return () => {
+  //     window.removeEventListener("load", handleLoad);
+  //   };
+  // }, []);
+
   // LISTENING TO WINDOW SIZE
   let resizeWindow = () => {
     setWindowWidth(window.innerWidth);
     setWindowHeight(window.innerHeight);
   };
+
   useEffect(() => {
     resizeWindow();
     window.addEventListener("resize", resizeWindow);

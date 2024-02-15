@@ -342,6 +342,7 @@ const cancelTask = async (req, res) => {
   task.remainingTime = remainingTime;
   task.cancel = true;
   task.cancelCount = cancel;
+  task.cancelledAt = new Date();
   task.repeat = false;
   await task.save();
 
