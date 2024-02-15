@@ -33,7 +33,7 @@ const UserPage = () => {
   const [showNavbar, setShowNavbar] = useState(true);
 
   // TO SET NAVBAR TO SHOW
-  // useEffect(() => setShowNavbar(true), [setShowNavbar]);
+  useEffect(() => setShowNavbar(true), [setShowNavbar]);
   // END
 
   // useEffect(() => {
