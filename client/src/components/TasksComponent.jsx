@@ -1,20 +1,33 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
-import { useUserContext } from "../pages/UserPage";
+
 import SingleTask from "./SingleTask";
 import { Link } from "react-router-dom";
 
 const TasksComponent = () => {
-  const { windowWidth } = useUserContext;
   const { data } = useTasksContext();
   let { tasks } = data;
-
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
   const [contRight, setContRight] = useState(0);
   const contRightRef = useRef(null);
 
   let rightLoc = windowWidth > 676 ? contRight - 50 : contRight;
-  let topLoc = windowWidth < 502 ? 375 : 390;
+  let topLoc = windowWidth < 500 ? 375 : 390;
+
+  // LISTENING TO WINDOW SIZE
+  let resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    resizeWindow();
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, []);
+  // LISTENING TO WINDOW SIZE END
 
   // LISTENING TO ELEMENT LEFT BOUNDING BOX LOCATION
   const onResize = useCallback(() => {
