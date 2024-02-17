@@ -1,6 +1,6 @@
 import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
-import UsersComponent from "../components/UsersComponent";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const loader = async ({ request }) => {
   try {
@@ -12,20 +12,26 @@ export const loader = async ({ request }) => {
     return redirect("userpage");
   }
 };
-// import { useUserContext } from "./UserPage";
+
+const AdminContext = createContext();
 
 const Admin = () => {
-  // const data = useUserContext();
   const { users } = useLoaderData();
   // console.log(users);
   return (
-    <>
-      <h2>Admin page</h2>
-      {users.map((user) => {
-        return <UsersComponent key={user._id} {...user} />;
-      })}
-    </>
+    <AdminContext.Provider
+      value={{
+        users,
+      }}
+    >
+      <>
+        <div className="outlet">
+          <Outlet />
+        </div>
+      </>
+    </AdminContext.Provider>
   );
 };
 
 export default Admin;
+export const useAdminContext = () => useContext(AdminContext);

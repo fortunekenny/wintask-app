@@ -8,4 +8,4 @@ export { default as CreateTask } from "./CreateTask";
 export { default as UserPage } from "./UserPage";
 export { default as Admin } from "./Admin";
 export { default as Profile } from "./Profile";
-// export { default as AdminSingleUserPage } from "./AdminSingleUserPage";
+export { default as AdminUsersPage } from "./AdminUsersPage";

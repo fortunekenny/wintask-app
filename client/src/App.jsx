@@ -14,6 +14,7 @@ import {
   UserPage,
   Admin,
   Profile,
+  AdminUsersPage,
 } from "./pages";
 
 import { action as signupAction } from "./pages/SignUpPage";
@@ -29,6 +30,7 @@ import { action as repeatTaskAction } from "./pages/RepeatTask";
 import { loader as cancelTaskLoader } from "./pages/CancelTask";
 import { action as cancelTaskAction } from "./pages/CancelTask";
 import { loader as usersLoader } from "./pages/Admin";
+import { trusted } from "mongoose";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +100,12 @@ const router = createBrowserRouter([
             path: "admin",
             loader: usersLoader,
             element: <Admin />,
+            children: [
+              {
+                index: true,
+                element: <AdminUsersPage />,
+              },
+            ],
           },
         ],
       },

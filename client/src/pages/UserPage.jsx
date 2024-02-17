@@ -1,10 +1,4 @@
-import {
-  Outlet,
-  redirect,
-  useLoaderData,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { Navbar } from "../components";
 import { createContext, useContext, useState, useEffect } from "react";

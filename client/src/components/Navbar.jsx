@@ -15,7 +15,7 @@ const Navbar = () => {
         </h5>
         <div className="link-center">
           <NavLink
-            to="/userpage/admin"
+            to="admin"
             className={role === "founder" ? "showadmin btn" : "adminhide"}
           >
             Admin
@@ -35,11 +35,12 @@ const Wrapper = styled.div`
   .nav-center {
     display: flex;
     justify-content: space-between;
+    flex: 0 0 0;
     background: var(--white);
     /* width: 100%; */
     margin: auto;
     padding: 2% 2%;
-    flex: 0 0 0;
+    border-radius: var(--borderRadius);
   }
 
   .navtext {
