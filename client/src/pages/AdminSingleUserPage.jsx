@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+/*
 import { useState, useEffect } from "react";
 import TimeRemainder from "./TimeRemainder";
 import InfoComponent from "./InfoComponent";
@@ -15,8 +16,23 @@ day.extend(isTomorrow);
 day.extend(isToday);
 day.extend(duration);
 day.extend(advancedFormat);
+*/
+import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
+import customFetch from "../utils/customFetch";
+import { createContext, useContext, useState, useEffect } from "react";
 
-const AdminSingleUserTasks = ({
+export const loader = async ({ params }) => {
+  try {
+    const { data } = await customFetch.get(`/users/${params.id}`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return redirect("userpage");
+  }
+};
+
+/*
+{
   cancel,
   remainingTime,
   repeat,
@@ -30,11 +46,17 @@ const AdminSingleUserTasks = ({
   updatedAt,
   futureTimeMonth,
   futureTimeYear,
-}) => {
-  let [remainderTime, setRemainderTime] = useState(remainingTime);
+}
+*/
+const AdminSingleUserPage = () => {
+  const { user } = useLoaderData();
+  const { email, name, role, tasks } = user;
+  console.log(email, name, role, tasks);
+  /*let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
-  futureTime = new Date(futureTime);
+  futureTime = new Date(futureTime);*/
 
+  /*
   useEffect(() => {
     let remainder = setInterval(() => {
       setRemainderTime(() => {
@@ -49,7 +71,9 @@ const AdminSingleUserTasks = ({
     }, 1000);
     return () => clearInterval(remainder);
   }, [futureTime, timeNow]);
+  */
 
+  /*
   let expiresAt = day(futureTime).format("hh:mm:ss A");
   let updatedTime =
     repeat || cancel
@@ -60,7 +84,9 @@ const AdminSingleUserTasks = ({
   let today = day(futureTime).isToday();
   let tomorrow = day(futureTime).isTomorrow();
   let dur = day.duration(day(timeNow).diff(futureTime));
+  */
 
+  /*
   let data = {
     cancel,
     remainingTime,
@@ -81,6 +107,7 @@ const AdminSingleUserTasks = ({
     tomorrow,
     dur,
   };
+*/
 
   // const navigation = useNavigation();
   // const isSubmitting = navigation.state === "submitting";
@@ -88,15 +115,13 @@ const AdminSingleUserTasks = ({
     <Wrapper>
       <div className="">
         {/* <h4>task page</h4> */}
-        <h5>{title}</h5>
+        {/* <h5>{title}</h5> */}
         <div className="">
-          <TimeRemainder {...data} />
-          <InfoComponent {...data} />
-          <ButtonsComponent {...data} />
+          {/* <TimeRemainder {...data} /> */}
+          {/* <InfoComponent {...data} /> */}
+          {/* <ButtonsComponent {...data} /> */}
         </div>
-        <div className="">
-          <ProgressBar {...data} />
-        </div>
+        <div className="">{/* <ProgressBar {...data} /> */}</div>
       </div>
     </Wrapper>
   );
@@ -106,4 +131,4 @@ const Wrapper = styled.div`
   background: skyblue;
 `;
 
-export default AdminSingleUserTasks;
+export default AdminSingleUserPage;

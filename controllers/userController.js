@@ -11,7 +11,8 @@ const {
 const tasks = require("../model/tasks");
 
 const getAllUsers = async (req, res) => {
-  const users = await User.find({}).select("-password").populate("tasks");
+  const users = await User.find({}).select("-password");
+  // .populate("tasks");
   res.status(StatusCodes.OK).json({ users });
 };
 

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const AdminUsersPage = () => {
   const { users } = useAdminContext();
-  console.log(users);
+  // console.log(users);
   return (
     <>
       <h3>AdminUserPage</h3>
