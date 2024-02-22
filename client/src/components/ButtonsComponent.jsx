@@ -1,62 +1,17 @@
 import styled from "styled-components";
-import { Link, Form } from "react-router-dom";
-import { BsRepeat1 } from "react-icons/bs";
-import { MdOutlineCancel } from "react-icons/md";
-import { RiEditCircleLine } from "react-icons/ri";
-import { RiDeleteBin2Line } from "react-icons/ri";
+import RepeatButton from "../components/RepeatButton";
+import CancelButton from "../components/CancelButton";
+import EditButton from "../components/EditButton";
+import DeleteButton from "../components/DeleteButton";
 
 const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
   return (
     <Wrapper>
       <div className={showButton ? "button-center" : "reduce-height"}>
-        <Form
-          method="post"
-          action={`./repeattask/${_id}`}
-          className={showButton ? "show" : "hide"}
-        >
-          <button
-            type="submit"
-            disabled={remainderTime > 1}
-            className={remainderTime > 1 ? "disable" : "btn2"}
-          >
-            <BsRepeat1 />
-            <p>Repeat</p>
-          </button>
-        </Form>
-        <Form
-          method="post"
-          action={`./canceltask/${_id}`}
-          className={showButton ? "show" : "hide"}
-        >
-          <button
-            type="submit"
-            disabled={remainderTime < 1}
-            className={remainderTime < 1 ? "disable" : "btn2"}
-          >
-            <MdOutlineCancel />
-            <p>Cancel</p>
-          </button>
-        </Form>
-        <Link to={`./edittask/${_id}`} className={showButton ? "show" : "hide"}>
-          <button
-            type="button"
-            disabled={remainderTime > 1}
-            className={remainderTime > 1 ? "disable" : "btn2"}
-          >
-            <RiEditCircleLine />
-            <p>Edit</p>
-          </button>
-        </Link>
-        <Form
-          method="post"
-          action={`./deletetask/${_id}`}
-          className={showButton ? "show" : "hide"}
-        >
-          <button type="submit" className="btn2">
-            <RiDeleteBin2Line />
-            <p>Delete</p>
-          </button>
-        </Form>
+        <RepeatButton time={remainderTime} id={_id} show={showButton} />
+        <CancelButton time={remainderTime} id={_id} show={showButton} />
+        <EditButton time={remainderTime} id={_id} show={showButton} />
+        <DeleteButton id={_id} show={showButton} />
       </div>
     </Wrapper>
   );

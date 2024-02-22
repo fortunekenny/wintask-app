@@ -12,7 +12,14 @@ const AdminUsersPage = () => {
     <>
       <h3>AdminUserPage</h3>
       {users.map((user) => {
-        return <UsersComponent key={user._id} {...user} />;
+        // console.log(user.tasks.length);
+        return (
+          <UsersComponent
+            key={user._id}
+            {...user}
+            taskLength={user.tasks.length}
+          />
+        );
       })}
     </>
   );

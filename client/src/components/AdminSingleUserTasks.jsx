@@ -21,7 +21,7 @@ import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { createContext, useContext, useState, useEffect } from "react";
 
-export const loader = async ({ params }) => {
+/*export const loader = async ({ params }) => {
   try {
     const { data } = await customFetch.get(`/users/${params.id}`);
     return data;
@@ -29,10 +29,12 @@ export const loader = async ({ params }) => {
     console.log(error);
     return redirect("userpage");
   }
-};
+};*/
 
 /*
-{
+
+*/
+const AdminSingleUserTasks = ({
   cancel,
   remainingTime,
   repeat,
@@ -46,12 +48,8 @@ export const loader = async ({ params }) => {
   updatedAt,
   futureTimeMonth,
   futureTimeYear,
-}
-*/
-const AdminSingleUserPage = () => {
-  const { user } = useLoaderData();
-  const { email, name, role, tasks } = user;
-  console.log(email, name, role, tasks);
+}) => {
+  console.log(title);
   /*let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);*/
@@ -113,16 +111,16 @@ const AdminSingleUserPage = () => {
   // const isSubmitting = navigation.state === "submitting";
   return (
     <Wrapper>
+      {/* <div className=""> */}
+      {/* <h4>task page</h4> */}
+      <h5>{title}</h5>
       <div className="">
-        {/* <h4>task page</h4> */}
-        {/* <h5>{title}</h5> */}
-        <div className="">
-          {/* <TimeRemainder {...data} /> */}
-          {/* <InfoComponent {...data} /> */}
-          {/* <ButtonsComponent {...data} /> */}
-        </div>
-        <div className="">{/* <ProgressBar {...data} /> */}</div>
+        {/* <TimeRemainder {...data} /> */}
+        {/* <InfoComponent {...data} /> */}
+        {/* <ButtonsComponent {...data} /> */}
       </div>
+      <div className="">{/* <ProgressBar {...data} /> */}</div>
+      {/* </div> */}
     </Wrapper>
   );
 };
@@ -131,4 +129,4 @@ const Wrapper = styled.div`
   background: skyblue;
 `;
 
-export default AdminSingleUserPage;
+export default AdminSingleUserTasks;

@@ -16,7 +16,7 @@ import {
   Profile,
   AdminUsersPage,
   AdminCreateTaskPage,
-  AdminSingleUserPage,
+  // AdminSingleUserPage,
 } from "./pages";
 
 import { action as signupAction } from "./pages/SignUpPage";
@@ -33,7 +33,7 @@ import { loader as cancelTaskLoader } from "./pages/CancelTask";
 import { action as cancelTaskAction } from "./pages/CancelTask";
 import { loader as usersLoader } from "./pages/Admin";
 import { action as adminCreateTaskAction } from "./pages/AdminCreateTask";
-import { loader as adminSingleUserPageLoader } from "./pages/AdminSingleUserPage";
+// import { loader as adminSingleUserPageLoader } from "./components/AdminSingleUserTask";
 
 const router = createBrowserRouter([
   {
@@ -113,11 +113,11 @@ const router = createBrowserRouter([
                 element: <AdminCreateTaskPage />,
                 action: adminCreateTaskAction,
               },
-              {
-                path: "adminsingleuserpage/:id",
-                element: <AdminSingleUserPage />,
-                loader: adminSingleUserPageLoader,
-              },
+              // {
+              //   path: "adminsingleuserpage/:id",
+              //   element: <AdminSingleUserPage />,
+              //   loader: adminSingleUserPageLoader,
+              // },
             ],
           },
         ],

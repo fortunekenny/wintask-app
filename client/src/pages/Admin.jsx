@@ -25,9 +25,9 @@ const Admin = () => {
       }}
     >
       <>
-        <div className="outlet">
-          <Outlet />
-        </div>
+        {/* <div className="outlet"> */}
+        <Outlet />
+        {/* </div> */}
       </>
     </AdminContext.Provider>
   );
