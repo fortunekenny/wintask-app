@@ -26,6 +26,13 @@ const InfoComponent = ({
             <span>{repeat ? "Repeated" : "Created"} At:</span>
             {updatedTime}
           </h5>
+          <span>
+            {yesterday
+              ? "yesterday"
+              : today
+              ? "today"
+              : `${dur.$d.days} days ago`}
+          </span>
         </div>
         <div className={info ? "expire" : "hide"}>
           <h5>
