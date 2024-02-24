@@ -109,14 +109,12 @@ const AdminSingleUserTasks = ({
   // const isSubmitting = navigation.state === "submitting";
   return (
     <Wrapper>
-      {/* <div className=""> */}
-      {/* <h4>task page</h4> */}
       <h5>{title}</h5>
-      <div className="">
-        <TimeRemainder {...data} />
-        {/* <InfoComponent {...data} /> */}
-        {/* <ButtonsComponent {...data} /> */}
-      </div>
+      {/* <div className=""> */}
+      <TimeRemainder {...data} />
+      {/* <InfoComponent {...data} /> */}
+      {/* <ButtonsComponent {...data} /> */}
+      {/* </div> */}
       {/* <div className=""><ProgressBar {...data} /></div> */}
       {/* </div> */}
     </Wrapper>

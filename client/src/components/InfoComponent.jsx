@@ -17,7 +17,8 @@ const InfoComponent = ({
   cancelledAt,
 }) => {
   let CancelledTime = day(cancelledAt).format("hh:mm:ss A");
-
+  const daysExpired = dur.$d.days;
+  const daysPlural = daysExpired < 2 ? "day" : "days";
   return (
     <Wrapper>
       <div className={info ? "center-info" : "hide-info"}>
@@ -31,7 +32,7 @@ const InfoComponent = ({
               ? "yesterday"
               : today
               ? "today"
-              : `${dur.$d.days} days ago`}
+              : `${dur.$d.days} ${daysPlural} ago`}
           </span>
         </div>
         <div className={info ? "expire" : "hide"}>
@@ -53,7 +54,7 @@ const InfoComponent = ({
               ? "yesterday"
               : today
               ? "today"
-              : `${dur.$d.days} days ago`}
+              : `${dur.$d.days} ${daysPlural} ago`}
           </span>
         </div>
       </div>

@@ -44,7 +44,7 @@ const TimeRemainder = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   padding-top: 0.5rem;
   position: relative;
   .time-remainder {
