@@ -72,40 +72,26 @@ const Wrapper = styled.div`
   .center-info span {
     font-size: 1rem;
     font-weight: 400;
+    color: var(--mediumVariation);
   }
 
-  .expire {
+  .expire,
+  .repeat {
     display: flex;
     align-items: end;
   }
-  .expire span {
-    color: var(--mediumVariation);
-  }
-  .repeat h5 {
+  .center-info h5 {
     margin-bottom: 0;
-    padding-top: 1.1rem;
-    padding-bottom: 0.2rem;
-    position: relative;
-  }
-  .expire h5 {
-    margin-bottom: 0;
-    padding-top: 1.1rem;
+    padding-top: 1.3rem;
     padding-bottom: 0.2rem;
     position: relative;
     margin-right: 0.3rem;
   }
-  .repeat h5 span {
+  h5 span {
     position: absolute;
     top: 2%;
     left: 0%;
-    margin-bottom: 0;
-    color: var(--mediumVariation);
-  }
-  .expire h5 span {
-    position: absolute;
-    top: 2%;
-    left: 0%;
-    margin-bottom: 0;
+    /* padding-bottom: 10px; */
     color: var(--mediumVariation);
   }
   .hide-info {
@@ -115,6 +101,23 @@ const Wrapper = styled.div`
   .hide {
     display: none;
     transition: var(--transition);
+  }
+  @media screen and (max-width: 514px) {
+    h5 {
+      font-size: 1rem;
+    }
+    .expire,
+    .repeat {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .expire h5 span {
+      width: 96px;
+    }
+    .expire > span,
+    .repeat > span {
+      margin-top: -10px;
+    }
   }
 `;
 
