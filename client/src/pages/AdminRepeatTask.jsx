@@ -16,9 +16,8 @@ export async function action({ request, params }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    await customFetch.patch(`/tasks/canceltask/${params.id}`, data);
-    toast.success("Task cancelled");
-    // return;
+    await customFetch.patch(`/tasks/repeattask/${params.id}`, data);
+    toast.success("Task repeating");
     return redirect("..");
   } catch (error) {
     toast.error(error?.response?.data?.msg);

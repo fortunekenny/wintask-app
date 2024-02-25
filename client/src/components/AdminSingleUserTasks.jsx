@@ -3,6 +3,7 @@ import TimeRemainder from "./TimeRemainder";
 import CancelButton from "./CancelButton";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
+import RepeatButton from "./RepeatButton";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import InfoComponent from "./InfoComponent";
@@ -155,9 +156,19 @@ const AdminSingleUserTasks = ({
           </span>
         </div>
       </div>
-      <CancelButton time={remainderTime} id={_id} />
-      <EditButton time={remainderTime} id={_id} />
-      <DeleteButton id={_id} />
+      <RepeatButton
+        time={remainderTime}
+        actionstring={`./adminrepeattask/${_id}`}
+      />
+      <CancelButton
+        time={remainderTime}
+        actionstring={`./admincanceltask/${_id}`}
+      />
+      <EditButton
+        time={remainderTime}
+        actionstring={`./adminedittask/${_id}`}
+      />
+      <DeleteButton actionstring={`./admindeletetask/${_id}`} />
       {/* <InfoComponent {...data} /> */}
       {/* <ButtonsComponent {...data} /> */}
       {/* </div> */}

@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
 import { FormRow } from "../components";
-import { Form, useNavigation, redirect, Link } from "react-router-dom";
+import {
+  Form,
+  useNavigation,
+  redirect,
+  Link,
+  useLoaderData,
+} from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import LiveTime from "../components/LiveTime";
@@ -9,12 +15,22 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import hero3 from "../assets/images/hero3.svg";
 import { useUserContext } from "../pages/UserPage";
 
-export const action = async ({ request }) => {
+export const loader = async ({ params }) => {
+  try {
+    const { data } = await customFetch.get(`/tasks/${params.id}`);
+    return data;
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return redirect("..");
+  }
+};
+
+export const action = async ({ request, params }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
-    await customFetch.post("/tasks", data);
-    toast.success("Task created");
+    await customFetch.patch(`/tasks/${params.id}`, data);
+    toast.success("Task edited successfully");
     return redirect("..");
   } catch (error) {
     toast.error(error?.response?.data?.msg);
@@ -22,27 +38,41 @@ export const action = async ({ request }) => {
   }
 };
 
-const CreateTask = () => {
+const AdminEditTask = () => {
+  const navigation = useNavigation();
+  const { task } = useLoaderData();
   const { setShowNavbar } = useUserContext();
 
   // TO HIDE NAVBAR
   useEffect(() => setShowNavbar(false), [setShowNavbar]);
   // END
 
-  const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   let timeNow = new Date().getHours() > 12 ? "PM" : "AM";
   let secondsNow = new Date().getSeconds();
-
   return (
     <Wrapper>
-      <div className="create-task-center">
+      <div
+        className="edit-task-center"
+        // style={contain ? { marginTop: `${25}%` } : { marginTop: `${0}%` }}
+      >
         <LiveTime />
         <Form method="post" className="form">
           <div className="selector">
-            <FormRow type="text" name="title" labelText="Title" />
-            <select name="alarmHour" id="alarmHour">
+            <FormRow
+              type="text"
+              name="title"
+              labelText="Title"
+              defaultValue={task.title}
+            />
+            <select
+              name="alarmHour"
+              id="alarmHour"
+              defaultValue={
+                task.alarmHour > 12 ? task.alarmHour % 12 : task.alarmHour
+              }
+            >
               <option value={""}>Hour</option>
               {[...Array(12)].map((x, i) => (
                 <option value={i + 1} key={i}>
@@ -50,7 +80,11 @@ const CreateTask = () => {
                 </option>
               ))}
             </select>
-            <select name="alarmMinute" id="alarmMinute">
+            <select
+              name="alarmMinute"
+              id="alarmMinute"
+              defaultValue={task.alarmMinute}
+            >
               <option value={""}>Minute</option>
               {[...Array(60)].map((x, i) => (
                 <option value={i} key={i}>
@@ -58,7 +92,11 @@ const CreateTask = () => {
                 </option>
               ))}
             </select>
-            <select name="alarmSeconds" id="alarmSeconds">
+            <select
+              name="alarmSeconds"
+              id="alarmSeconds"
+              defaultValue={task.alarmSeconds}
+            >
               <option value={""}>Seconds</option>
               <option value={secondsNow}>Seconds Now</option>
               {[...Array(60)].map((x, i) => (
@@ -67,19 +105,19 @@ const CreateTask = () => {
                 </option>
               ))}
             </select>
-            <select name="ampm" id="ampm">
+            <select name="ampm" id="ampm" defaultValue={task.ampm}>
               <option value={""}>AM/PM</option>
-              <option value={`${timeNow}`}>{timeNow}</option>
+              <option value={timeNow}>{timeNow}</option>
               <option value={timeNow === "AM" ? "PM" : "AM"}>
                 {timeNow === "AM" ? "PM" : "AM"}
               </option>
             </select>
           </div>
-          <div className="create-btns">
+          <div className="editBtns">
             <button type="submit" className="btn" disabled={isSubmitting}>
               {isSubmitting ? "submitting..." : "submit"}
             </button>
-            <Link to="/admin" className="btn-back" reloadDocument>
+            <Link to=".." reloadDocument className="btn-back">
               <IoIosArrowRoundBack /> back
             </Link>
           </div>
@@ -102,26 +140,17 @@ const Wrapper = styled.div`
   text-transform: capitalize;
   margin: auto;
   margin-top: 10rem;
-  .create-task-center {
+
+  .edit-task-center {
     width: 100%;
     padding-bottom: 1rem;
     background: var(--white);
     box-shadow: var(--shadowLG);
     border-radius: var(--borderRadius);
   }
-  .create-task-center .time-center {
-    margin-bottom: 1rem;
-  }
-
-  .create-task-center .form {
+  .edit-task-center .form {
     margin-left: 10%;
     margin-right: 10%;
-  }
-
-  .form {
-  }
-
-  .selector {
   }
   .selector select {
     height: 1.5rem;
@@ -135,14 +164,7 @@ const Wrapper = styled.div`
   .selector select:focus {
     outline: none;
   }
-  .selector select option {
-    font-size: 1rem;
-  }
-  .selector select option:hover {
-    background: var(--darkVariation);
-    color: var(--lightestVariation);
-  }
-  .create-btns {
+  .editBtns {
     display: flex;
     justify-content: space-between;
   }
@@ -164,7 +186,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 500px) {
     margin-top: 40%;
     width: 95%;
-    .create-task-center {
+    .edir-task-center {
       width: 100%;
     }
   }
@@ -173,7 +195,7 @@ const Wrapper = styled.div`
     margin-top: 10%;
     width: 100%;
     max-width: 1000px;
-    .create-task-center {
+    .edit-task-center {
       margin-top: -20%;
       width: 100%;
       max-width: 450px;
@@ -193,4 +215,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default CreateTask;
+export default AdminEditTask;

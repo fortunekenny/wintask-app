@@ -18,7 +18,6 @@ export async function action({ request, params }) {
   try {
     await customFetch.patch(`/tasks/canceltask/${params.id}`, data);
     toast.success("Task cancelled");
-    // return;
     return redirect("..");
   } catch (error) {
     toast.error(error?.response?.data?.msg);

@@ -10,4 +10,5 @@ export { default as Admin } from "./Admin";
 export { default as Profile } from "./Profile";
 export { default as AdminUsersPage } from "./AdminUsersPage";
 export { default as AdminCreateTaskPage } from "./AdminCreateTask";
+export { default as AdminEditTask } from "./AdminEditTask";
 // export { default as AdminSingleUserPage } from "../components/AdminSingleUserPage";

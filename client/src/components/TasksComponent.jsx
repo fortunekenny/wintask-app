@@ -55,7 +55,7 @@ const TasksComponent = () => {
   if (tasks.length === 0) {
     return (
       <Wrapper>
-        <h2>No tasks to display.</h2>
+        <h2>No task.</h2>
       </Wrapper>
     );
   }

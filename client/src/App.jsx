@@ -16,6 +16,7 @@ import {
   Profile,
   AdminUsersPage,
   AdminCreateTaskPage,
+  AdminEditTask,
   // AdminSingleUserPage,
 } from "./pages";
 
@@ -34,6 +35,13 @@ import { action as cancelTaskAction } from "./pages/CancelTask";
 import { loader as usersLoader } from "./pages/Admin";
 import { action as adminCreateTaskAction } from "./pages/AdminCreateTask";
 // import { loader as adminSingleUserPageLoader } from "./components/AdminSingleUserTask";
+import { loader as adminCancelTaskLoader } from "./pages/CancelTask";
+import { action as adminCancelTaskAction } from "./pages/CancelTask";
+import { loader as adminRepeatTaskLoader } from "./pages/AdminRepeatTask";
+import { action as adminRepeatTaskAction } from "./pages/AdminRepeatTask";
+import { loader as adminEditTaskLoader } from "./pages/AdminEditTask";
+import { action as adminEditTaskAction } from "./pages/AdminEditTask";
+import { action as adminDeleteTaskAction } from "./pages/AdminDeleteTask";
 
 const router = createBrowserRouter([
   {
@@ -113,11 +121,29 @@ const router = createBrowserRouter([
                 element: <AdminCreateTaskPage />,
                 action: adminCreateTaskAction,
               },
-              // {
-              //   path: "adminsingleuserpage/:id",
-              //   element: <AdminSingleUserPage />,
-              //   loader: adminSingleUserPageLoader,
-              // },
+              {
+                path: "admincanceltask/:id",
+                loader: adminCancelTaskLoader,
+                action: adminCancelTaskAction,
+                element: <Navigate to=".." />,
+              },
+              {
+                path: "adminrepeattask/:id",
+                loader: adminRepeatTaskLoader,
+                action: adminRepeatTaskAction,
+                element: <Navigate to="." />,
+              },
+              {
+                path: "adminedittask/:id",
+                element: <AdminEditTask />,
+                loader: adminEditTaskLoader,
+                action: adminEditTaskAction,
+              },
+              {
+                path: "admindeletetask/:id",
+                action: adminDeleteTaskAction,
+                element: <Navigate to=".." />,
+              },
             ],
           },
         ],

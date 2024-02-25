@@ -10,27 +10,20 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
       <div className={showButton ? "button-center" : "reduce-height"}>
         <RepeatButton
           time={remainderTime}
-          // id={_id}
           show={showButton}
           actionstring={`./repeattask/${_id}`}
         />
         <CancelButton
           time={remainderTime}
-          // id={_id}
           show={showButton}
           actionstring={`./canceltask/${_id}`}
         />
         <EditButton
           time={remainderTime}
-          // id={_id}
           show={showButton}
           actionstring={`./edittask/${_id}`}
         />
-        <DeleteButton
-          // id={_id}
-          show={showButton}
-          actionstring={`./deletetask/${_id}`}
-        />
+        <DeleteButton show={showButton} actionstring={`./deletetask/${_id}`} />
       </div>
     </Wrapper>
   );
