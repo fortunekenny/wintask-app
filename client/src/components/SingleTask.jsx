@@ -78,6 +78,10 @@ const SingleTask = ({
   let tomorrow = day(futureTime).isTomorrow();
   let dur = day.duration(day(timeNow).diff(futureTime));
 
+  let CancelledTime = day(cancelledAt).format("hh:mm:ss A");
+  const expiredDays = dur.$d.days;
+  const daysPlural = expiredDays < 2 ? "day" : "days";
+
   let data = {
     cancel,
     remainingTime,
@@ -96,12 +100,13 @@ const SingleTask = ({
     yesterday,
     today,
     tomorrow,
-    dur,
+    expiredDays,
     info,
     setInfo,
     showButton,
     setShowButton,
-    cancelledAt,
+    daysPlural,
+    CancelledTime,
   };
 
   // const navigation = useNavigation();

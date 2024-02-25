@@ -1,12 +1,12 @@
 import { Form } from "react-router-dom";
 import { BsRepeat1 } from "react-icons/bs";
 
-const RepeatButton = ({ time, id, show }) => {
+const RepeatButton = ({ time, show, actionstring }) => {
   return (
     <>
       <Form
         method="post"
-        action={`./repeattask/${id}`}
+        action={actionstring}
         className={show ? "show" : "hide"}
       >
         <button

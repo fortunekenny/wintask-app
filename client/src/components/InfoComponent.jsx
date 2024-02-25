@@ -12,13 +12,12 @@ const InfoComponent = ({
   yesterday,
   today,
   tomorrow,
-  dur,
   info,
-  cancelledAt,
+  CancelledTime,
+  daysPlural,
+  expiredDays,
 }) => {
-  let CancelledTime = day(cancelledAt).format("hh:mm:ss A");
-  const daysExpired = dur.$d.days;
-  const daysPlural = daysExpired < 2 ? "day" : "days";
+  // let CancelledTime = day(cancelledAt).format("hh:mm:ss A");
   return (
     <Wrapper>
       <div className={info ? "center-info" : "hide-info"}>
@@ -32,7 +31,7 @@ const InfoComponent = ({
               ? "yesterday"
               : today
               ? "today"
-              : `${dur.$d.days} ${daysPlural} ago`}
+              : `${expiredDays} ${daysPlural} ago`}
           </span>
         </div>
         <div className={info ? "expire" : "hide"}>
@@ -54,7 +53,7 @@ const InfoComponent = ({
               ? "yesterday"
               : today
               ? "today"
-              : `${dur.$d.days} ${daysPlural} ago`}
+              : `${expiredDays} ${daysPlural} ago`}
           </span>
         </div>
       </div>

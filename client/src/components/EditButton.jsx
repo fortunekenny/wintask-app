@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { RiEditCircleLine } from "react-icons/ri";
 
-const EditButton = ({ time, id, show }) => {
+const EditButton = ({ time, show, actionstring }) => {
   return (
     <>
-      <Link to={`./edittask/${id}`} className={show ? "show" : "hide"}>
+      <Link to={actionstring} className={show ? "show" : "hide"}>
         <button
           type="button"
           disabled={time > 1}

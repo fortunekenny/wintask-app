@@ -1,12 +1,12 @@
 import { Form } from "react-router-dom";
 import { MdOutlineCancel } from "react-icons/md";
 
-const CancelButton = ({ time, id, show }) => {
+const CancelButton = ({ time, show, actionstring }) => {
   return (
     <>
       <Form
         method="post"
-        action={`./canceltask/${id}`}
+        action={actionstring}
         className={show ? "show" : "hide"}
       >
         <button
