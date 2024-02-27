@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { TimeRemainder, InfoComponent, ButtonsComponent } from "../components";
+import { InfoComponent, ButtonsComponent } from "../components";
 import ProgressBar from "./ProgressBar";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
@@ -9,6 +9,7 @@ import isTomorrow from "dayjs/plugin/isTomorrow";
 import isYesterday from "dayjs/plugin/isYesterday";
 import isToday from "dayjs/plugin/isToday";
 import duration from "dayjs/plugin/duration";
+import TimeRemainder from "./TimeRemainder";
 
 day.extend(isYesterday);
 day.extend(isTomorrow);
@@ -122,7 +123,15 @@ const SingleTask = ({
         </div>
         <div className="feature-center">
           <div className="tim-but">
-            <TimeRemainder {...data} />
+            <TimeRemainder
+              remainderTime={remainderTime}
+              futureTimeMonth={futureTimeMonth}
+              futureTimeYear={futureTimeYear}
+              ampm={ampm}
+              click={() => setShowButton(!showButton)}
+              remainingClass={remainderTime === 0 ? "hides" : "shows"}
+            />
+            {/* <TimeRemainder {...data} /> */}
             <ButtonsComponent {...data} />
           </div>
           <div className="">
@@ -196,6 +205,17 @@ const Wrapper = styled.div`
     .task-title {
       font-size: 1.953rem;
     }
+  }
+
+  // TIME REMAINDER CLASSES
+  .time-remainder {
+    cursor: pointer;
+  }
+  .time-texts:active {
+    background: var(--darkestVariation);
+  }
+  .time-texts:active h2 {
+    color: var(--lightestVariation);
   }
 `;
 

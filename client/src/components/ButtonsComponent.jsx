@@ -10,20 +10,23 @@ const ButtonsComponent = ({ remainderTime, _id, showButton }) => {
       <div className={showButton ? "button-center" : "reduce-height"}>
         <RepeatButton
           time={remainderTime}
-          show={showButton}
+          classes={showButton ? "show" : "hide"}
           actionstring={`./repeattask/${_id}`}
         />
         <CancelButton
           time={remainderTime}
-          show={showButton}
+          classes={showButton ? "show" : "hide"}
           actionstring={`./canceltask/${_id}`}
         />
         <EditButton
           time={remainderTime}
-          show={showButton}
+          classes={showButton ? "show" : "hide"}
           actionstring={`./edittask/${_id}`}
         />
-        <DeleteButton show={showButton} actionstring={`./deletetask/${_id}`} />
+        <DeleteButton
+          classes={showButton ? "show" : "hide"}
+          actionstring={`./deletetask/${_id}`}
+        />
       </div>
     </Wrapper>
   );
@@ -37,7 +40,7 @@ const Wrapper = styled.div`
     border-radius: 2rem;
     transition: var(--transition);
   }
-  .btn2 {
+  /* .btn2 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,8 +55,8 @@ const Wrapper = styled.div`
     width: 2.5rem;
     height: 2.5rem;
     color: var(--primaryColor);
-  }
-  .btn2:active {
+  } */
+  /* .btn2:active {
     color: var(--lightestVariation);
     background: var(--darkestVariation);
   }
@@ -78,23 +81,23 @@ const Wrapper = styled.div`
     width: 2.5rem;
     height: 2.5rem;
     margin-right: 1rem;
-  }
-  .disable p {
+  } */
+  /* .disable p {
     margin-bottom: 0.1rem;
     font-size: 0.65rem;
   }
   .disable svg {
     font-size: 1.5rem;
-  }
-  .reduce-height {
-    height: 0px;
-    transition: var(--transition);
-  }
+  } */
   .show {
     display: inline-block;
   }
   .hide {
     display: none;
+    transition: var(--transition);
+  }
+  .reduce-height {
+    height: 0px;
     transition: var(--transition);
   }
 `;

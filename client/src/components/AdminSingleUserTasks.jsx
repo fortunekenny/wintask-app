@@ -1,43 +1,15 @@
 import { styled } from "styled-components";
-import TimeRemainder from "./TimeRemainder";
+// import TimeRemainder from "./TimeRemainderNotUsed";
 import CancelButton from "./CancelButton";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 import RepeatButton from "./RepeatButton";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import InfoComponent from "./InfoComponent";
-/*
+import TimeRemainderAdmin from "./TimeRemainder";
 import { useState, useEffect } from "react";
-import ButtonsComponent from "./ButtonsComponent";
-import ProgressBar from "./ProgressBar";
-import isTomorrow from "dayjs/plugin/isTomorrow";
-import isYesterday from "dayjs/plugin/isYesterday";
-import isToday from "dayjs/plugin/isToday";
-import duration from "dayjs/plugin/duration";
-day.extend(isYesterday);
-day.extend(isTomorrow);
-day.extend(isToday);
-day.extend(duration);
-day.extend(advancedFormat);
-*/
-import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
-import customFetch from "../utils/customFetch";
-import { createContext, useContext, useState, useEffect } from "react";
+import AdminTaskInfo from "./AdminTaskInfo";
 
-/*export const loader = async ({ params }) => {
-  try {
-    const { data } = await customFetch.get(`/users/${params.id}`);
-    return data;
-  } catch (error) {
-    console.log(error);
-    return redirect("userpage");
-  }
-};*/
-
-/*
-
-*/
 const AdminSingleUserTasks = ({
   cancel,
   remainingTime,
@@ -53,8 +25,12 @@ const AdminSingleUserTasks = ({
   futureTimeMonth,
   futureTimeYear,
   cancelledAt,
+  ampm,
+  cancelCount,
+  repeatCount,
+  editCount,
 }) => {
-  // console.log(title);
+  // console.log(cancelCount, repeatCount, editCount);
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
@@ -89,73 +65,36 @@ const AdminSingleUserTasks = ({
   const expiredDays = dur.$d.days;
   const daysPlural = expiredDays < 2 ? "day" : "days";
 
-  let data = {
-    cancel,
-    remainingTime,
-    repeat,
-    title,
-    _id,
-    futureTime,
-    futureTimeMonth,
-    futureTimeYear,
-    lastTimeUpdatedBeforeCanceling,
-    updatedAt,
-    remainderTime,
-    expiresAt,
-    updatedTime,
-    timeNow,
-    yesterday,
-    today,
-    expiredDays,
-    tomorrow,
-    daysPlural,
-    CancelledTime,
-  };
+  remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
   // const navigation = useNavigation();
   // const isSubmitting = navigation.state === "submitting";
   return (
     <Wrapper>
       <h5>{title}</h5>
-      {/* <div className=""> */}
-      <TimeRemainder {...data} />
-      <div className="info">
-        <div className="createreapet">
-          <h5>
-            <span>{repeat ? "Repeated" : "Created"} At:</span>
-            {updatedTime}
-          </h5>
-          <span>
-            {yesterday
-              ? "yesterday"
-              : today
-              ? "today"
-              : `${expiredDays} ${daysPlural} ago`}
-          </span>
-        </div>
-        <div className="cancelexpire">
-          <h5>
-            <span>
-              {remainderTime < 1 && !cancel
-                ? "Expired "
-                : remainderTime < 1 && cancel
-                ? "Cancelled "
-                : "Expires "}
-              At:
-            </span>
-            {cancel ? CancelledTime : expiresAt}
-          </h5>
-          <span>
-            {tomorrow
-              ? "tomorrow"
-              : yesterday
-              ? "yesterday"
-              : today
-              ? "today"
-              : `${expiredDays} ${daysPlural} ago`}
-          </span>
-        </div>
-      </div>
+      <TimeRemainderAdmin
+        remainderTime={remainderTime}
+        futureTimeMonth={futureTimeMonth}
+        futureTimeYear={futureTimeYear}
+        ampm={ampm}
+      />
+      <AdminTaskInfo
+        repeat={repeat}
+        updatedTime={updatedTime}
+        yesterday={yesterday}
+        today={today}
+        expiredDays={expiredDays}
+        daysPlural={daysPlural}
+        remainderTime={remainderTime}
+        cancel={cancel}
+        CancelledTime={CancelledTime}
+        expiresAt={expiresAt}
+        tomorrow={tomorrow}
+        cancelCount={cancelCount}
+        repeatCount={repeatCount}
+        editCount={editCount}
+      />
+
       <RepeatButton
         time={remainderTime}
         actionstring={`./adminrepeattask/${_id}`}
@@ -169,17 +108,15 @@ const AdminSingleUserTasks = ({
         actionstring={`./adminedittask/${_id}`}
       />
       <DeleteButton actionstring={`./admindeletetask/${_id}`} />
-      {/* <InfoComponent {...data} /> */}
-      {/* <ButtonsComponent {...data} /> */}
-      {/* </div> */}
-      {/* <div className=""><ProgressBar {...data} /></div> */}
-      {/* </div> */}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   background: skyblue;
+  .time-remainder > h4 {
+    display: none;
+  }
 `;
 
 export default AdminSingleUserTasks;

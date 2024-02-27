@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import remainingTimeConverter from "../utils/remainingTimeConverter";
-
 const TimeRemainder = ({
   remainderTime,
   futureTimeMonth,
   futureTimeYear,
+  showButton,
+  setShowButton,
   ampm,
-  click,
-  remainingClass,
 }) => {
   remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
@@ -18,15 +17,14 @@ const TimeRemainder = ({
       futureTimeYear,
       ampm
     );
+
   return (
     <Wrapper>
       <div
         className="time-remainder"
-        onClick={click}
-        // onClick={() => setShowButton(!showButton)}
+        onClick={() => setShowButton(!showButton)}
       >
-        {/* <h4 className={remainderTime === 0 ? "hides" : "shows"}>remaining:</h4> */}
-        <h4 className={remainingClass}>remaining:</h4>
+        <h4 className={remainderTime === 0 ? "hides" : "shows"}>remaining:</h4>
         <div className="time-texts">
           <h2>
             {remainingHours < 10 ? `0${remainingHours}` : remainingHours}
@@ -50,8 +48,7 @@ const Wrapper = styled.section`
   padding-top: 0.5rem;
   position: relative;
   .time-remainder {
-    //not needed here but in single task componenet
-    /* cursor: pointer; */
+    cursor: pointer;
     width: 90%;
     margin: 0 auto;
   }
@@ -60,13 +57,12 @@ const Wrapper = styled.section`
     flex: 0 0 0;
     justify-content: center;
   }
-  // not needed here but in single task componenet
-  /* .time-texts:active {
+  .time-texts:active {
     background: var(--darkestVariation);
-  } */
-  /* .time-texts:active h2 {
+  }
+  .time-texts:active h2 {
     color: var(--lightestVariation);
-  } */
+  }
   h2 {
     margin-top: auto;
     margin-bottom: auto;
