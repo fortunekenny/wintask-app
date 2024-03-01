@@ -34,7 +34,6 @@ import { loader as cancelTaskLoader } from "./pages/CancelTask";
 import { action as cancelTaskAction } from "./pages/CancelTask";
 import { loader as usersLoader } from "./pages/Admin";
 import { action as adminCreateTaskAction } from "./pages/AdminCreateTask";
-// import { loader as adminSingleUserPageLoader } from "./components/AdminSingleUserTask";
 import { loader as adminCancelTaskLoader } from "./pages/CancelTask";
 import { action as adminCancelTaskAction } from "./pages/CancelTask";
 import { loader as adminRepeatTaskLoader } from "./pages/AdminRepeatTask";

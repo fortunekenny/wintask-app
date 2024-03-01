@@ -8,16 +8,16 @@ const UsersComponent = ({ email, name, role, tasks }) => {
   // console.log(tasks.length);
   return (
     <Wrapper>
-      {/* <Link to={`./adminsingleuserpage/${_id}`}> */}
-      <div className="">
+      {/* <div className="center"> */}
+      <div className="top-cap">
+        {/* <h4 style={{ borderRight: "2px solid var(--lightVariation)" }}> */}
         <h4>{name}</h4>
-        {/* </Link> */}
-        <h4>{email}</h4>
+        <h4 style={{ textTransform: "lowercase" }}>{email}</h4>
       </div>
-      <div className="">
-        <Link to="admincreatetask" className="lnk">
+      <div className="task">
+        {/* <Link to="admincreatetask" className="lnk">
           +
-        </Link>
+        </Link> */}
         {tasks.length === 0 ? (
           <h2>No Task</h2>
         ) : (
@@ -26,7 +26,7 @@ const UsersComponent = ({ email, name, role, tasks }) => {
           })
         )}
       </div>
-      <div className="">
+      <div className="bottom-cap">
         <h4>role: {role}</h4>
         {tasks.length > 0 ? (
           <h4>
@@ -34,12 +34,52 @@ const UsersComponent = ({ email, name, role, tasks }) => {
           </h4>
         ) : null}
       </div>
+      {/* </div> */}
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  background: skyblue;
+  background: var(--white);
+  margin: 2rem 1rem;
+  /* border-radius: 20px; */
+  .task {
+    width: 95%;
+    margin: 0px auto;
+    padding: 0px 0px;
+    /* border-bottom: 5px solid var(--white); */
+  }
 
+  .top-cap {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-items: center;
+    width: 95%;
+    margin: auto;
+    /* margin-top: 5px; */
+    padding: 0.3rem;
+    background: var(--lightestVariation);
+    border-top-right-radius: 100px;
+    border-top-left-radius: 100px;
+    overflow: hidden;
+  }
+  .bottom-cap {
+    display: grid;
+    grid-template-columns: max-content 2fr;
+    justify-items: center;
+    justify-items: center;
+    width: 95%;
+    margin: auto;
+    padding: 0.3rem;
+    background: var(--lightestVariation);
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    overflow: hidden;
+  }
+  .top-cap h4,
+  .bottom-cap h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+  }
   .lnk {
     cursor: pointer;
     display: flex;

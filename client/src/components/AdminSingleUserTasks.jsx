@@ -78,6 +78,21 @@ const AdminSingleUserTasks = ({
         futureTimeYear={futureTimeYear}
         ampm={ampm}
       />
+      <div className="admin-buttons">
+        <RepeatButton
+          time={remainderTime}
+          actionstring={`./adminrepeattask/${_id}`}
+        />
+        <CancelButton
+          time={remainderTime}
+          actionstring={`./admincanceltask/${_id}`}
+        />
+        <EditButton
+          time={remainderTime}
+          actionstring={`./adminedittask/${_id}`}
+        />
+        <DeleteButton actionstring={`./admindeletetask/${_id}`} />
+      </div>
       <AdminTaskInfo
         repeat={repeat}
         updatedTime={updatedTime}
@@ -94,28 +109,45 @@ const AdminSingleUserTasks = ({
         repeatCount={repeatCount}
         editCount={editCount}
       />
-
-      <RepeatButton
-        time={remainderTime}
-        actionstring={`./adminrepeattask/${_id}`}
-      />
-      <CancelButton
-        time={remainderTime}
-        actionstring={`./admincanceltask/${_id}`}
-      />
-      <EditButton
-        time={remainderTime}
-        actionstring={`./adminedittask/${_id}`}
-      />
-      <DeleteButton actionstring={`./admindeletetask/${_id}`} />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  background: skyblue;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  /* margin-top: 10px; */
+  /* border-bottom: 10px solid var(--white); */
+  /* row-gap: 5px; */
+  background: var(--lightestVariation);
+
+  section {
+    /* width: 80%; */
+  }
+  .time-remainder {
+    width: 100%;
+  }
+  .time-texts {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+  }
+  .time-texts h2 {
+    /* font-size: 1rem;*/
+  }
   .time-remainder > h4 {
     display: none;
+  }
+
+  .admin-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* align-content: center; */
+    justify-content: center;
+    margin: 10px auto;
+  }
+  h5 {
+    margin-bottom: 0rem;
   }
 `;
 

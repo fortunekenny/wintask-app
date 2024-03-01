@@ -20,43 +20,57 @@ const AdminTaskInfo = ({
   return (
     <Wrapper>
       <div className="info-center">
-        <div className="createreapet">
-          <h5>
-            <span>{repeat ? "Repeated" : "Created"} At:</span>
-            {updatedTime}
-          </h5>
-          <span>
-            {yesterday
-              ? "yesterday"
-              : today
-              ? "today"
-              : `${expiredDays} ${daysPlural} ago`}
-          </span>
+        <div className="createrepeat">
+          <p className="para">
+            <span className="colour">
+              {repeat ? "Repeated" : "Created"} At:{" "}
+            </span>
+            <span className="size">{updatedTime}</span>
+            <span className="colour">
+              {" "}
+              {yesterday
+                ? "yesterday"
+                : today
+                ? "today"
+                : `${expiredDays} ${daysPlural} ago`}
+            </span>
+          </p>
         </div>
         <div className="cancelexpire">
-          <h5>
-            <span>
+          <p className="para">
+            <span className="colour">
               {remainderTime < 1 && !cancel
                 ? "Expired "
                 : remainderTime < 1 && cancel
                 ? "Cancelled "
                 : "Expires "}
-              At:
+              At:{" "}
             </span>
-            {cancel ? CancelledTime : expiresAt}
-          </h5>
-          <span>
-            {tomorrow
-              ? "tomorrow"
-              : yesterday
-              ? "yesterday"
-              : today
-              ? "today"
-              : `${expiredDays} ${daysPlural} ago`}
-          </span>
-          <h5>Repeat Count: {repeatCount}</h5>
-          <h5>Edit Count: {editCount}</h5>
-          <h5>Cancel Count: {cancelCount}</h5>
+            <span className="size">{cancel ? CancelledTime : expiresAt}</span>
+            <span className="colour">
+              {" "}
+              {tomorrow
+                ? "tomorrow"
+                : yesterday
+                ? "yesterday"
+                : today
+                ? "today"
+                : `${expiredDays} ${daysPlural} ago`}
+            </span>
+          </p>
+        </div>
+        <div>
+          <p className="count">
+            <span className="colour size">
+              Repeat Count: <span>{repeatCount} </span>
+            </span>
+            <span className="colour size">
+              Edit Count: <span>{editCount}</span>
+            </span>
+            <span className="colour size">
+              Cancel Count: <span>{cancelCount}</span>
+            </span>
+          </p>
         </div>
       </div>
     </Wrapper>
@@ -65,4 +79,43 @@ const AdminTaskInfo = ({
 
 export default AdminTaskInfo;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  .info-center {
+    display: grid;
+    justify-items: center;
+  }
+  p {
+    margin-bottom: 0px;
+  }
+  .para {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    font-size: 0.8rem;
+  }
+  .size {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .colour {
+    color: var(--mediumVariation);
+  }
+  .createrepeat,
+  .cancelexpire {
+    margin: auto;
+  }
+
+  ///// COUNT SECTION //////
+
+  .count {
+    display: grid;
+    grid-template-columns: fit-content(30%) fit-content(22%) fit-content(30%);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+  }
+`;
