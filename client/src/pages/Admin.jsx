@@ -1,6 +1,7 @@
 import { Outlet, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { createContext, useContext, useState, useEffect } from "react";
+import styled from "styled-components";
 
 export const loader = async ({ request }) => {
   try {
@@ -24,14 +25,21 @@ const Admin = () => {
         users,
       }}
     >
-      <>
-        {/* <div className="outlet"> */}
+      <Wrapper>
+        {/* <div className="adminoutlet"> */}
         <Outlet />
         {/* </div> */}
-      </>
+      </Wrapper>
     </AdminContext.Provider>
   );
 };
+
+const Wrapper = styled.div`
+  width: 95%;
+  margin: 0px auto;
+  margin-top: 10px;
+  /* background: red; */
+`;
 
 export default Admin;
 export const useAdminContext = () => useContext(AdminContext);

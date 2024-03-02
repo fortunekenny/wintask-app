@@ -20,12 +20,7 @@ const TimeRemainder = ({
     );
   return (
     <Wrapper>
-      <div
-        className="time-remainder"
-        onClick={click}
-        // onClick={() => setShowButton(!showButton)}
-      >
-        {/* <h4 className={remainderTime === 0 ? "hides" : "shows"}>remaining:</h4> */}
+      <div className="time-remainder" onClick={click}>
         <h4 className={remainingClass}>remaining:</h4>
         <div className="time-texts">
           <h2>

@@ -1,20 +1,25 @@
 import { styled } from "styled-components";
 import AdminSingleUserTasks from "./AdminSingleUserTasks";
-import { Link } from "react-router-dom";
-import { CiSquarePlus } from "react-icons/ci";
-// import CreateTask from "../pages/CreateTask";
 
-const UsersComponent = ({ email, name, role, tasks }) => {
-  // console.log(tasks.length);
+const UsersComponent = ({
+  _id,
+  email,
+  name,
+  role,
+  tasks,
+  activeId,
+  toggleId,
+}) => {
+  const isActive = _id === activeId;
+
   return (
     <Wrapper>
-      {/* <div className="center"> */}
-      <div className="top-cap">
-        {/* <h4 style={{ borderRight: "2px solid var(--lightVariation)" }}> */}
+      <div className="top-cap" onClick={() => toggleId(_id)}>
         <h4>{name}</h4>
         <h4 style={{ textTransform: "lowercase" }}>{email}</h4>
       </div>
-      <div className="task">
+      {/* style={ someCondition ? { textAlign:'center', paddingTop: '50%'} : {}} */}
+      <div className="task" style={isActive ? {} : { display: "none" }}>
         {/* <Link to="admincreatetask" className="lnk">
           +
         </Link> */}
@@ -26,27 +31,32 @@ const UsersComponent = ({ email, name, role, tasks }) => {
           })
         )}
       </div>
-      <div className="bottom-cap">
+      <div className="bottom-cap" onClick={() => toggleId(_id)}>
         <h4>role: {role}</h4>
-        {tasks.length > 0 ? (
-          <h4>
-            {tasks.length} {tasks.length > 1 ? "Tasks" : "Task"}
-          </h4>
-        ) : null}
+        <h4>
+          {tasks.length} {tasks.length > 1 ? "Tasks" : "Task"}
+        </h4>
       </div>
-      {/* </div> */}
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
   background: var(--white);
-  margin: 2rem 1rem;
-  /* border-radius: 20px; */
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
   .task {
     width: 95%;
     margin: 0px auto;
     padding: 0px 0px;
-    /* border-bottom: 5px solid var(--white); */
+  }
+
+  .task h2 {
+    text-align: center;
+    background: var(--lightestVariation);
+    margin-top: 2px;
+    margin-bottom: 2px;
   }
 
   .top-cap {
@@ -55,25 +65,28 @@ const Wrapper = styled.div`
     justify-items: center;
     width: 95%;
     margin: auto;
-    /* margin-top: 5px; */
     padding: 0.3rem;
     background: var(--lightestVariation);
-    border-top-right-radius: 100px;
-    border-top-left-radius: 100px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
     overflow: hidden;
+    cursor: pointer;
   }
   .bottom-cap {
     display: grid;
-    grid-template-columns: max-content 2fr;
-    justify-items: center;
+    grid-template-columns: 1.5fr 1fr;
     justify-items: center;
     width: 95%;
     margin: auto;
     padding: 0.3rem;
     background: var(--lightestVariation);
-    border-bottom-right-radius: 100px;
-    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
     overflow: hidden;
+    cursor: pointer;
+  }
+  .bottom-cap:hover {
+    box-shadow: var(--shadowMD);
   }
   .top-cap h4,
   .bottom-cap h4 {

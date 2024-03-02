@@ -91,7 +91,6 @@ const Wrapper = styled.div`
     position: absolute;
     top: 2%;
     left: 0%;
-    /* padding-bottom: 10px; */
     color: var(--mediumVariation);
   }
   .hide-info {

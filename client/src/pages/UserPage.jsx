@@ -96,7 +96,7 @@ const Wrapper = styled.div`
     margin: 0 auto;
   }
   @media screen and (max-width: 502px) {
-    width: 100vw;
+    width: 100%;
     margin: 0 auto;
   }
 `;

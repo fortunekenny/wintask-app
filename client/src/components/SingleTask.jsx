@@ -131,7 +131,6 @@ const SingleTask = ({
               click={() => setShowButton(!showButton)}
               remainingClass={remainderTime === 0 ? "hides" : "shows"}
             />
-            {/* <TimeRemainder {...data} /> */}
             <ButtonsComponent {...data} />
           </div>
           <div className="">

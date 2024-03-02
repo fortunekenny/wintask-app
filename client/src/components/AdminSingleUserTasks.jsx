@@ -30,7 +30,6 @@ const AdminSingleUserTasks = ({
   repeatCount,
   editCount,
 }) => {
-  // console.log(cancelCount, repeatCount, editCount);
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
@@ -117,11 +116,9 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-  /* margin-top: 10px; */
-  /* border-bottom: 10px solid var(--white); */
-  /* row-gap: 5px; */
+  margin-top: 2px;
+  margin-bottom: 2px;
   background: var(--lightestVariation);
-
   section {
     /* width: 80%; */
   }
@@ -142,7 +139,6 @@ const Wrapper = styled.div`
   .admin-buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* align-content: center; */
     justify-content: center;
     margin: 10px auto;
   }

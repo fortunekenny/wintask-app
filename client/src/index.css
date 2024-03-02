@@ -52,7 +52,8 @@ body {
   font-weight: 400;
   line-height: var(--lineHeightBody);
   color: var(--darkestVariation);
-  /* width: 100vw; */
+  /* width: 90%; */
+  /* margin: auto; */
 }
 
 p {

@@ -76,7 +76,7 @@ const Wrapper = styled.div`
   }
   @media screen and (max-width: 502px) {
     margin: 0 auto;
-    max-width: 100vw;
+    width: 100%;
     .nav-center {
       /* width: 100%; */
       /* margin: 0 auto; */

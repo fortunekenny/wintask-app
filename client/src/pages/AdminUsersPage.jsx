@@ -7,17 +7,23 @@ import { toast } from "react-toastify";
 
 const AdminUsersPage = () => {
   const { users } = useAdminContext();
-  // console.log(users);
+
+  const [activeId, setActiveId] = useState(null);
+
+  const toggleId = (id) => {
+    const newActiveId = id === activeId ? null : id;
+    setActiveId(newActiveId);
+  };
   return (
     <>
-      {/* <h3>AdminUserPage</h3> */}
       {users.map((user) => {
-        // console.log(user.tasks.length);
         return (
           <UsersComponent
             key={user._id}
             {...user}
             taskLength={user.tasks.length}
+            activeId={activeId}
+            toggleId={toggleId}
           />
         );
       })}
