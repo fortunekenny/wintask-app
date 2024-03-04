@@ -145,6 +145,43 @@ const Wrapper = styled.div`
   h5 {
     margin-bottom: 0rem;
   }
+
+  @media screen and (min-width: 502px) {
+  }
+  @media screen and (min-width: 676px) {
+    .admin-buttons {
+      /* background: blue; */
+      width: 50%;
+      height: 80%;
+    }
+    .admin-buttons div form button {
+      /* background: yellow; */
+      /* font-size: ; */
+      width: 90%;
+      height: 70%;
+      margin-right: 0px;
+    }
+    .admin-buttons div form button svg {
+      font-size: 2rem;
+    }
+    .admin-buttons div form button p {
+      font-size: 1rem;
+    }
+    .admin-buttons div a button {
+      display: block;
+      width: 90%;
+      height: 70%;
+      margin-right: 0px;
+    }
+    .admin-buttons div a button svg {
+      font-size: 2rem;
+    }
+    .admin-buttons div a button p {
+      font-size: 1rem;
+    }
+  }
+  @media screen and (min-width: 990px) {
+  }
 `;
 
 export default AdminSingleUserTasks;

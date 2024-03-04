@@ -59,17 +59,11 @@ const AdminTaskInfo = ({
             </span>
           </p>
         </div>
-        <div>
-          <p className="count">
-            <span className="colour size">
-              Repeat Count: <span>{repeatCount} </span>
-            </span>
-            <span className="colour size">
-              Edit Count: <span>{editCount}</span>
-            </span>
-            <span className="colour size">
-              Cancel Count: <span>{cancelCount}</span>
-            </span>
+        <div className="count">
+          <p>
+            <span className="colour size">Repeat Count: {repeatCount}</span>
+            <span className="colour size">Edit Count: {editCount}</span>
+            <span className="colour size">Cancel Count: {cancelCount}</span>
           </p>
         </div>
       </div>
@@ -86,7 +80,7 @@ const Wrapper = styled.div`
   padding-right: 5px;
   .info-center {
     display: grid;
-    justify-items: center;
+    /* justify-items: start; */
   }
   p {
     margin-bottom: 0px;
@@ -108,14 +102,36 @@ const Wrapper = styled.div`
   .cancelexpire {
     margin: auto;
   }
+  .cancelexpire {
+    margin-top: 5px;
+  }
 
   ///// COUNT SECTION //////
-
   .count {
+    margin-top: 15px;
+  }
+  .count p {
     display: grid;
     grid-template-columns: fit-content(30%) fit-content(22%) fit-content(30%);
     justify-content: space-evenly;
-    justify-items: center;
-    align-items: center;
+    /* justify-items: center; */
+    /* align-items: center; */
+  }
+  @media screen and (min-width: 676px) {
+    width: 90%;
+    .info-center {
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+    }
+    .count p {
+      grid-template-columns: fit-content(30%) fit-content(25%) fit-content(30%);
+    }
+    .count p .size {
+      font-size: 1rem;
+    }
+    /* .count p {
+      /* grid-column: 2; 
+      grid-column: 1 / 3;
+    } */
   }
 `;

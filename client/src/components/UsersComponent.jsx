@@ -15,8 +15,16 @@ const UsersComponent = ({
   return (
     <Wrapper>
       <div className="top-cap" onClick={() => toggleId(_id)}>
-        <h4>{name}</h4>
-        <h4 style={{ textTransform: "lowercase" }}>{email}</h4>
+        <h4 style={{ paddingLeft: "20px" }}>{name}</h4>
+        <h4
+          style={{
+            textTransform: "lowercase",
+            justifySelf: "end",
+            paddingRight: "20px",
+          }}
+        >
+          {email}
+        </h4>
       </div>
       {/* style={ someCondition ? { textAlign:'center', paddingTop: '50%'} : {}} */}
       <div className="task" style={isActive ? {} : { display: "none" }}>
@@ -32,8 +40,10 @@ const UsersComponent = ({
         )}
       </div>
       <div className="bottom-cap" onClick={() => toggleId(_id)}>
-        <h4>role: {role}</h4>
-        <h4>
+        <h4 style={{ justifySelf: "start", paddingLeft: "20px" }}>
+          role: {role}
+        </h4>
+        <h4 style={{ paddingRight: "20px" }}>
           {tasks.length} {tasks.length > 1 ? "Tasks" : "Task"}
         </h4>
       </div>
@@ -46,6 +56,20 @@ const Wrapper = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
+
+  .top-cap {
+    display: grid;
+    grid-template-columns: auto 2fr;
+    justify-items: center;
+    width: 95%;
+    margin: auto;
+    padding: 0.3rem;
+    background: var(--lightestVariation);
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
+    overflow: hidden;
+    cursor: pointer;
+  }
   .task {
     width: 95%;
     margin: 0px auto;
@@ -59,22 +83,9 @@ const Wrapper = styled.div`
     margin-bottom: 2px;
   }
 
-  .top-cap {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    justify-items: center;
-    width: 95%;
-    margin: auto;
-    padding: 0.3rem;
-    background: var(--lightestVariation);
-    border-top-right-radius: 50px;
-    border-top-left-radius: 50px;
-    overflow: hidden;
-    cursor: pointer;
-  }
   .bottom-cap {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.5fr auto;
     justify-items: center;
     width: 95%;
     margin: auto;
@@ -111,6 +122,9 @@ const Wrapper = styled.div`
   .lnk:hover {
     background: var(--darkVariation);
     box-shadow: var(--shadowXLG);
+  }
+
+  @media screen and (max-width: 400px) {
   }
 `;
 

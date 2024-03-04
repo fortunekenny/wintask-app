@@ -86,6 +86,7 @@ const Wrapper = styled.section`
   .hides {
     display: none;
   }
+
   @media screen and (max-width: 502px) {
     h2 {
       font-size: 2rem;

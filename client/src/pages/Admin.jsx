@@ -39,6 +39,9 @@ const Wrapper = styled.div`
   margin: 0px auto;
   margin-top: 10px;
   /* background: red; */
+  @media screen and (min-width: 676px) {
+    max-width: 600px;
+  }
 `;
 
 export default Admin;

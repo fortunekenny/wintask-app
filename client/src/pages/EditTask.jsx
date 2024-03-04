@@ -185,7 +185,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 500px) {
     margin-top: 40%;
     width: 95%;
-    .edir-task-center {
+    .edit-task-center {
       width: 100%;
     }
   }

@@ -88,7 +88,7 @@ const Wrapper = styled.div`
     max-width: 600px;
     margin: auto;
     margin-top: 5rem;
-    padding: 0.5rem 0.5rem;
+    /* padding: 0.5rem 0.5rem; */
     .nav-center {
       /* width: 100%; */
       /* margin-top: 5rem;
