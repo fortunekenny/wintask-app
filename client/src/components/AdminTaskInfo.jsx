@@ -59,13 +59,15 @@ const AdminTaskInfo = ({
             </span>
           </p>
         </div>
-        <div className="count">
-          <p>
-            <span className="colour size">Repeat Count: {repeatCount}</span>
-            <span className="colour size">Edit Count: {editCount}</span>
-            <span className="colour size">Cancel Count: {cancelCount}</span>
-          </p>
-        </div>
+        {/* <div className="count"> */}
+        <p className="count">
+          <span className=" colour size spacing">
+            Repeat Count: {repeatCount}
+          </span>
+          <span className="colour size spacing">Edit Count: {editCount}</span>
+          <span className="colour size">Cancel Count: {cancelCount}</span>
+        </p>
+        {/* </div> */}
       </div>
     </Wrapper>
   );
@@ -78,8 +80,11 @@ const Wrapper = styled.div`
   margin-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
+  width: 70%;
   .info-center {
     display: grid;
+    /* grid-template-columns: max-content; */
+    /* width: 100%; */
     /* justify-items: start; */
   }
   p {
@@ -108,30 +113,27 @@ const Wrapper = styled.div`
 
   ///// COUNT SECTION //////
   .count {
-    margin-top: 15px;
+    margin-top: 10px;
+    width: 100%;
   }
-  .count p {
-    display: grid;
-    grid-template-columns: fit-content(30%) fit-content(22%) fit-content(30%);
-    justify-content: space-evenly;
-    /* justify-items: center; */
-    /* align-items: center; */
+  .spacing {
+    padding-right: 15%;
   }
   @media screen and (min-width: 676px) {
-    width: 90%;
+    width: 84%;
     .info-center {
       grid-template-columns: 1fr 1fr;
       justify-items: center;
     }
-    .count p {
-      grid-template-columns: fit-content(30%) fit-content(25%) fit-content(30%);
+
+    p {
+      grid-column: 1 / 3;
     }
-    .count p .size {
+    .count p {
       font-size: 1rem;
     }
-    /* .count p {
-      /* grid-column: 2; 
-      grid-column: 1 / 3;
-    } */
+    .spacing {
+      padding-right: 15%;
+    }
   }
 `;
