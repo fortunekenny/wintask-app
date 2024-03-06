@@ -80,12 +80,13 @@ const Wrapper = styled.div`
   margin-bottom: 10px;
   padding-left: 5px;
   padding-right: 5px;
-  width: 70%;
+  width: 95%;
   .info-center {
     display: grid;
-    /* grid-template-columns: max-content; */
+    /* grid-template-columns: fit-content(100%); */
     /* width: 100%; */
-    /* justify-items: start; */
+    /* justify-items: center; */
+    /* margin: auto; */
   }
   p {
     margin-bottom: 0px;
@@ -114,10 +115,26 @@ const Wrapper = styled.div`
   ///// COUNT SECTION //////
   .count {
     margin-top: 10px;
-    width: 100%;
+    /* width: 100%; */
+    text-align: center;
+    /* font-size: 0.2rem; */
+  }
+  .count span {
+    font-size: 0.65rem;
   }
   .spacing {
-    padding-right: 15%;
+    padding-right: 3%;
+  }
+  @media screen and (min-width: 350px) {
+    .para {
+      font-size: 0.9rem;
+    }
+    .size {
+      font-size: 0.9rem;
+    }
+    .count span {
+      font-size: 0.8rem;
+    }
   }
   @media screen and (min-width: 676px) {
     width: 84%;
@@ -129,7 +146,7 @@ const Wrapper = styled.div`
     p {
       grid-column: 1 / 3;
     }
-    .count p {
+    .count span {
       font-size: 1rem;
     }
     .spacing {
