@@ -82,7 +82,7 @@ const Wrapper = styled.div`
   padding-right: 5px;
   width: 95%;
   .info-center {
-    display: grid;
+    /* display: grid; */
     /* grid-template-columns: fit-content(100%); */
     /* width: 100%; */
     /* justify-items: center; */
@@ -93,7 +93,7 @@ const Wrapper = styled.div`
   }
   .para {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto;
     justify-items: center;
     font-size: 0.8rem;
   }
@@ -137,10 +137,10 @@ const Wrapper = styled.div`
     }
   }
   @media screen and (min-width: 676px) {
-    width: 84%;
+    width: 85%;
     .info-center {
-      grid-template-columns: 1fr 1fr;
-      justify-items: center;
+      /* grid-template-columns: 1fr 1fr 1fr; */
+      /* justify-items: center; */
     }
 
     p {
