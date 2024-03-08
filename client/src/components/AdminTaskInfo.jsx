@@ -25,7 +25,7 @@ const AdminTaskInfo = ({
             <span className="colour">
               {repeat ? "Repeated" : "Created"} At:{" "}
             </span>
-            <span className="size">{updatedTime}</span>
+            <span className="size"> {updatedTime}</span>
             <span className="colour">
               {" "}
               {yesterday
@@ -139,8 +139,12 @@ const Wrapper = styled.div`
   @media screen and (min-width: 676px) {
     width: 85%;
     .info-center {
-      /* grid-template-columns: 1fr 1fr 1fr; */
+      display: grid;
+      grid-template-columns: max-content max-content;
       /* justify-items: center; */
+      justify-content: space-between;
+      /* width: 100%; */
+      /* max-width: 100%; */
     }
 
     p {
