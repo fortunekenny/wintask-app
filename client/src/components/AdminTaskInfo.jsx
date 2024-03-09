@@ -120,11 +120,11 @@ const Wrapper = styled.div`
   @media screen and (max-width: 675px) {
     .info-center {
       width: 85%;
-      min-width: 183px;
+      /* min-width: 183px; */
     }
     .count {
       width: 70%;
-      min-width: 183px;
+      /* min-width: 183px; */
       margin: auto;
       margin-top: 0.5rem;
     }
