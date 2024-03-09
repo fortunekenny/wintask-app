@@ -23,7 +23,7 @@ const AdminTaskInfo = ({
         <div className="createrepeat">
           <p className="unbold">{repeat ? "Repeated" : "Created"} At: </p>
           <span className="bold"> {updatedTime}</span>
-          <p className="unbold">
+          <p className="unbold days">
             {yesterday
               ? "yesterday"
               : today
@@ -41,7 +41,7 @@ const AdminTaskInfo = ({
             At:{" "}
           </p>
           <span className="bold">{cancel ? CancelledTime : expiresAt}</span>
-          <p className="unbold">
+          <p className="unbold days">
             {" "}
             {tomorrow
               ? "tomorrow"
@@ -84,11 +84,11 @@ const Wrapper = styled.div`
   .createrepeat,
   .cancelexpire {
     display: grid;
-    /* grid-template-rows: auto auto auto; */
-    grid-template-rows: max-content max-content max-content;
+    grid-template-rows: auto auto auto;
     grid-auto-flow: column;
-    justify-items: center;
-    width: 80%;
+    justify-content: center;
+    justify-items: start;
+    width: 90%;
   }
   p {
     margin-bottom: 0px;
@@ -109,6 +109,7 @@ const Wrapper = styled.div`
     grid-auto-flow: column;
     justify-items: center;
     margin-top: 0.5rem;
+    width: 100%;
   }
   .count p {
     text-align: center;
@@ -120,30 +121,44 @@ const Wrapper = styled.div`
     font-size: 1.5rem;
   }
 
-  @media screen and (max-width: 675px) {
+  /* @media screen and (max-width: 675px) {
     .info-center {
-      width: 85%;
-      /* min-width: 183px; */
+      width: 100%;
+      /* min-width: 183px; 
     }
     .count {
-      width: 70%;
-      /* min-width: 183px; */
+      width: 100%;
+      /* min-width: 183px; 
       margin: auto;
       margin-top: 0.5rem;
     }
-  }
+  } */
 
   @media screen and (min-width: 676px) {
     width: 85%;
+
     .info-center {
       width: 85%;
     }
+    .createrepeat,
+    .cancelexpire {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+      /* grid-template-rows: 1fr 1fr; */
+      grid-auto-flow: row;
+      /* justify-content: center; */
+      justify-items: center;
+      width: 99%;
+    }
 
     .bold {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
     .unbold {
-      font-size: 1rem;
+      font-size: 0.9rem;
+    }
+    .days {
+      grid-column: 1/-1;
     }
     .count {
       width: 80%;

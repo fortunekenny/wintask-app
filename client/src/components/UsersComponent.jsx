@@ -87,7 +87,7 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr auto;
     justify-items: center;
-    width: 95%;
+    /* width: 95%; */
     margin: auto;
     padding: 0.3rem;
     background: var(--lightestVariation);
