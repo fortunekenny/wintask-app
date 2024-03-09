@@ -21,53 +21,45 @@ const AdminTaskInfo = ({
     <Wrapper>
       <div className="info-center">
         <div className="createrepeat">
-          <p className="para">
-            <span className="colour">
-              {repeat ? "Repeated" : "Created"} At:{" "}
-            </span>
-            <span className="size"> {updatedTime}</span>
-            <span className="colour">
-              {" "}
-              {yesterday
-                ? "yesterday"
-                : today
-                ? "today"
-                : `${expiredDays} ${daysPlural} ago`}
-            </span>
+          <p className="unbold">{repeat ? "Repeated" : "Created"} At: </p>
+          <span className="bold"> {updatedTime}</span>
+          <p className="unbold">
+            {yesterday
+              ? "yesterday"
+              : today
+              ? "today"
+              : `${expiredDays} ${daysPlural} ago`}
           </p>
         </div>
         <div className="cancelexpire">
-          <p className="para">
-            <span className="colour">
-              {remainderTime < 1 && !cancel
-                ? "Expired "
-                : remainderTime < 1 && cancel
-                ? "Cancelled "
-                : "Expires "}
-              At:{" "}
-            </span>
-            <span className="size">{cancel ? CancelledTime : expiresAt}</span>
-            <span className="colour">
-              {" "}
-              {tomorrow
-                ? "tomorrow"
-                : yesterday
-                ? "yesterday"
-                : today
-                ? "today"
-                : `${expiredDays} ${daysPlural} ago`}
-            </span>
+          <p className="unbold">
+            {remainderTime < 1 && !cancel
+              ? "Expired "
+              : remainderTime < 1 && cancel
+              ? "Cancelled "
+              : "Expires "}
+            At:{" "}
+          </p>
+          <span className="bold">{cancel ? CancelledTime : expiresAt}</span>
+          <p className="unbold">
+            {" "}
+            {tomorrow
+              ? "tomorrow"
+              : yesterday
+              ? "yesterday"
+              : today
+              ? "today"
+              : `${expiredDays} ${daysPlural} ago`}
           </p>
         </div>
-        {/* <div className="count"> */}
-        <p className="count">
-          <span className=" colour size spacing">
-            Repeat Count: {repeatCount}
-          </span>
-          <span className="colour size spacing">Edit Count: {editCount}</span>
-          <span className="colour size">Cancel Count: {cancelCount}</span>
-        </p>
-        {/* </div> */}
+      </div>
+      <div className="count">
+        <span className="">{editCount}</span>
+        <p className="">Edit Count</p>
+        <span className="">{cancelCount}</span>
+        <p className="">Cancel Count</p>
+        <span className="">{repeatCount}</span>
+        <p className="">Repeat Count</p>
       </div>
     </Wrapper>
   );
@@ -82,79 +74,84 @@ const Wrapper = styled.div`
   padding-right: 5px;
   width: 95%;
   .info-center {
-    /* display: grid; */
-    /* grid-template-columns: fit-content(100%); */
-    /* width: 100%; */
-    /* justify-items: center; */
-    /* margin: auto; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+  }
+  .createrepeat,
+  .cancelexpire {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-auto-flow: column;
   }
   p {
     margin-bottom: 0px;
   }
-  .para {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-items: center;
-    font-size: 0.8rem;
-  }
-  .size {
+  .bold {
     font-size: 0.8rem;
     font-weight: 600;
   }
-  .colour {
+  .unbold {
     color: var(--mediumVariation);
-  }
-  .createrepeat,
-  .cancelexpire {
-    margin: auto;
-  }
-  .cancelexpire {
-    margin-top: 5px;
+    font-size: 0.8rem;
   }
 
   ///// COUNT SECTION //////
   .count {
-    margin-top: 10px;
-    /* width: 100%; */
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+    justify-items: center;
+    margin-top: 0.5rem;
+  }
+  .count p {
     text-align: center;
-    /* font-size: 0.2rem; */
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--mediumVariation);
   }
   .count span {
-    font-size: 0.65rem;
+    font-size: 1.5rem;
   }
-  .spacing {
-    padding-right: 3%;
+
+  @media screen and (max-width: 675px) {
+    .info-center {
+      width: 85%;
+      min-width: 183px;
+    }
+    .count {
+      width: 70%;
+      min-width: 183px;
+      margin: auto;
+      margin-top: 0.5rem;
+    }
   }
-  @media screen and (min-width: 350px) {
-    .para {
-      font-size: 0.9rem;
-    }
-    .size {
-      font-size: 0.9rem;
-    }
-    .count span {
-      font-size: 0.8rem;
-    }
-  }
+
   @media screen and (min-width: 676px) {
     width: 85%;
     .info-center {
-      display: grid;
-      grid-template-columns: max-content max-content;
-      /* justify-items: center; */
-      justify-content: space-between;
-      /* width: 100%; */
-      /* max-width: 100%; */
+      width: 85%;
     }
 
-    p {
-      grid-column: 1 / 3;
-    }
-    .count span {
+    .bold {
       font-size: 1rem;
     }
-    .spacing {
-      padding-right: 15%;
+    .unbold {
+      font-size: 1rem;
+    }
+    .count {
+      width: 80%;
+      margin: auto;
+      margin-top: 0.5rem;
+    }
+    .count p {
+      font-size: 1rem;
+    }
+    .count span {
+      font-size: 1.75rem;
     }
   }
 `;
