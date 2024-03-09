@@ -84,8 +84,11 @@ const Wrapper = styled.div`
   .createrepeat,
   .cancelexpire {
     display: grid;
-    grid-template-rows: auto auto auto;
+    /* grid-template-rows: auto auto auto; */
+    grid-template-rows: max-content max-content max-content;
     grid-auto-flow: column;
+    justify-items: center;
+    width: 80%;
   }
   p {
     margin-bottom: 0px;
