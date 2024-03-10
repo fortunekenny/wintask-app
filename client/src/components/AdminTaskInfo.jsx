@@ -116,7 +116,7 @@ const Wrapper = styled.div`
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--mediumVariation);
-    width: 60%;
+    width: 100%;
   }
   .count span {
     font-size: 1.5rem;
@@ -136,10 +136,10 @@ const Wrapper = styled.div`
   } */
 
   @media screen and (min-width: 676px) {
-    width: 85%;
+    width: 90%;
 
     .info-center {
-      width: 85%;
+      width: 90%;
     }
     .createrepeat,
     .cancelexpire {
@@ -162,7 +162,7 @@ const Wrapper = styled.div`
       grid-column: 1/-1;
     }
     .count {
-      width: 80%;
+      width: 90%;
       margin: auto;
       margin-top: 0.5rem;
     }
