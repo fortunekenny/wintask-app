@@ -116,6 +116,7 @@ const Wrapper = styled.div`
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--mediumVariation);
+    width: 60%;
   }
   .count span {
     font-size: 1.5rem;

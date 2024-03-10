@@ -86,7 +86,7 @@ const Wrapper = styled.div`
   .bottom-cap {
     display: grid;
     grid-template-columns: 1fr auto;
-    justify-items: center;
+    /* justify-items: center; */
     width: 95%;
     margin: auto;
     padding: 0.3rem;
