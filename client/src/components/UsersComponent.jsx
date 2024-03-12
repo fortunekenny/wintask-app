@@ -40,10 +40,10 @@ const UsersComponent = ({
         )}
       </div>
       <div className="bottom-cap" onClick={() => toggleId(_id)}>
-        <h4 style={{ justifySelf: "start", paddingLeft: "20px" }}>
+        <h4 style={{ justifySelf: "start", paddingLeft: "20px", width: "70%" }}>
           role: {role}
         </h4>
-        <h4 style={{ paddingRight: "20px" }}>
+        <h4 style={{ paddingRight: "20px", width: "100%", textAlign: "end" }}>
           {tasks.length} {tasks.length > 1 ? "Tasks" : "Task"}
         </h4>
       </div>
