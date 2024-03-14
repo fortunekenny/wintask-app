@@ -40,17 +40,8 @@ const UsersComponent = ({
         )}
       </div>
       <div className="bottom-cap" onClick={() => toggleId(_id)}>
-        <h4 style={{ textAlign: "start", paddingLeft: "20px", width: "175px" }}>
-          role: {role}
-        </h4>
-        <h4
-          style={{
-            paddingRight: "10px",
-            marginRight: "30px",
-            width: "80px",
-            textAlign: "end",
-          }}
-        >
+        <h4 className="adjustRoleText">role: {role}</h4>
+        <h4 className="adjustTaskText">
           {tasks.length} {tasks.length > 1 ? "Tasks" : "Task"}
         </h4>
       </div>
@@ -93,7 +84,6 @@ const Wrapper = styled.div`
   .bottom-cap {
     display: grid;
     grid-template-columns: 1fr auto;
-    /* justify-items: center; */
     width: 95%;
     margin: auto;
     padding: 0.3rem;
@@ -110,6 +100,17 @@ const Wrapper = styled.div`
   .bottom-cap h4 {
     font-size: 1.3rem;
     margin-bottom: 0;
+  }
+  .adjustTaskText {
+    padding-right: 20px;
+    /* margin-right: 30px; */
+    width: 100px;
+    text-align: end;
+  }
+  .adjustRoleText {
+    text-align: start;
+    padding-left: 20px;
+    width: 170px;
   }
   .lnk {
     cursor: pointer;
@@ -131,7 +132,27 @@ const Wrapper = styled.div`
     box-shadow: var(--shadowXLG);
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 300px) {
+    .top-cap h4,
+    .bottom-cap h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0;
+    }
+    .adjustTaskText {
+      padding-right: 20px;
+      margin-right: 0px;
+      width: 6rem;
+      text-align: end;
+    }
+    .adjustRoleText {
+      text-align: start;
+      padding-left: 20px;
+      width: 150px;
+    }
+    .bottom-cap {
+      display: grid;
+      grid-template-columns: 1fr max-content;
+    }
   }
 `;
 
