@@ -29,10 +29,14 @@ const AdminSingleUserTasks = ({
   cancelCount,
   repeatCount,
   editCount,
+  activeTaskId,
+  toggleTaskId,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
+  const isActiveTask = _id === activeTaskId;
+  console.log(isActiveTask);
 
   useEffect(() => {
     let remainder = setInterval(() => {
@@ -69,45 +73,47 @@ const AdminSingleUserTasks = ({
   // const navigation = useNavigation();
   // const isSubmitting = navigation.state === "submitting";
   return (
-    <Wrapper>
-      <h5>{title}</h5>
-      <TimeRemainderAdmin
-        remainderTime={remainderTime}
-        futureTimeMonth={futureTimeMonth}
-        futureTimeYear={futureTimeYear}
-        ampm={ampm}
-      />
-      <div className="admin-buttons">
-        <RepeatButton
-          time={remainderTime}
-          actionstring={`./adminrepeattask/${_id}`}
+    <Wrapper onClick={() => toggleTaskId(_id)}>
+      <h5 onClick={() => toggleTaskId(_id)}>{title}</h5>
+      <article style={isActiveTask ? {} : { display: "none" }}>
+        <TimeRemainderAdmin
+          remainderTime={remainderTime}
+          futureTimeMonth={futureTimeMonth}
+          futureTimeYear={futureTimeYear}
+          ampm={ampm}
         />
-        <CancelButton
-          time={remainderTime}
-          actionstring={`./admincanceltask/${_id}`}
+        <div className="admin-buttons">
+          <RepeatButton
+            time={remainderTime}
+            actionstring={`./adminrepeattask/${_id}`}
+          />
+          <CancelButton
+            time={remainderTime}
+            actionstring={`./admincanceltask/${_id}`}
+          />
+          <EditButton
+            time={remainderTime}
+            actionstring={`./adminedittask/${_id}`}
+          />
+          <DeleteButton actionstring={`./admindeletetask/${_id}`} />
+        </div>
+        <AdminTaskInfo
+          repeat={repeat}
+          updatedTime={updatedTime}
+          yesterday={yesterday}
+          today={today}
+          expiredDays={expiredDays}
+          daysPlural={daysPlural}
+          remainderTime={remainderTime}
+          cancel={cancel}
+          CancelledTime={CancelledTime}
+          expiresAt={expiresAt}
+          tomorrow={tomorrow}
+          cancelCount={cancelCount}
+          repeatCount={repeatCount}
+          editCount={editCount}
         />
-        <EditButton
-          time={remainderTime}
-          actionstring={`./adminedittask/${_id}`}
-        />
-        <DeleteButton actionstring={`./admindeletetask/${_id}`} />
-      </div>
-      <AdminTaskInfo
-        repeat={repeat}
-        updatedTime={updatedTime}
-        yesterday={yesterday}
-        today={today}
-        expiredDays={expiredDays}
-        daysPlural={daysPlural}
-        remainderTime={remainderTime}
-        cancel={cancel}
-        CancelledTime={CancelledTime}
-        expiresAt={expiresAt}
-        tomorrow={tomorrow}
-        cancelCount={cancelCount}
-        repeatCount={repeatCount}
-        editCount={editCount}
-      />
+      </article>
     </Wrapper>
   );
 };

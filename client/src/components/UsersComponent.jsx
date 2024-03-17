@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import AdminSingleUserTasks from "./AdminSingleUserTasks";
+import { useState } from "react";
 
 const UsersComponent = ({
   _id,
@@ -11,6 +12,12 @@ const UsersComponent = ({
   toggleId,
 }) => {
   const isActive = _id === activeId;
+
+  const [activeTaskId, setActiveTaskId] = useState(null);
+  const toggleTaskId = (id) => {
+    const newActiveTaskId = id === activeTaskId ? null : id;
+    setActiveTaskId(newActiveTaskId);
+  };
 
   return (
     <Wrapper>
@@ -35,7 +42,14 @@ const UsersComponent = ({
           <h2>No Task</h2>
         ) : (
           tasks.map((task) => {
-            return <AdminSingleUserTasks key={task._id} {...task} />;
+            return (
+              <AdminSingleUserTasks
+                key={task._id}
+                {...task}
+                activeTaskId={activeTaskId}
+                toggleTaskId={toggleTaskId}
+              />
+            );
           })
         )}
       </div>
