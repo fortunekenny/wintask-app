@@ -31,12 +31,12 @@ const AdminSingleUserTasks = ({
   editCount,
   activeTaskId,
   toggleTaskId,
+  isActive,
 }) => {
   let [remainderTime, setRemainderTime] = useState(remainingTime);
   let timeNow = new Date();
   futureTime = new Date(futureTime);
-  const isActiveTask = _id === activeTaskId;
-  console.log(isActiveTask);
+  let isActiveTask = _id === activeTaskId;
 
   useEffect(() => {
     let remainder = setInterval(() => {
@@ -73,9 +73,13 @@ const AdminSingleUserTasks = ({
   // const navigation = useNavigation();
   // const isSubmitting = navigation.state === "submitting";
   return (
-    <Wrapper onClick={() => toggleTaskId(_id)}>
-      <h5 onClick={() => toggleTaskId(_id)}>{title}</h5>
-      <article style={isActiveTask ? {} : { display: "none" }}>
+    <>
+      <div className="name" onClick={() => toggleTaskId(_id)}>
+        <h5>{title}</h5>
+      </div>
+      <Wrapper style={isActiveTask ? {} : { display: "none" }}>
+        {/* <h5>{title}</h5> */}
+        {/* <article style={isActiveTask ? {} : { display: "none" }}> */}
         <TimeRemainderAdmin
           remainderTime={remainderTime}
           futureTimeMonth={futureTimeMonth}
@@ -113,8 +117,9 @@ const AdminSingleUserTasks = ({
           repeatCount={repeatCount}
           editCount={editCount}
         />
-      </article>
-    </Wrapper>
+        {/* </article> */}
+      </Wrapper>
+    </>
   );
 };
 
@@ -122,9 +127,11 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  /* margin-top: 2px; */
+  /* margin-bottom: 2px; */
   background: var(--lightestVariation);
+  width: 95%;
+  margin: auto;
   section {
     /* width: 80%; */
   }
@@ -155,10 +162,18 @@ const Wrapper = styled.div`
   @media screen and (min-width: 502px) {
   }
   @media screen and (min-width: 676px) {
+    /* .name {
+      background: var(--lightestVariation);
+      text-align: center;
+    } */
+    /* .name h5 {
+      margin-bottom: 0px;
+    } */
     .admin-buttons {
       /* background: blue; */
       width: 50%;
-      height: 80%;
+      /* height: 80%; */
+      margin: 10px auto;
     }
     .admin-buttons div form button {
       /* background: yellow; */

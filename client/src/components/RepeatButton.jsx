@@ -20,6 +20,7 @@ const RepeatButton = ({ time, classes, actionstring }) => {
 };
 
 const Wrapper = styled.div`
+  /* height: auto; */
   .btn2 {
     display: flex;
     flex-direction: column;

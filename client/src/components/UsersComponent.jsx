@@ -48,6 +48,7 @@ const UsersComponent = ({
                 {...task}
                 activeTaskId={activeTaskId}
                 toggleTaskId={toggleTaskId}
+                isActive={isActive}
               />
             );
           })
@@ -93,6 +94,18 @@ const Wrapper = styled.div`
     background: var(--lightestVariation);
     margin-top: 2px;
     margin-bottom: 2px;
+  }
+  .task .name {
+    background: var(--lightestVariation);
+    text-align: center;
+    margin: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    /* width: 95%; */
+    cursor: pointer;
+  }
+  .task .name h5 {
+    margin-bottom: 0px;
   }
 
   .bottom-cap {
