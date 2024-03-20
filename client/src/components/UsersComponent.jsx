@@ -69,7 +69,44 @@ const Wrapper = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
+  /* 
+.item {
+     display: none;
+}
+.item {
+     display: none;
+}
 
+.item:hover {
+     display: block;
+     animation: fade_in_show 0.5s
+}
+
+@keyframes fade_in_show {
+     0% {
+          opacity: 0;
+          transform: scale(0)
+     }
+
+     100% {
+          opacity: 1;
+          transform: scale(1)
+  
+.item:hover {
+     display: block;
+     animation: fade_in_show 0.5s
+}
+
+@keyframes fade_in_show {
+     0% {
+          opacity: 0;
+          transform: scale(0)
+     }
+
+     100% {
+          opacity: 1;
+          transform: scale(1)
+*/
   .top-cap {
     display: grid;
     grid-template-columns: auto 2fr;
@@ -82,6 +119,7 @@ const Wrapper = styled.div`
     border-top-left-radius: 50px;
     overflow: hidden;
     cursor: pointer;
+    transition: 1s cubic-bezier(0.5, 0.01, 0.54, 0.99) all;
   }
   .task {
     width: 95%;
@@ -119,6 +157,7 @@ const Wrapper = styled.div`
     border-bottom-left-radius: 50px;
     overflow: hidden;
     cursor: pointer;
+    transition: 1s cubic-bezier(0.5, 0.01, 0.54, 0.99) all;
   }
   .bottom-cap:hover {
     box-shadow: var(--shadowMD);

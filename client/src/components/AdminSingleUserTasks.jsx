@@ -132,6 +132,7 @@ const Wrapper = styled.div`
   background: var(--lightestVariation);
   width: 95%;
   margin: auto;
+  transition: 1s cubic-bezier(0.5, 0.01, 0.54, 0.99) all;
   section {
     /* width: 80%; */
   }
