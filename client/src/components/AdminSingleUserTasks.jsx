@@ -7,7 +7,7 @@ import RepeatButton from "./RepeatButton";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import TimeRemainderAdmin from "./TimeRemainder";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import AdminTaskInfo from "./AdminTaskInfo";
 
 const AdminSingleUserTasks = ({
@@ -37,6 +37,9 @@ const AdminSingleUserTasks = ({
   let timeNow = new Date();
   futureTime = new Date(futureTime);
   let isActiveTask = _id === activeTaskId;
+
+  let [height, setHeight] = useState(0);
+  const elementHeightRef = useRef(null);
 
   useEffect(() => {
     let remainder = setInterval(() => {
@@ -70,6 +73,22 @@ const AdminSingleUserTasks = ({
 
   remainderTime = remainderTime < 0 ? 0 : remainderTime;
 
+  //// Gettting Element Bounding Box /////
+  const onClicking = useCallback(() => {
+    if (elementHeightRef.current) {
+      console.log(elementHeightRef.current.getBoundingClientRect());
+      // setHeight(elementHeightRef.current.getBoundingClientRect().left);
+    }
+  }, []);
+  useEffect(() => {
+    window.addEventListener("click", onClicking);
+    onClicking();
+    return () => {
+      window.removeEventListener("click", onClicking);
+    };
+  }, [onClicking]);
+  //// Gettting Element Bounding Box End/////
+
   // const navigation = useNavigation();
   // const isSubmitting = navigation.state === "submitting";
   return (
@@ -77,7 +96,10 @@ const AdminSingleUserTasks = ({
       <div className="name" onClick={() => toggleTaskId(_id)}>
         <h5>{title}</h5>
       </div>
-      <Wrapper style={isActiveTask ? {} : { display: "none" }}>
+      <Wrapper
+        style={isActiveTask ? {} : { display: "none" }}
+        ref={elementHeightRef}
+      >
         {/* <h5>{title}</h5> */}
         {/* <article style={isActiveTask ? {} : { display: "none" }}> */}
         <TimeRemainderAdmin
