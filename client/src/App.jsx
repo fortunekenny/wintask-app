@@ -88,19 +88,19 @@ const router = createBrowserRouter([
           {
             path: "deletetask/:id",
             action: deleteTaskAction,
-            element: <Navigate to=".." />,
+            element: <Navigate to='..' />,
           },
           {
             path: "repeattask/:id",
             loader: repeatTaskLoader,
             action: repeatTaskAction,
-            element: <Navigate to=".." />,
+            element: <Navigate to='..' />,
           },
           {
             path: "canceltask/:id",
             loader: cancelTaskLoader,
             action: cancelTaskAction,
-            element: <Navigate to=".." />,
+            element: <Navigate to='..' />,
           },
           {
             path: "profile/:id",
@@ -124,13 +124,13 @@ const router = createBrowserRouter([
                 path: "admincanceltask/:id",
                 loader: adminCancelTaskLoader,
                 action: adminCancelTaskAction,
-                element: <Navigate to=".." />,
+                element: <Navigate to='..' />,
               },
               {
                 path: "adminrepeattask/:id",
                 loader: adminRepeatTaskLoader,
                 action: adminRepeatTaskAction,
-                element: <Navigate to="." />,
+                element: <Navigate to='.' />,
               },
               {
                 path: "adminedittask/:id",
@@ -141,7 +141,7 @@ const router = createBrowserRouter([
               {
                 path: "admindeletetask/:id",
                 action: adminDeleteTaskAction,
-                element: <Navigate to=".." />,
+                element: <Navigate to='..' />,
               },
             ],
           },

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { styled } from "styled-components";
+
 const FormRow = ({ type, name, labelText, defaultValue, min, max }) => {
   const [labelWidth, setLabelWidth] = useState(0);
   const [wrapperWidth, setWrapperWidth] = useState(0);
@@ -16,13 +17,17 @@ const FormRow = ({ type, name, labelText, defaultValue, min, max }) => {
   return (
     // <div>
     <Wrapper ref={wrapperWidthRef}>
-      <label htmlFor={name} className="label" ref={labelWidthRef}>
+      <label
+        htmlFor={name}
+        className='label'
+        ref={labelWidthRef}
+      >
         {labelText || name}
       </label>
       <input
         type={type}
         id={name}
-        className="input"
+        className='input'
         name={name}
         defaultValue={defaultValue}
         min={min}

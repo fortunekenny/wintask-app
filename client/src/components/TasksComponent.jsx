@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { styled } from "styled-components";
 import { useTasksContext } from "../pages/Tasks";
+import NoTask from "./NoTask";
 
 import SingleTask from "./SingleTask";
 import { Link } from "react-router-dom";
@@ -53,26 +54,30 @@ const TasksComponent = () => {
   /////// end
 
   if (tasks.length === 0) {
-    return (
-      <Wrapper>
-        <h2>No task.</h2>
-      </Wrapper>
-    );
+    return <NoTask />;
   }
 
   return (
     <Wrapper>
-      <div className="main">
+      <div className='main'>
         <Link
-          to="createtask"
-          className="lnk"
+          to='createtask'
+          className='lnk'
           style={{ right: `${rightLoc}px`, top: `${topLoc}px` }}
         >
           +
         </Link>
-        <div className="cont" ref={contRightRef}>
+        <div
+          className='cont'
+          ref={contRightRef}
+        >
           {tasks.map((task) => {
-            return <SingleTask key={task._id} {...task} />;
+            return (
+              <SingleTask
+                key={task._id}
+                {...task}
+              />
+            );
           })}
         </div>
       </div>
